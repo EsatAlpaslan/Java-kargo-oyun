@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/introFragment3">
+    app:startDestination="@id/introFragment">
     <fragment
         android:id="@+id/mainRoomFragment"
         android:name="com.example.kargocuillegal.MainRoomFragment"
@@ -22,7 +22,7 @@
         android:label="fragment_room_selection"
         tools:layout="@layout/fragment_room_selection" />
     <fragment
-        android:id="@+id/introFragment3"
+        android:id="@+id/introFragment"
         android:name="com.example.kargocuillegal.IntroFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro" >
