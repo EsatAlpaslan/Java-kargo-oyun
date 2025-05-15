@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph.xml">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/mainRoomFragment">
+    <fragment
+        android:id="@+id/mainRoomFragment"
+        android:name="com.example.kargocuillegal.MainRoomFragment"
+        android:label="fragment_main_room"
+        tools:layout="@layout/fragment_main_room" >
+        <action
+            android:id="@+id/action_mainRoomFragment_to_roomSelectionFragment"
+            app:destination="@id/roomSelectionFragment" />
+        <action
+            android:id="@+id/action_mainRoomFragment_to_roomSelectionFragment2"
+            app:destination="@id/roomSelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/roomSelectionFragment"
+        android:name="com.example.kargocuillegal.RoomSelectionFragment"
+        android:label="fragment_room_selection"
+        tools:layout="@layout/fragment_room_selection" />
+    <fragment
+        android:id="@+id/introFragment3"
+        android:name="com.example.kargocuillegal.IntroFragment"
+        android:label="fragment_intro"
+        tools:layout="@layout/fragment_intro" >
+        <action
+            android:id="@+id/action_introFragment3_to_mainRoomFragment"
+            app:destination="@id/mainRoomFragment" />
+    </fragment>
 </navigation>
