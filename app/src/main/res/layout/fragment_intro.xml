@@ -19,10 +19,13 @@
     <!-- Oyuna Başla Butonu -->
     <Button
         android:id="@+id/btnStart"
-        android:layout_width="240dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Oyuna Başla"
         android:textColor="#000000"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="100dp"
         android:backgroundTint="#FFEB3B"></Button>
     <!-- Sarı -->
        android:textSize="20sp"
