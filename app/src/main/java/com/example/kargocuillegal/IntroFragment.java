@@ -1,12 +1,13 @@
 package com.example.kargocuillegal;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +59,16 @@ public class IntroFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_intro, container, false);
-    }
-}
+        // XML dosyasını şişiriyoruz ve view nesnesine atıyoruz
+        View view = inflater.inflate(R.layout.fragment_intro, container, false);
+
+        // Butonu view üzerinden buluyoruz
+        Button btnStart = view.findViewById(R.id.btnStart);
+
+        // Butona tıklanınca RoomSelectionFragment'e geçiş yapıyoruz
+        btnStart.setOnClickListener(v ->
+                Navigation.findNavController(v).navigate(R.id.action_introFragment_to_roomSelectionFragment)
+        );
+
+        return view;
+} }
