@@ -58,7 +58,7 @@
             android:id="@+id/btnMusic"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:src="@android:drawable/ic_media_play"
+            android:src="@drawable/ic_music_foreground"
             android:background="@drawable/round_button_background"
             android:contentDescription="Müzik"
             android:scaleType="centerInside"
