@@ -8,26 +8,23 @@
         android:id="@+id/mainRoomFragment"
         android:name="com.example.kargocuillegal.MainRoomFragment"
         android:label="fragment_main_room"
-        tools:layout="@layout/fragment_main_room" >
-        <action
-            android:id="@+id/action_mainRoomFragment_to_roomSelectionFragment"
-            app:destination="@id/roomSelectionFragment" />
-        <action
-            android:id="@+id/action_mainRoomFragment_to_roomSelectionFragment2"
-            app:destination="@id/roomSelectionFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_main_room" />
     <fragment
         android:id="@+id/roomSelectionFragment"
         android:name="com.example.kargocuillegal.RoomSelectionFragment"
         android:label="fragment_room_selection"
-        tools:layout="@layout/fragment_room_selection" />
+        tools:layout="@layout/fragment_room_selection" >
+        <action
+            android:id="@+id/action_roomSelectionFragment_to_mainRoomFragment"
+            app:destination="@id/mainRoomFragment" />
+    </fragment>
     <fragment
         android:id="@+id/introFragment"
         android:name="com.example.kargocuillegal.IntroFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro" >
         <action
-            android:id="@+id/action_introFragment3_to_mainRoomFragment"
-            app:destination="@id/mainRoomFragment" />
+            android:id="@+id/action_introFragment_to_roomSelectionFragment"
+            app:destination="@id/roomSelectionFragment" />
     </fragment>
 </navigation>
