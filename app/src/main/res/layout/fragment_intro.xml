@@ -1,40 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     xmlns:tools="http://schemas.android.com/tools"
-
+    android:id="@+id/intro_fragment"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
+    tools:context=".IntroFragment"
+    tools:ignore="ExtraText">
 
-    tools:context=".IntroFragment">
-
-
-
-    <!-- TODO: Update blank fragment layout -->
-
-    <TextView
-
-        android:layout_width="match_parent"
-
-        android:layout_height="match_parent" />
-
-
+    <!-- Arka Plan Görseli -->
     <ImageView
-
         android:id="@+id/imageView"
-
         android:layout_width="match_parent"
-
         android:layout_height="match_parent"
-
         android:scaleType="centerCrop"
-
         android:src="@drawable/ana_ekran_arkaplan" />
 
+    <!-- Oyuna Başla Butonu -->
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:text="Oyuna Başla"
+        android:textColor="#000000"
+        android:backgroundTint="#FFEB3B"></Button>
+    <!-- Sarı -->
+       android:textSize="20sp"
+    android:textStyle="bold"
+    android:layout_gravity="center_horizontal|bottom"
+     android:layout_marginBottom="180dp" />
 
+    <!-- Ses ve Müzik Butonları -->
+    <LinearLayout
+        android:id="@+id/topRightControls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_vertical">
+
+        <!-- Ses Butonu -->
+        <ImageButton
+            android:id="@+id/btnSound"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@android:drawable/ic_lock_silent_mode_off"
+            android:background="@drawable/round_button_background"
+            android:contentDescription="Ses"
+            android:scaleType="centerInside"
+            app:tint="#FFFFFF"
+            android:layout_marginEnd="12dp"/>
+
+        <!-- Müzik Butonu -->
+        <ImageButton
+            android:id="@+id/btnMusic"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@android:drawable/ic_media_play"
+            android:background="@drawable/round_button_background"
+            android:contentDescription="Müzik"
+            android:scaleType="centerInside"
+            app:tint="#FFFFFF"
+            />
+
+    </LinearLayout>
 
 </FrameLayout>
