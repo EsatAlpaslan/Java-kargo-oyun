@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".RoomSelectionFragment">
 
-    <!-- Kapı görseli -->
+    <!-- uc Kapı görseli -->
     <ImageView
         android:id="@+id/imgDoors"
         android:layout_width="match_parent"
