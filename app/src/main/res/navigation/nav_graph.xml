@@ -5,10 +5,20 @@
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/introFragment">
     <fragment
-        android:id="@+id/mainRoomFragment"
-        android:name="com.example.kargocuillegal.MainRoomFragment"
-        android:label="fragment_main_room"
-        tools:layout="@layout/fragment_main_room" />
+        android:id="@+id/introFragment"
+        android:name="com.example.kargocuillegal.IntroFragment"
+        android:label="fragment_intro"
+        tools:layout="@layout/fragment_intro" >
+        <action
+            android:id="@+id/action_introFragment_to_roomSelectionFragment"
+            app:destination="@id/roomSelectionFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/roomSelectionFragment"
         android:name="com.example.kargocuillegal.RoomSelectionFragment"
@@ -16,15 +26,18 @@
         tools:layout="@layout/fragment_room_selection" >
         <action
             android:id="@+id/action_roomSelectionFragment_to_mainRoomFragment"
-            app:destination="@id/mainRoomFragment" />
+            app:destination="@id/mainRoomFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
     <fragment
-        android:id="@+id/introFragment"
-        android:name="com.example.kargocuillegal.IntroFragment"
-        android:label="fragment_intro"
-        tools:layout="@layout/fragment_intro" >
-        <action
-            android:id="@+id/action_introFragment_to_roomSelectionFragment"
-            app:destination="@id/roomSelectionFragment" />
-    </fragment>
+        android:id="@+id/mainRoomFragment"
+        android:name="com.example.kargocuillegal.MainRoomFragment"
+        android:label="fragment_main_room"
+        tools:layout="@layout/fragment_main_room" />
+
+
 </navigation>
