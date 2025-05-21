@@ -7,6 +7,18 @@
 
     <!-- MASA GÖRSELİ -->
     <ImageView
+        android:id="@+id/alarmLight"
+        android:layout_width="1029dp"
+        android:layout_height="878dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="-192dp"
+        android:layout_marginEnd="-60dp"
+        android:contentDescription="Alarm Lambası"
+        android:scaleType="center"
+        android:src="@drawable/alarm_lambasi"
+        android:visibility="visible" />
+
+    <ImageView
         android:id="@+id/masaImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,39 +27,41 @@
         android:src="@drawable/masa" />
 
     <!-- ALARM LAMBASI - TEST AMAÇLI GÖRÜNÜR -->
-    <!--<ImageView
-        android:id="@+id/alarmLight"
-        android:layout_width="1029dp"
-        android:layout_height="878dp"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="-192dp"
-        android:layout_marginEnd="-60dp"
-        android:contentDescription="Alarm Lambası"
-        android:scaleType="fitCenter"
-        android:src="@drawable/alarm_lambasi"
-        android:visibility="visible" /> -->
 
 
     <!-- SOL OK -->
+
+    <ImageView
+        android:id="@+id/alarmLight2"
+        android:layout_width="1029dp"
+        android:layout_height="878dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="-255dp"
+        android:layout_marginEnd="-57dp"
+        android:contentDescription="Alarm Lambası"
+        android:scaleType="center"
+        android:src="@drawable/alarm_lambasi"
+        android:visibility="visible" />
+
+    <!-- SAĞ OK -->
     <ImageButton
         android:id="@+id/leftArrow"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center_vertical|start"
         android:layout_marginStart="16dp"
-        android:src="@drawable/ok_sola"
         android:background="@android:color/transparent"
-        android:contentDescription="Sola git" />
+        android:contentDescription="Sola git"
+        android:src="@drawable/ok_sola" />
 
-    <!-- SAĞ OK -->
     <ImageButton
         android:id="@+id/rightArrow"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center_vertical|end"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ok_saga"
         android:background="@android:color/transparent"
-        android:contentDescription="Sağa git" />
+        android:contentDescription="Sağa git"
+        android:src="@drawable/ok_saga" />
 
 </FrameLayout>
