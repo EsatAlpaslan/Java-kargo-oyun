@@ -31,6 +31,7 @@
 
     <!-- SOL OK -->
 
+    <!-- SAĞ OK -->
     <ImageView
         android:id="@+id/alarmLight2"
         android:layout_width="1029dp"
@@ -43,7 +44,6 @@
         android:src="@drawable/alarm_lambasi"
         android:visibility="visible" />
 
-    <!-- SAĞ OK -->
     <ImageButton
         android:id="@+id/leftArrow"
         android:layout_width="60dp"
