@@ -53,19 +53,31 @@ public class MainRoomFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ImageView alarmLight = view.findViewById(R.id.alarmLight);
+        // Bu alan artık boş kalabilir çünkü sadece masa gösterilecek
 
-        // 3 saniye sonra alarmı başlat
-        new Handler().postDelayed(() -> {
-            alarmLight.setVisibility(View.VISIBLE);
+        // Aşağıdaki kodları artık kullanmıyoruz:
 
-            // ObjectAnimator ile daha güçlü yanıp sönme efekti
-            ObjectAnimator animator = ObjectAnimator.ofFloat(alarmLight, "alpha", 1f, 0.2f);
-            animator.setDuration(400); // yanıp sönme süresi
-            animator.setRepeatCount(ValueAnimator.INFINITE);
-            animator.setRepeatMode(ValueAnimator.REVERSE);
-            animator.start();
+    /*
+    ImageView alarmLight = view.findViewById(R.id.alarmLight);
 
-        }, 3000); // 3 saniye gecikmeli başlat
-    }
+    new Handler().postDelayed(() -> {
+        alarmLight.setVisibility(View.VISIBLE);
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(alarmLight, "alpha", 1f, 0.2f);
+        animator.setDuration(400);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.setRepeatMode(ValueAnimator.REVERSE);
+        animator.start();
+    }, 3000);
+    */
+
+    /*
+    ImageButton leftArrow = view.findViewById(R.id.leftArrow);
+    ImageButton rightArrow = view.findViewById(R.id.rightArrow);
+
+    // Örnek tıklama işlemleri vardıysa bunları da silebilirsin
+    */
+
+
+}
 }
