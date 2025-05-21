@@ -3,31 +3,51 @@
     android:id="@+id/mainRoomRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RoomSelectionFragment">
+    tools:context=".MainRoomFragment">
 
-    <!-- Silah üretim masası -->
-
-
-    <!-- Alarm lambası -->
+    <!-- MASA GÖRSELİ -->
     <ImageView
         android:id="@+id/masaImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/masa"
-        android:contentDescription="Silah üretim masası" />
+        android:contentDescription="Silah üretim masası"
+        android:scaleType="center"
+        android:src="@drawable/masa" />
 
+    <!-- ALARM LAMBASI - TEST AMAÇLI GÖRÜNÜR -->
     <ImageView
         android:id="@+id/alarmLight"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="816dp"
+        android:layout_height="878dp"
         android:layout_gravity="top|end"
-        android:layout_margin="16dp"
+        android:layout_marginTop="-289dp"
+        android:layout_marginEnd="-80dp"
+        android:contentDescription="Alarm Lambası"
+        android:scaleType="fitCenter"
         android:src="@drawable/alarm_lambasi"
-        android:visibility="gone"
-        android:contentDescription="Alarm Lambası" />
+        android:visibility="visible" />
 
-    <!-- Sol ok -->
 
-    <!-- Sağ ok -->
+    <!-- SOL OK -->
+    <ImageButton
+        android:id="@+id/leftArrow"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical|start"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ok_sola"
+        android:background="@android:color/transparent"
+        android:contentDescription="Sola git" />
+
+    <!-- SAĞ OK -->
+    <ImageButton
+        android:id="@+id/rightArrow"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ok_saga"
+        android:background="@android:color/transparent"
+        android:contentDescription="Sağa git" />
+
 </FrameLayout>
