@@ -8,11 +8,14 @@
     <!-- Silah üretim masası -->
     <ImageView
         android:id="@+id/masaImage"
-        android:layout_width="743dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:contentDescription="Silah üretim masası"
-        android:src="@drawable/masa" />
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        android:src="@drawable/masa"
+        android:contentDescription="Silah üretim masası" />
+
 
     <!-- Alarm lambası -->
     <ImageView
