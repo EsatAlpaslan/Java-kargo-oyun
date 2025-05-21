@@ -6,18 +6,20 @@
     tools:context=".RoomSelectionFragment">
 
     <!-- Silah üretim masası -->
-    <ImageView
-        android:id="@+id/masaImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true"
-        android:src="@drawable/masa"
-        android:contentDescription="Silah üretim masası" />
 
 
     <!-- Alarm lambası -->
+
+    <ImageView
+        android:id="@+id/masaImage"
+        android:layout_width="763dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:contentDescription="Silah üretim masası"
+        android:scaleType="centerInside"
+        android:src="@drawable/masa" />
+
     <ImageView
         android:id="@+id/alarmLight"
         android:layout_width="50dp"
