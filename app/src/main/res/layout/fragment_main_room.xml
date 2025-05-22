@@ -18,6 +18,7 @@
 
 
    <!-- Revolver Silah Parçaları -->
+
     <ImageView
         android:id="@+id/partBarrel"
         android:layout_width="60dp"
