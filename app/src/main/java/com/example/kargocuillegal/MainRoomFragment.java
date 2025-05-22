@@ -1,10 +1,8 @@
 package com.example.kargocuillegal;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,32 +13,8 @@ import androidx.fragment.app.Fragment;
 
 public class MainRoomFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
     public MainRoomFragment() {
-        // Required empty public constructor
-    }
-
-    public static MainRoomFragment newInstance(String param1, String param2) {
-        MainRoomFragment fragment = new MainRoomFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        // Boş constructor
     }
 
     @Override
@@ -53,31 +27,47 @@ public class MainRoomFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Bu alan artık boş kalabilir çünkü sadece masa gösterilecek
+        // Parçaları tanımla
+        ImageView partGrip = view.findViewById(R.id.partGrip);
+        ImageView partBarrel = view.findViewById(R.id.partBarrel);
+        ImageView partCylinder = view.findViewById(R.id.partCylinder);
+        ImageView partHammer = view.findViewById(R.id.partHammer);
 
-        // Aşağıdaki kodları artık kullanmıyoruz:
+        // Sürüklenebilir yap
+        makeDraggable(partGrip);
+        makeDraggable(partBarrel);
+        makeDraggable(partCylinder);
+        makeDraggable(partHammer);
+    }
 
-    /*
-    ImageView alarmLight = view.findViewById(R.id.alarmLight);
+    // Sürükle-bırak fonksiyonu
+    private void makeDraggable(ImageView imageView) {
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            float dX = 0, dY = 0; // Parmağın tıklama pozisyonunu tutar
 
-    new Handler().postDelayed(() -> {
-        alarmLight.setVisibility(View.VISIBLE);
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Parmağın bastığı an: ofsetleri hesapla
+                        dX = v.getX() - event.getRawX();
+                        dY = v.getY() - event.getRawY();
+                        return true;
 
-        ObjectAnimator animator = ObjectAnimator.ofFloat(alarmLight, "alpha", 1f, 0.2f);
-        animator.setDuration(400);
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.setRepeatMode(ValueAnimator.REVERSE);
-        animator.start();
-    }, 3000);
-    */
+                    case MotionEvent.ACTION_MOVE:
+                        // Parmağı hareket ettirdikçe parça da hareket eder
+                        v.animate()
+                                .x(event.getRawX() + dX)
+                                .y(event.getRawY() + dY)
+                                .setDuration(0)
+                                .start();
+                        return true;
 
-    /*
-    ImageButton leftArrow = view.findViewById(R.id.leftArrow);
-    ImageButton rightArrow = view.findViewById(R.id.rightArrow);
-
-    // Örnek tıklama işlemleri vardıysa bunları da silebilirsin
-    */
-
-
+                    default:
+                        return false;
+                }
+            }
+        });
+    }
 }
-}
+
