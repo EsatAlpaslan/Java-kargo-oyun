@@ -119,7 +119,7 @@ public class MainRoomFragment extends Fragment {
         if (distance < 100) {
             // GÖRSEL AYAR: Cylinder’ın üstüne ortalayarak yerleştir
             float targetX = partCylinder.getX() + (partCylinder.getWidth() - partBarrel.getWidth()) / 2f;
-            float targetY = partCylinder.getY() - partBarrel.getHeight() + 10; // -10 gibi ayarla deneyerek
+            float targetY = partCylinder.getY()  - partBarrel.getHeight()  ; // -10 gibi ayarla deneyerek
 
             partBarrel.setX(targetX);
             partBarrel.setY(targetY);
