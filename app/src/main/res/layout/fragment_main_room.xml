@@ -16,18 +16,8 @@
         android:scaleType="fitXY"
         android:src="@drawable/masa" />
 
-    <ImageView
-        android:id="@+id/partGrip"
-        android:layout_width="132dp"
-        android:layout_height="76dp"
-        android:adjustViewBounds="true"
-        android:clipChildren="true"
-        android:clipToPadding="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/revolver_grip"
-        android:translationX="20dp"
-        android:translationY="20dp" />
 
+   <!-- Revolver Silah Parçaları -->
     <ImageView
         android:id="@+id/partBarrel"
         android:layout_width="60dp"
@@ -64,59 +54,17 @@
         android:translationX="450dp"
         android:translationY="36dp" />
 
-
-    <!-- Silah parçaları eski -->
-<!--
     <ImageView
         android:id="@+id/partGrip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="132dp"
+        android:layout_height="76dp"
+        android:adjustViewBounds="true"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:scaleType="fitCenter"
         android:src="@drawable/revolver_grip"
-        android:translationX="-190dp"
-        android:translationY="-120dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:clipChildren="true"
-        android:clipToPadding="true" />
-
-    <ImageView
-        android:id="@+id/partBarrel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:translationX="180dp"
-        android:translationY="-50dp"
-        android:src="@drawable/revolver_barrel"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:clipChildren="true"
-        android:clipToPadding="true"
-        />
-
-    <ImageView
-        android:id="@+id/partCylinder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:translationX="2dp"
-        android:translationY="-120dp"
-        android:src="@drawable/revolver_cylinder"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:clipChildren="true"
-        android:clipToPadding="true"
-        />
-
-    <ImageView
-        android:id="@+id/partHammer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:translationX="170dp"
-        android:translationY="-120dp"
-        android:src="@drawable/revolver_hammer"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:clipChildren="true"
-        android:clipToPadding="true"
-        /> -->
+        android:translationX="20dp"
+        android:translationY="20dp" />
 
 
 </FrameLayout>
