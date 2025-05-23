@@ -125,7 +125,7 @@ public class MainRoomFragment extends Fragment {
         if (distance < 160) {
             // 🔧 Cihazdan bağımsız sabitleme için offset oranları kullan:
             float offsetX = -0.45f * partGrip.getWidth();  // sola kaydır
-            float offsetY = -0.50f * partGrip.getHeight(); // yukarı kaydır
+            float offsetY = -0.52f * partGrip.getHeight(); // yukarı kaydır
 
             float targetX = partCylinder.getX() + (partCylinder.getWidth() - partGrip.getWidth()) / 2f + offsetX;
             float targetY = partCylinder.getY() + (partCylinder.getHeight() - partGrip.getHeight()) / 2f + offsetY;
@@ -160,14 +160,17 @@ public class MainRoomFragment extends Fragment {
         double distance = Math.hypot(barrelCenterX - cylinderCenterX, barrelCenterY - cylinderCenterY);
 
         if (distance < 100) {
-            // Yeni konum, ekran koordinatları değil görünüm koordinatlarına göre ayarlanır
-            float targetX = partCylinder.getX() + (partCylinder.getWidth() - partBarrel.getWidth()) / 2f - 14;
-            float targetY = partCylinder.getY() + 12;
+            // 📏 Cihazdan bağımsız oransal offset
+            float offsetX = -0.077f * partBarrel.getWidth();     // biraz sola
+            float offsetY = +0.07f * partBarrel.getHeight();    // biraz aşağı
+
+            float targetX = partCylinder.getX() + (partCylinder.getWidth() - partBarrel.getWidth()) / 2f + offsetX;
+            float targetY = partCylinder.getY() + offsetY;
 
             partBarrel.setX(targetX);
             partBarrel.setY(targetY);
 
-            // Offset’i cylinder’a göre kaydet
+            // 🔒 Hareket için offset farklarını kaydet
             barrelOffsetX = targetX - partCylinder.getX();
             barrelOffsetY = targetY - partCylinder.getY();
             barrelLockedToCylinder = true;
@@ -175,6 +178,7 @@ public class MainRoomFragment extends Fragment {
             partBarrel.setEnabled(false);
         }
     }
+
 
     private void checkCylinderHammerMerge() {
         int[] hammerLoc = new int[2];
