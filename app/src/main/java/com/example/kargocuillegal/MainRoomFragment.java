@@ -267,9 +267,17 @@ public class MainRoomFragment extends Fragment {
         if (gripLockedToCylinder && barrelLockedToCylinder && hammerLockedToCylinder && !isCompleted) {
             completionText.setVisibility(View.VISIBLE);
             nextDayButton.setVisibility(View.VISIBLE);
+            dayTimerText.setVisibility(View.GONE); // Sayaç gizlensin
+
+            if (countDownTimer != null) {
+                countDownTimer.cancel();
+            }
+
             isCompleted = true;
         }
     }
+
+
 
     private void startCountdown(int seconds) {
         if (countDownTimer != null) {
@@ -286,8 +294,11 @@ public class MainRoomFragment extends Fragment {
             @Override
             public void onFinish() {
                 dayTimerText.setText("Süre doldu!");
-                dayTimerText.setText("");
-                // Buraya zaman dolunca ne olacağını yazabilirsin.
+                if (!isCompleted) {
+                    dayTimerText.setText("Süre doldu!");
+                } else {
+                    dayTimerText.setText(""); // Tamamlandıysa boş bırak
+                }
             }
         };
 
