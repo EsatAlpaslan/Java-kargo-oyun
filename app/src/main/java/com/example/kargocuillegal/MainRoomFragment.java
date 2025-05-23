@@ -1,6 +1,7 @@
 package com.example.kargocuillegal;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +35,9 @@ public class MainRoomFragment extends Fragment {
 
     private int currentDay = 1; // Başlangıçta Gün 1
     private boolean isCompleted = false;
+    private TextView dayTimerText;
+    private CountDownTimer countDownTimer;
+
 
 
 
@@ -79,6 +83,10 @@ public class MainRoomFragment extends Fragment {
             completionText.setVisibility(View.GONE);
             Toast.makeText(getContext(), "Gün " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
         });
+        dayTimerText = view.findViewById(R.id.dayTimerText);
+
+        startCountdown(15); // 15 saniyelik sayaç başlat
+
 
 
     }
@@ -262,6 +270,30 @@ public class MainRoomFragment extends Fragment {
             isCompleted = true;
         }
     }
+
+    private void startCountdown(int seconds) {
+        if (countDownTimer != null) {
+            countDownTimer.cancel(); // eski sayaç varsa iptal et
+        }
+
+        countDownTimer = new CountDownTimer(seconds * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int secondsLeft = (int) (millisUntilFinished / 1000);
+                dayTimerText.setText("Kalan: " + secondsLeft + " sn");
+            }
+
+            @Override
+            public void onFinish() {
+                dayTimerText.setText("Süre doldu!");
+                dayTimerText.setText("");
+                // Buraya zaman dolunca ne olacağını yazabilirsin.
+            }
+        };
+
+        countDownTimer.start();
+    }
+
 
 
 

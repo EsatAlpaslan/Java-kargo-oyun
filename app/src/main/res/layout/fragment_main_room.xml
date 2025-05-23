@@ -81,17 +81,6 @@
         android:padding="16dp"
         android:elevation="10dp"/>
 
-    <!-- Gün sayısını gösteren yazı -->
-    <TextView
-        android:id="@+id/dayText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GÜN 1"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:layout_gravity="top|start"
-        android:layout_margin="16dp" />
 
     <!-- Sonraki Güne Geç Butonu -->
     <Button
@@ -107,6 +96,38 @@
         android:textColor="@android:color/white"
         />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp">
+    <!-- Gün sayısını gösteren yazı -->
+    <TextView
+        android:id="@+id/dayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GÜN 1"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="top|start"
+        android:layout_margin="16dp" />
+
+ <!-- sayac -->
+    <TextView
+        android:id="@+id/dayTimerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="top|start"
+        android:layout_marginStart="16dp"/>
+
+    </LinearLayout>
 
 
 
