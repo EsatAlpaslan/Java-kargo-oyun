@@ -125,7 +125,7 @@ public class MainRoomFragment extends Fragment {
         if (distance < 160) {
             // 🔧 Cihazdan bağımsız sabitleme için offset oranları kullan:
             float offsetX = -0.45f * partGrip.getWidth();  // sola kaydır
-            float offsetY = -0.55f * partGrip.getHeight(); // yukarı kaydır
+            float offsetY = -0.50f * partGrip.getHeight(); // yukarı kaydır
 
             float targetX = partCylinder.getX() + (partCylinder.getWidth() - partGrip.getWidth()) / 2f + offsetX;
             float targetY = partCylinder.getY() + (partCylinder.getHeight() - partGrip.getHeight()) / 2f + offsetY;
