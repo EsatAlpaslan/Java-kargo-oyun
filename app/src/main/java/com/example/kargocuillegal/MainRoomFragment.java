@@ -201,7 +201,7 @@ public class MainRoomFragment extends Fragment {
 
         if (distance < 100) {
             // 📏 Cihazdan bağımsız oransal offset
-            float offsetX = -0.077f * partBarrel.getWidth();     // biraz sola
+            float offsetX = -0.085f * partBarrel.getWidth();     // biraz sola
             float offsetY = +0.07f * partBarrel.getHeight();    // biraz aşağı
 
             float targetX = partCylinder.getX() + (partCylinder.getWidth() - partBarrel.getWidth()) / 2f + offsetX;
