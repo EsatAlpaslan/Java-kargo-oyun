@@ -192,11 +192,11 @@ public class MainRoomFragment extends Fragment {
         double distance = Math.hypot(hammerCenterX - cylinderCenterX, hammerCenterY - cylinderCenterY);
 
         if (distance < 150) {
-            // Konum düzeltmeleri görünüm içi pozisyona göre yapılır
-            float offsetX = 70f;
-            float offsetY = 15f;
+            // 📏 Oranlı offset (görsel boyutuna göre ayarlanır)
+            float offsetX = 0.47f * partCylinder.getWidth();   // sağa kaydır
+            float offsetY = 0.10f * partHammer.getHeight();   // yukarı kaydır
 
-            float targetX = partCylinder.getX() + (partCylinder.getWidth() - partHammer.getWidth()) / 2f + offsetX;
+            float targetX = partCylinder.getX() + offsetX;
             float targetY = partCylinder.getY() + offsetY;
 
             partHammer.setX(targetX);
@@ -209,6 +209,7 @@ public class MainRoomFragment extends Fragment {
             partHammer.setEnabled(false);
         }
     }
+
 
 
 }
