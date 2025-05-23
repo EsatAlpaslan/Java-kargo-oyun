@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +29,15 @@ public class MainRoomFragment extends Fragment {
     private boolean hammerLockedToCylinder = false;
     private float hammerOffsetX = 0;
     private float hammerOffsetY = 0;
+    private TextView completionText;
+    private Button nextDayButton;
+
+    private int currentDay = 1; // Başlangıçta Gün 1
+    private boolean isCompleted = false;
+
+
+
+
 
     public MainRoomFragment() {
         // Boş constructor
@@ -52,6 +64,23 @@ public class MainRoomFragment extends Fragment {
         makeDraggable(partBarrel);
         makeDraggable(partCylinder);
         makeDraggable(partHammer);
+
+        completionText = view.findViewById(R.id.completionText);
+        nextDayButton = view.findViewById(R.id.nextDayButton);
+
+
+        // yeni gün için
+        TextView completionText = view.findViewById(R.id.completionText);
+        Button nextDayButton = view.findViewById(R.id.nextDayButton);// daha önce tanımlandıysa
+
+        nextDayButton.setOnClickListener(v -> {
+            currentDay++;
+            nextDayButton.setVisibility(View.GONE);
+            completionText.setVisibility(View.GONE);
+            Toast.makeText(getContext(), "Gün " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
+        });
+
+
     }
 
     // Sürükle-bırak fonksiyonu + birleşme kontrolü
@@ -98,6 +127,7 @@ public class MainRoomFragment extends Fragment {
                         checkGripCylinderMerge();
                         checkCylinderBarrelMerge();
                         checkCylinderHammerMerge();
+                        checkIfCompleted();
                         return true;
 
                     default:
@@ -138,6 +168,8 @@ public class MainRoomFragment extends Fragment {
             gripLockedToCylinder = true;
 
             partGrip.setEnabled(false);
+            checkIfAssemblyCompleted();
+
         }
     }
 
@@ -176,6 +208,8 @@ public class MainRoomFragment extends Fragment {
             barrelLockedToCylinder = true;
 
             partBarrel.setEnabled(false);
+            checkIfAssemblyCompleted();
+
         }
     }
 
@@ -211,8 +245,25 @@ public class MainRoomFragment extends Fragment {
             hammerLockedToCylinder = true;
 
             partHammer.setEnabled(false);
+            checkIfAssemblyCompleted();
+
         }
     }
+
+    private void checkIfAssemblyCompleted() {
+        if (barrelLockedToCylinder && gripLockedToCylinder && hammerLockedToCylinder) {
+            completionText.setVisibility(View.VISIBLE);
+        }
+    }
+    private void checkIfCompleted() {
+        if (gripLockedToCylinder && barrelLockedToCylinder && hammerLockedToCylinder && !isCompleted) {
+            completionText.setVisibility(View.VISIBLE);
+            nextDayButton.setVisibility(View.VISIBLE);
+            isCompleted = true;
+        }
+    }
+
+
 
 
 
