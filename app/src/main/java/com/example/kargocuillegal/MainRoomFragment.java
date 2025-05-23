@@ -146,43 +146,56 @@ public class MainRoomFragment extends Fragment {
 
 
     private void checkCylinderBarrelMerge() {
-        float bx = partBarrel.getX() + partBarrel.getWidth() / 2f;
-        float by = partBarrel.getY() + partBarrel.getHeight() / 2f;
+        int[] barrelLoc = new int[2];
+        int[] cylinderLoc = new int[2];
 
-        float cx = partCylinder.getX() + partCylinder.getWidth() / 2f;
-        float cy = partCylinder.getY() + partCylinder.getHeight() / 2f;
+        partBarrel.getLocationOnScreen(barrelLoc);
+        partCylinder.getLocationOnScreen(cylinderLoc);
 
-        double distance = Math.hypot(bx - cx, by - cy);
+        float barrelCenterX = barrelLoc[0] + partBarrel.getWidth() / 2f;
+        float barrelCenterY = barrelLoc[1] + partBarrel.getHeight() / 2f;
+
+        float cylinderCenterX = cylinderLoc[0] + partCylinder.getWidth() / 2f;
+        float cylinderCenterY = cylinderLoc[1] + partCylinder.getHeight() / 2f;
+
+        double distance = Math.hypot(barrelCenterX - cylinderCenterX, barrelCenterY - cylinderCenterY);
 
         if (distance < 100) {
+            // Yeni konum, ekran koordinatları değil görünüm koordinatlarına göre ayarlanır
             float targetX = partCylinder.getX() + (partCylinder.getWidth() - partBarrel.getWidth()) / 2f - 14;
             float targetY = partCylinder.getY() + 12;
 
             partBarrel.setX(targetX);
             partBarrel.setY(targetY);
 
-            // Farkı kaydet
-            barrelOffsetX = partBarrel.getX() - partCylinder.getX();
-            barrelOffsetY = partBarrel.getY() - partCylinder.getY();
+            // Offset’i cylinder’a göre kaydet
+            barrelOffsetX = targetX - partCylinder.getX();
+            barrelOffsetY = targetY - partCylinder.getY();
+            barrelLockedToCylinder = true;
 
             partBarrel.setEnabled(false);
-            barrelLockedToCylinder = true;
         }
     }
 
     private void checkCylinderHammerMerge() {
-        float hx = partHammer.getX() + partHammer.getWidth() / 2f-120;
-        float hy = partHammer.getY() + partHammer.getHeight() / 2f+50;
+        int[] hammerLoc = new int[2];
+        int[] cylinderLoc = new int[2];
 
-        float cx = partCylinder.getX() + partCylinder.getWidth() / 2f;
-        float cy = partCylinder.getY() + partCylinder.getHeight() / 2f;
+        partHammer.getLocationOnScreen(hammerLoc);
+        partCylinder.getLocationOnScreen(cylinderLoc);
 
-        double distance = Math.hypot(hx - cx, hy - cy);
+        float hammerCenterX = hammerLoc[0] + partHammer.getWidth() / 2f;
+        float hammerCenterY = hammerLoc[1] + partHammer.getHeight() / 2f;
 
-        if (distance < 100) {
-            // 🔧 Konum düzeltme değerleri
-            float offsetX = +70f;
-            float offsetY = +15f;
+        float cylinderCenterX = cylinderLoc[0] + partCylinder.getWidth() / 2f;
+        float cylinderCenterY = cylinderLoc[1] + partCylinder.getHeight() / 2f;
+
+        double distance = Math.hypot(hammerCenterX - cylinderCenterX, hammerCenterY - cylinderCenterY);
+
+        if (distance < 150) {
+            // Konum düzeltmeleri görünüm içi pozisyona göre yapılır
+            float offsetX = 70f;
+            float offsetY = 15f;
 
             float targetX = partCylinder.getX() + (partCylinder.getWidth() - partHammer.getWidth()) / 2f + offsetX;
             float targetY = partCylinder.getY() + offsetY;
@@ -190,7 +203,6 @@ public class MainRoomFragment extends Fragment {
             partHammer.setX(targetX);
             partHammer.setY(targetY);
 
-            // 🔒 Offset değerlerini kaydet
             hammerOffsetX = targetX - partCylinder.getX();
             hammerOffsetY = targetY - partCylinder.getY();
             hammerLockedToCylinder = true;
@@ -198,5 +210,6 @@ public class MainRoomFragment extends Fragment {
             partHammer.setEnabled(false);
         }
     }
+
 
 }
