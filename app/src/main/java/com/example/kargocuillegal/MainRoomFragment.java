@@ -15,6 +15,8 @@ public class MainRoomFragment extends Fragment {
 
     private ImageView partGrip, partBarrel, partCylinder, partHammer;
     private boolean barrelLockedToCylinder = false;
+    private float barrelOffsetX = 0;  // Barrel'ın cylinder'a göre X farkı
+    private float barrelOffsetY = 0;  // Barrel'ın cylinder'a göre Y farkı
 
     public MainRoomFragment() {
         // Boş constructor
@@ -63,10 +65,10 @@ public class MainRoomFragment extends Fragment {
                         v.setX(newX);
                         v.setY(newY);
 
-                        // Eğer cylinder hareket ediyorsa ve barrel ona bağlıysa:
+                        // Eğer cylinder hareket ediyorsa ve barrel ona kilitliyse birlikte hareket etsin
                         if (v.getId() == R.id.partCylinder && barrelLockedToCylinder) {
-                            partBarrel.setX(newX + partCylinder.getWidth() / 2f - partBarrel.getWidth() / 2f);
-                            partBarrel.setY(newY - partBarrel.getHeight());
+                            partBarrel.setX(newX + barrelOffsetX);
+                            partBarrel.setY(newY + barrelOffsetY);
                         }
 
                         return true;
@@ -117,18 +119,20 @@ public class MainRoomFragment extends Fragment {
         double distance = Math.hypot(bx - cx, by - cy);
 
         if (distance < 100) {
-            // GÖRSEL AYAR: Cylinder’ın üstüne ortalayarak yerleştir
-            float targetX = partCylinder.getX() + (partCylinder.getWidth() - partBarrel.getWidth()) / 2f;
-            float targetY = partCylinder.getY()  - partBarrel.getHeight()  ; // -10 gibi ayarla deneyerek
+            float targetX = partCylinder.getX() + (partCylinder.getWidth() - partBarrel.getWidth()) / 2f - 14;
+            float targetY = partCylinder.getY() + 12;
 
             partBarrel.setX(targetX);
             partBarrel.setY(targetY);
+
+            // Farkı kaydet
+            barrelOffsetX = partBarrel.getX() - partCylinder.getX();
+            barrelOffsetY = partBarrel.getY() - partCylinder.getY();
 
             partBarrel.setEnabled(false);
             barrelLockedToCylinder = true;
         }
     }
-
 
     private void checkCylinderHammerMerge() {
         float hx = partHammer.getX();
