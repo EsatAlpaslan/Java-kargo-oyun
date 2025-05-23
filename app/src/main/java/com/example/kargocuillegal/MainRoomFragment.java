@@ -18,6 +18,11 @@ public class MainRoomFragment extends Fragment {
     private float barrelOffsetX = 0;  // Barrel'ın cylinder'a göre X farkı
     private float barrelOffsetY = 0;  // Barrel'ın cylinder'a göre Y farkı
 
+    //yeni eklendi
+    private boolean gripLockedToCylinder = false;
+    private float gripOffsetX = 0;
+    private float gripOffsetY = 0;
+
     public MainRoomFragment() {
         // Boş constructor
     }
@@ -66,10 +71,18 @@ public class MainRoomFragment extends Fragment {
                         v.setY(newY);
 
                         // Eğer cylinder hareket ediyorsa ve barrel ona kilitliyse birlikte hareket etsin
+                        // Eğer cylinder hareket ediyorsa ve barrel ona kilitliyse
                         if (v.getId() == R.id.partCylinder && barrelLockedToCylinder) {
                             partBarrel.setX(newX + barrelOffsetX);
                             partBarrel.setY(newY + barrelOffsetY);
                         }
+
+                        // Eğer cylinder hareket ediyorsa ve grip ona kilitliyse
+                        if (v.getId() == R.id.partCylinder && gripLockedToCylinder) {
+                            partGrip.setX(newX + gripOffsetX);
+                            partGrip.setY(newY + gripOffsetY);
+                        }
+
 
                         return true;
 
@@ -102,12 +115,28 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(gripCenterX - cylCenterX, gripCenterY - cylCenterY);
 
-        if (distance < 100) {
-            partCylinder.setX(partGrip.getX() + partGrip.getWidth() / 2f - partCylinder.getWidth() / 2f);
-            partCylinder.setY(partGrip.getY() + partGrip.getHeight() / 4f);
-            partCylinder.setEnabled(false);
+        // 🔧 Birleşme mesafesini daha hassas yap (150 çok fazlaydı)
+        if (distance < 150) {
+            // 🔧 Konum düzeltme (senin verdiğin değerlere göre):
+            float offsetX = -150f;
+            float offsetY = -105f;
+
+            float targetX = partCylinder.getX() + (partCylinder.getWidth() - partGrip.getWidth()) / 2f + offsetX;
+            float targetY = partCylinder.getY() + partCylinder.getHeight() / 2f - partGrip.getHeight() / 2f + offsetY;
+
+            partGrip.setX(targetX);
+            partGrip.setY(targetY);
+
+            // 🔒 Kilitleme ve birlikte hareket için offsetleri kaydet
+            gripOffsetX = targetX - partCylinder.getX();
+            gripOffsetY = targetY - partCylinder.getY();
+            gripLockedToCylinder = true;
+
+            partGrip.setEnabled(false);
         }
     }
+
+
 
     private void checkCylinderBarrelMerge() {
         float bx = partBarrel.getX() + partBarrel.getWidth() / 2f;
