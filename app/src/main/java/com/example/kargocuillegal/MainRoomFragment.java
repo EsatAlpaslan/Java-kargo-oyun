@@ -23,6 +23,10 @@ public class MainRoomFragment extends Fragment {
     private float gripOffsetX = 0;
     private float gripOffsetY = 0;
 
+    private boolean hammerLockedToCylinder = false;
+    private float hammerOffsetX = 0;
+    private float hammerOffsetY = 0;
+
     public MainRoomFragment() {
         // Boş constructor
     }
@@ -76,12 +80,15 @@ public class MainRoomFragment extends Fragment {
                             partBarrel.setX(newX + barrelOffsetX);
                             partBarrel.setY(newY + barrelOffsetY);
                         }
-
-                        // Eğer cylinder hareket ediyorsa ve grip ona kilitliyse
                         if (v.getId() == R.id.partCylinder && gripLockedToCylinder) {
                             partGrip.setX(newX + gripOffsetX);
                             partGrip.setY(newY + gripOffsetY);
                         }
+                        if (v.getId() == R.id.partCylinder && hammerLockedToCylinder) {
+                            partHammer.setX(newX + hammerOffsetX);
+                            partHammer.setY(newY + hammerOffsetY);
+                        }
+
 
 
                         return true;
@@ -107,7 +114,7 @@ public class MainRoomFragment extends Fragment {
         partGrip.getLocationOnScreen(gripLoc);
         partCylinder.getLocationOnScreen(cylLoc);
 
-        float gripCenterX = gripLoc[0] + partGrip.getWidth() / 2f;
+        float gripCenterX = gripLoc[0] + partGrip.getWidth() / 2f+70;
         float gripCenterY = gripLoc[1] + partGrip.getHeight() / 2f;
 
         float cylCenterX = cylLoc[0] + partCylinder.getWidth() / 2f;
@@ -116,7 +123,7 @@ public class MainRoomFragment extends Fragment {
         double distance = Math.hypot(gripCenterX - cylCenterX, gripCenterY - cylCenterY);
 
         // 🔧 Birleşme mesafesini daha hassas yap (150 çok fazlaydı)
-        if (distance < 150) {
+        if (distance < 160) {
             // 🔧 Konum düzeltme (senin verdiğin değerlere göre):
             float offsetX = -150f;
             float offsetY = -105f;
@@ -164,18 +171,32 @@ public class MainRoomFragment extends Fragment {
     }
 
     private void checkCylinderHammerMerge() {
-        float hx = partHammer.getX();
-        float hy = partHammer.getY();
+        float hx = partHammer.getX() + partHammer.getWidth() / 2f-120;
+        float hy = partHammer.getY() + partHammer.getHeight() / 2f+50;
 
-        float cx = partCylinder.getX() + partCylinder.getWidth();
-        float cy = partCylinder.getY();
+        float cx = partCylinder.getX() + partCylinder.getWidth() / 2f;
+        float cy = partCylinder.getY() + partCylinder.getHeight() / 2f;
 
         double distance = Math.hypot(hx - cx, hy - cy);
 
-        if (distance < 80) {
-            partHammer.setX(cx - partHammer.getWidth() / 2f);
-            partHammer.setY(cy - partHammer.getHeight() / 2f);
+        if (distance < 100) {
+            // 🔧 Konum düzeltme değerleri
+            float offsetX = +70f;
+            float offsetY = +15f;
+
+            float targetX = partCylinder.getX() + (partCylinder.getWidth() - partHammer.getWidth()) / 2f + offsetX;
+            float targetY = partCylinder.getY() + offsetY;
+
+            partHammer.setX(targetX);
+            partHammer.setY(targetY);
+
+            // 🔒 Offset değerlerini kaydet
+            hammerOffsetX = targetX - partCylinder.getX();
+            hammerOffsetY = targetY - partCylinder.getY();
+            hammerLockedToCylinder = true;
+
             partHammer.setEnabled(false);
         }
     }
+
 }
