@@ -114,7 +114,7 @@ public class MainRoomFragment extends Fragment {
         partGrip.getLocationOnScreen(gripLoc);
         partCylinder.getLocationOnScreen(cylLoc);
 
-        float gripCenterX = gripLoc[0] + partGrip.getWidth() / 2f+70;
+        float gripCenterX = gripLoc[0] + partGrip.getWidth() / 2f;
         float gripCenterY = gripLoc[1] + partGrip.getHeight() / 2f;
 
         float cylCenterX = cylLoc[0] + partCylinder.getWidth() / 2f;
@@ -122,19 +122,17 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(gripCenterX - cylCenterX, gripCenterY - cylCenterY);
 
-        // 🔧 Birleşme mesafesini daha hassas yap (150 çok fazlaydı)
         if (distance < 160) {
-            // 🔧 Konum düzeltme (senin verdiğin değerlere göre):
-            float offsetX = -150f;
-            float offsetY = -105f;
+            // 🔧 Cihazdan bağımsız sabitleme için offset oranları kullan:
+            float offsetX = -0.45f * partGrip.getWidth();  // sola kaydır
+            float offsetY = -0.55f * partGrip.getHeight(); // yukarı kaydır
 
             float targetX = partCylinder.getX() + (partCylinder.getWidth() - partGrip.getWidth()) / 2f + offsetX;
-            float targetY = partCylinder.getY() + partCylinder.getHeight() / 2f - partGrip.getHeight() / 2f + offsetY;
+            float targetY = partCylinder.getY() + (partCylinder.getHeight() - partGrip.getHeight()) / 2f + offsetY;
 
             partGrip.setX(targetX);
             partGrip.setY(targetY);
 
-            // 🔒 Kilitleme ve birlikte hareket için offsetleri kaydet
             gripOffsetX = targetX - partCylinder.getX();
             gripOffsetY = targetY - partCylinder.getY();
             gripLockedToCylinder = true;
@@ -142,6 +140,7 @@ public class MainRoomFragment extends Fragment {
             partGrip.setEnabled(false);
         }
     }
+
 
 
 
