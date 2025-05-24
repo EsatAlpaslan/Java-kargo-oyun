@@ -120,6 +120,44 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             />
+    <!-- Sipariş Panosu Butonu -->
+    <ImageButton
+        android:id="@+id/orderBoardButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:layout_gravity="top|start"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_clipboard"
+    android:scaleType="centerInside"
+    android:contentDescription="Sipariş Panosu" />
+
+
+    <!-- Sipariş Açıklama Kutusu -->
+    <TextView
+        android:id="@+id/orderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#AA000000"
+        android:text="GÜN 1 SİPARİŞİ:\n1 adet tabanca\nTeslim süresi: 15 sn"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:visibility="gone"
+        android:elevation="8dp"/>
+
+    <ImageView
+        android:id="@+id/exampleGunImage"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/revolver"
+        android:visibility="gone"
+        android:contentDescription="Silah Görseli" />
+
+
+
 
 
 

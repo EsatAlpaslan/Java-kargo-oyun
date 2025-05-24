@@ -2,6 +2,7 @@ package com.example.kargocuillegal;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import android.widget.ImageButton;
+
 
 public class MainRoomFragment extends Fragment {
 
@@ -39,9 +42,9 @@ public class MainRoomFragment extends Fragment {
     private CountDownTimer countDownTimer;
     private TextView dayText;
     private boolean isTimeOver = false;
-
-
-
+    private ImageButton orderBoardButton;
+    private TextView orderText;
+    private ImageView exampleGunImage;
 
 
 
@@ -74,22 +77,79 @@ public class MainRoomFragment extends Fragment {
         completionText = view.findViewById(R.id.completionText);
         nextDayButton = view.findViewById(R.id.nextDayButton);
 
-
         // yeni gün için
         TextView completionText = view.findViewById(R.id.completionText);
         Button nextDayButton = view.findViewById(R.id.nextDayButton);// daha önce tanımlandıysa
 
         nextDayButton.setOnClickListener(v -> {
             currentDay++;
+
+            // ✔ Arayüz sıfırla
             nextDayButton.setVisibility(View.GONE);
             completionText.setVisibility(View.GONE);
-            dayText.setText("GÜN " + currentDay);
-            Toast.makeText(getContext(), "Gün " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
-        });
-        dayTimerText = view.findViewById(R.id.dayTimerText);
+            isCompleted = false;
 
+            // Sayaç yeniden başlasın
+            startCountdown(15);
+
+            // ✔ Parçaları tekrar görünür ve sürüklenebilir yap
+            partGrip.setVisibility(View.VISIBLE);
+            partGrip.setEnabled(true);
+            partBarrel.setVisibility(View.VISIBLE);
+            partBarrel.setEnabled(true);
+            partHammer.setVisibility(View.VISIBLE);
+            partHammer.setEnabled(true);
+            partCylinder.setVisibility(View.VISIBLE);
+            partCylinder.setEnabled(true);
+
+            makeDraggable(partGrip);
+            makeDraggable(partBarrel);
+            makeDraggable(partHammer);
+            makeDraggable(partCylinder);
+
+            // ✔ Konumlarını sıfırla (ilk konuma al – örnek değerler)
+// Önce ekran boyutlarını al:
+            DisplayMetrics metrics = new DisplayMetrics();
+            requireActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            float screenWidth = metrics.widthPixels;
+            float screenHeight = metrics.heightPixels;
+
+// Sonra parçaları oranla konumlandır:
+            partGrip.setX(0.10f * screenWidth); partGrip.setY(0.08f * screenHeight);
+            partCylinder.setX(0.30f * screenWidth); partCylinder.setY(0.08f * screenHeight);
+            partBarrel.setX(0.50f * screenWidth); partBarrel.setY(0.08f * screenHeight);
+            partHammer.setX(0.70f * screenWidth); partHammer.setY(0.08f * screenHeight);
+
+
+            // ✔ Kilit durumlarını sıfırla
+            gripLockedToCylinder = false;
+            barrelLockedToCylinder = false;
+            hammerLockedToCylinder = false;
+
+            // ✔ Gün metnini güncelle
+            TextView dayText = requireView().findViewById(R.id.dayText);
+            dayText.setText("GÜN " + currentDay);
+
+            Toast.makeText(getContext(), "GÜN " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
+        });
+
+        dayTimerText = view.findViewById(R.id.dayTimerText);
         startCountdown(15);
         dayText = view.findViewById(R.id.dayText);
+
+
+        orderBoardButton = view.findViewById(R.id.orderBoardButton);
+        exampleGunImage = view.findViewById(R.id.exampleGunImage);
+
+        orderBoardButton.setOnClickListener(v -> {
+            // Eğer görünürse gizle, gizliyse göster
+            if (exampleGunImage.getVisibility() == View.VISIBLE) {
+                exampleGunImage.setVisibility(View.GONE);
+            } else {
+                exampleGunImage.setVisibility(View.VISIBLE);
+            }
+        });
+
     }
 
     // Sürükle-bırak fonksiyonu + birleşme kontrolü
@@ -313,10 +373,4 @@ public class MainRoomFragment extends Fragment {
 
         countDownTimer.start();
     }
-
-
-
-
-
-
 }
