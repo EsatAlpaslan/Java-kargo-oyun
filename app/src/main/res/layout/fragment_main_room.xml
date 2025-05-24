@@ -96,11 +96,6 @@
         />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="16dp">
     <!-- Gün sayısını gösteren yazı -->
         <TextView
             android:id="@+id/dayText"
@@ -109,8 +104,8 @@
             android:text="GÜN 1"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="#001555"
-            android:layout_gravity="bottom|end"
+            android:textColor="#000000"
+            android:layout_gravity="bottom|start"
             android:layout_margin="16dp" />
 
  <!-- sayac -->
@@ -119,15 +114,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kalan: 15 sn"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
             android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"/>
-
-    </LinearLayout>
-
-
-
+            android:layout_margin="16dp"
+            />
 
 
 
