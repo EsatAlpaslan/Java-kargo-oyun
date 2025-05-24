@@ -108,7 +108,7 @@
             android:layout_gravity="bottom|start"
             android:layout_margin="16dp" />
 
- <!-- sayac -->
+    <!-- sayac -->
         <TextView
             android:id="@+id/dayTimerText"
             android:layout_width="wrap_content"

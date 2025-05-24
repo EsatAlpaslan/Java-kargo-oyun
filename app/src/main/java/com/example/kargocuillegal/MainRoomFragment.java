@@ -37,6 +37,8 @@ public class MainRoomFragment extends Fragment {
     private boolean isCompleted = false;
     private TextView dayTimerText;
     private CountDownTimer countDownTimer;
+    private TextView dayText;
+    private boolean isTimeOver = false;
 
 
 
@@ -81,14 +83,13 @@ public class MainRoomFragment extends Fragment {
             currentDay++;
             nextDayButton.setVisibility(View.GONE);
             completionText.setVisibility(View.GONE);
+            dayText.setText("GÜN " + currentDay);
             Toast.makeText(getContext(), "Gün " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
         });
         dayTimerText = view.findViewById(R.id.dayTimerText);
 
-        startCountdown(15); // 15 saniyelik sayaç başlat
-
-
-
+        startCountdown(15);
+        dayText = view.findViewById(R.id.dayText);
     }
 
     // Sürükle-bırak fonksiyonu + birleşme kontrolü
@@ -98,6 +99,7 @@ public class MainRoomFragment extends Fragment {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if (isTimeOver) return false; // süre bittiyse hareket ettirme
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         dX = v.getX() - event.getRawX();
@@ -293,13 +295,20 @@ public class MainRoomFragment extends Fragment {
 
             @Override
             public void onFinish() {
-                dayTimerText.setText("Süre doldu!");
                 if (!isCompleted) {
-                    dayTimerText.setText("Süre doldu!");
+                    dayTimerText.setText("Süreniz bitti!");
+                    isTimeOver = true;
+
+                    // Parçaları devre dışı bırak
+                    partGrip.setEnabled(false);
+                    partBarrel.setEnabled(false);
+                    partCylinder.setEnabled(false);
+                    partHammer.setEnabled(false);
                 } else {
-                    dayTimerText.setText(""); // Tamamlandıysa boş bırak
+                    dayTimerText.setText(""); // Silah tamamlandıysa sayaç boş kalsın
                 }
             }
+
         };
 
         countDownTimer.start();
