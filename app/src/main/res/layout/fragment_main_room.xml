@@ -67,6 +67,66 @@
         android:translationX="20dp"
         android:translationY="20dp" />
 
+    <ImageView
+        android:id="@+id/partSlide"
+        android:layout_width="132dp"
+        android:layout_height="76dp"
+        android:adjustViewBounds="true"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/part_slide"
+        android:translationX="5dp"
+        android:translationY="150dp" />
+
+    <ImageView
+        android:id="@+id/partSpring"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:adjustViewBounds="true"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/part_spring"
+        android:translationX="65dp"
+        android:translationY="20dp"/>
+
+    <ImageView
+        android:id="@+id/partBarrel2"
+        android:layout_width="100dp"
+        android:layout_height="42dp"
+        android:adjustViewBounds="true"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/part_barrel"
+        android:translationX="185dp"
+        android:translationY="20dp" />
+
+    <ImageView
+        android:id="@+id/partFrame"
+        android:layout_width="135dp"
+        android:layout_height="76dp"
+        android:adjustViewBounds="true"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/part_frame"
+        android:translationX="500dp"
+        android:translationY="40dp" />
+
+    <ImageView
+        android:id="@+id/partMag"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
+        android:adjustViewBounds="true"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/part_mag"
+        android:translationX="500dp"
+        android:translationY="250dp"  />
+
     <TextView
         android:id="@+id/completionText"
         android:layout_width="wrap_content"
@@ -155,6 +215,8 @@
         android:src="@drawable/revolver"
         android:visibility="gone"
         android:contentDescription="Silah Görseli" />
+
+
 
 
 

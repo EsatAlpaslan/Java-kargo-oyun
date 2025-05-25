@@ -21,6 +21,8 @@ import android.widget.ImageButton;
 public class MainRoomFragment extends Fragment {
 
     private ImageView partGrip, partBarrel, partCylinder, partHammer;
+    private ImageView part_slide, part_spring, part_barrel2, part_frame, part_mag;
+
     private boolean barrelLockedToCylinder = false;
     private float barrelOffsetX = 0;  // Barrel'ın cylinder'a göre X farkı
     private float barrelOffsetY = 0;  // Barrel'ın cylinder'a göre Y farkı
@@ -68,6 +70,13 @@ public class MainRoomFragment extends Fragment {
         partCylinder = view.findViewById(R.id.partCylinder);
         partHammer = view.findViewById(R.id.partHammer);
 
+        part_slide = view.findViewById(R.id.partSlide);
+        part_spring = view.findViewById(R.id.partSpring);
+        part_barrel2 = view.findViewById(R.id.partBarrel2);
+        part_frame = view.findViewById(R.id.partFrame);
+        part_mag = view.findViewById(R.id.partMag);
+
+
         // Sürüklenebilir yap
         makeDraggable(partGrip);
         makeDraggable(partBarrel);
@@ -84,53 +93,75 @@ public class MainRoomFragment extends Fragment {
         nextDayButton.setOnClickListener(v -> {
             currentDay++;
 
-            // ✔ Arayüz sıfırla
             nextDayButton.setVisibility(View.GONE);
             completionText.setVisibility(View.GONE);
             isCompleted = false;
 
-            // Sayaç yeniden başlasın
             startCountdown(15);
 
-            // ✔ Parçaları tekrar görünür ve sürüklenebilir yap
-            partGrip.setVisibility(View.VISIBLE);
-            partGrip.setEnabled(true);
-            partBarrel.setVisibility(View.VISIBLE);
-            partBarrel.setEnabled(true);
-            partHammer.setVisibility(View.VISIBLE);
-            partHammer.setEnabled(true);
-            partCylinder.setVisibility(View.VISIBLE);
-            partCylinder.setEnabled(true);
-
-            makeDraggable(partGrip);
-            makeDraggable(partBarrel);
-            makeDraggable(partHammer);
-            makeDraggable(partCylinder);
-
-            // ✔ Konumlarını sıfırla (ilk konuma al – örnek değerler)
-// Önce ekran boyutlarını al:
             DisplayMetrics metrics = new DisplayMetrics();
             requireActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
             float screenWidth = metrics.widthPixels;
             float screenHeight = metrics.heightPixels;
 
-// Sonra parçaları oranla konumlandır:
-            partGrip.setX(0.10f * screenWidth); partGrip.setY(0.08f * screenHeight);
-            partCylinder.setX(0.30f * screenWidth); partCylinder.setY(0.08f * screenHeight);
-            partBarrel.setX(0.50f * screenWidth); partBarrel.setY(0.08f * screenHeight);
-            partHammer.setX(0.70f * screenWidth); partHammer.setY(0.08f * screenHeight);
+            if (currentDay == 2) {
+                // Revolver parçalarını gizle
+                partGrip.setVisibility(View.GONE);
+                partBarrel.setVisibility(View.GONE);
+                partHammer.setVisibility(View.GONE);
+                partCylinder.setVisibility(View.GONE);
 
+                // Glock parçalarını göster
+                part_slide.setVisibility(View.VISIBLE);
+                part_spring.setVisibility(View.VISIBLE);
+                part_barrel2.setVisibility(View.VISIBLE);
+                part_frame.setVisibility(View.VISIBLE);
+                part_mag.setVisibility(View.VISIBLE);
 
-            // ✔ Kilit durumlarını sıfırla
+                // Glock parçalarını sürüklenebilir yap
+                makeDraggable(part_slide);
+                makeDraggable(part_spring);
+                makeDraggable(part_barrel2);
+                makeDraggable(part_frame);
+                makeDraggable(part_mag);
+
+                // Glock parçalarını konumlandır
+                part_slide.setX(0.10f * screenWidth); part_slide.setY(0.08f * screenHeight);
+                part_spring.setX(0.30f * screenWidth); part_spring.setY(0.08f * screenHeight);
+                part_barrel2.setX(0.50f * screenWidth); part_barrel2.setY(0.08f * screenHeight);
+                part_frame.setX(0.10f * screenWidth); part_frame.setY(0.25f * screenHeight);
+                part_mag.setX(0.30f * screenWidth); part_mag.setY(0.25f * screenHeight);
+
+            } else {
+                // Gün 1 veya diğer günler için revolver parçalarını göster
+                partGrip.setVisibility(View.VISIBLE);
+                partGrip.setEnabled(true);
+                partBarrel.setVisibility(View.VISIBLE);
+                partBarrel.setEnabled(true);
+                partHammer.setVisibility(View.VISIBLE);
+                partHammer.setEnabled(true);
+                partCylinder.setVisibility(View.VISIBLE);
+                partCylinder.setEnabled(true);
+
+                makeDraggable(partGrip);
+                makeDraggable(partBarrel);
+                makeDraggable(partHammer);
+                makeDraggable(partCylinder);
+
+                partGrip.setX(0.10f * screenWidth); partGrip.setY(0.08f * screenHeight);
+                partCylinder.setX(0.30f * screenWidth); partCylinder.setY(0.08f * screenHeight);
+                partBarrel.setX(0.50f * screenWidth); partBarrel.setY(0.08f * screenHeight);
+                partHammer.setX(0.70f * screenWidth); partHammer.setY(0.08f * screenHeight);
+            }
+
             gripLockedToCylinder = false;
             barrelLockedToCylinder = false;
             hammerLockedToCylinder = false;
 
-            // ✔ Gün metnini güncelle
             TextView dayText = requireView().findViewById(R.id.dayText);
-            dayText.setText("GÜN " + currentDay);
+            dayText.setText("G\u00dcN " + currentDay);
 
-            Toast.makeText(getContext(), "GÜN " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "G\u00dcN " + currentDay + " ba\u015flad\u0131!", Toast.LENGTH_SHORT).show();
         });
 
         dayTimerText = view.findViewById(R.id.dayTimerText);
@@ -214,7 +245,7 @@ public class MainRoomFragment extends Fragment {
         partGrip.getLocationOnScreen(gripLoc);
         partCylinder.getLocationOnScreen(cylLoc);
 
-        float gripCenterX = gripLoc[0] + partGrip.getWidth() / 2f;
+        float gripCenterX = gripLoc[0] + partGrip.getWidth() / 1.5f;
         float gripCenterY = gripLoc[1] + partGrip.getHeight() / 2f;
 
         float cylCenterX = cylLoc[0] + partCylinder.getWidth() / 2f;
