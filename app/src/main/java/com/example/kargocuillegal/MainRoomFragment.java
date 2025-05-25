@@ -219,7 +219,16 @@ public class MainRoomFragment extends Fragment {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (isTimeOver) return false; // süre bittiyse hareket ettirme
+                if (isTimeOver) return false;
+
+                // 🔐 Glock parçaları kilitlendiyse tekrar oynatılamasın
+                if (currentDay == 2) {
+                    if (v == part_slide && slideLocked) return false;
+                    if (v == part_barrel2 && barrel2Locked) return false;
+                    if (v == part_spring && springLocked) return false;
+                    if (v == part_mag && magLocked) return false;
+                }
+
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         dX = v.getX() - event.getRawX();
@@ -233,8 +242,7 @@ public class MainRoomFragment extends Fragment {
                         v.setX(newX);
                         v.setY(newY);
 
-                        // Eğer cylinder hareket ediyorsa ve barrel ona kilitliyse birlikte hareket etsin
-                        // Eğer cylinder hareket ediyorsa ve barrel ona kilitliyse
+                        // 🔧 Revolver parçaları birbirine bağlıysa birlikte hareket etsin
                         if (v.getId() == R.id.partCylinder && barrelLockedToCylinder) {
                             partBarrel.setX(newX + barrelOffsetX);
                             partBarrel.setY(newY + barrelOffsetY);
@@ -247,24 +255,44 @@ public class MainRoomFragment extends Fragment {
                             partHammer.setX(newX + hammerOffsetX);
                             partHammer.setY(newY + hammerOffsetY);
                         }
+
+                        // 🔧 Glock birleşme kontrolleri ve kilitli parçaların birlikte hareketi
                         if (currentDay == 2) {
                             checkSlideFrameMerge();
                             checkBarrel2ToFrame();
                             checkSpringToBarrel2();
                             checkMagToFrame();
+
+                            // Frame sürükleniyorsa bağlı parçaları da taşı
+                            if (v.getId() == R.id.partFrame) {
+                                if (slideLocked) {
+                                    part_slide.setX(newX + slideOffsetX);
+                                    part_slide.setY(newY + slideOffsetY);
+                                }
+                                if (barrel2Locked) {
+                                    part_barrel2.setX(newX + barrel2OffsetX);
+                                    part_barrel2.setY(newY + barrel2OffsetY);
+                                }
+                                if (magLocked) {
+                                    part_mag.setX(newX + magOffsetX);
+                                    part_mag.setY(newY + magOffsetY);
+                                }
+                            }
+
+                            // Barrel2 sürükleniyorsa spring de onunla birlikte sürüklensin
+                            if (v.getId() == R.id.partBarrel2 && springLocked) {
+                                part_spring.setX(newX + springOffsetX);
+                                part_spring.setY(newY + springOffsetY);
+                            }
                         }
-
-
-
 
                         return true;
 
                     case MotionEvent.ACTION_UP:
-                        // Parmağı bıraktığında kontrol et
                         checkGripCylinderMerge();
                         checkCylinderBarrelMerge();
                         checkCylinderHammerMerge();
-                        checkIfCompleted();
+                        checkIfAssemblyCompleted();
                         return true;
 
                     default:
@@ -273,6 +301,7 @@ public class MainRoomFragment extends Fragment {
             }
         });
     }
+
 
     private void checkGripCylinderMerge() {
         int[] gripLoc = new int[2];
@@ -471,7 +500,7 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(springCenterX - barrelCenterX, springCenterY - barrelCenterY);
 
-        if (distance < 100) {
+        if (distance < 150) {
             float offsetX = -0.1f * part_spring.getWidth();
             float offsetY = 0.1f * part_spring.getHeight();
 
@@ -481,15 +510,20 @@ public class MainRoomFragment extends Fragment {
             part_spring.setX(targetX);
             part_spring.setY(targetY);
 
+            // 🔗 Bağlantı offsetlerini kaydet
             springOffsetX = targetX - part_barrel2.getX();
             springOffsetY = targetY - part_barrel2.getY();
 
-            part_spring.setEnabled(false);
+            // 🔒 Kilitlenme aktif
             springLocked = true;
+
+            // 🔕 Artık sürüklenemesin
+            part_spring.setEnabled(false);
 
             checkIfAssemblyCompleted();
         }
     }
+
 
     private void checkMagToFrame() {
         int[] magLoc = new int[2];
