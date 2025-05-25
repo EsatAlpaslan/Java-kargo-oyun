@@ -77,7 +77,9 @@
         android:scaleType="fitCenter"
         android:src="@drawable/part_slide"
         android:translationX="5dp"
-        android:translationY="150dp" />
+        android:translationY="150dp"
+        android:visibility="gone"
+        />
 
     <ImageView
         android:id="@+id/partSpring"
@@ -89,7 +91,9 @@
         android:scaleType="fitCenter"
         android:src="@drawable/part_spring"
         android:translationX="65dp"
-        android:translationY="20dp"/>
+        android:translationY="20dp"
+        android:visibility="gone"
+        />
 
     <ImageView
         android:id="@+id/partBarrel2"
@@ -101,7 +105,9 @@
         android:scaleType="fitCenter"
         android:src="@drawable/part_barrel"
         android:translationX="185dp"
-        android:translationY="20dp" />
+        android:translationY="20dp"
+        android:visibility="gone"
+        />
 
     <ImageView
         android:id="@+id/partFrame"
@@ -113,7 +119,9 @@
         android:scaleType="fitCenter"
         android:src="@drawable/part_frame"
         android:translationX="500dp"
-        android:translationY="40dp" />
+        android:translationY="40dp"
+        android:visibility="gone"
+        />
 
     <ImageView
         android:id="@+id/partMag"
@@ -125,7 +133,9 @@
         android:scaleType="fitCenter"
         android:src="@drawable/part_mag"
         android:translationX="500dp"
-        android:translationY="250dp"  />
+        android:translationY="250dp"
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/completionText"

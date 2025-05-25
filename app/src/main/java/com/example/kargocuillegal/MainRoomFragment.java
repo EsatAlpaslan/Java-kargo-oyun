@@ -104,6 +104,19 @@ public class MainRoomFragment extends Fragment {
             float screenWidth = metrics.widthPixels;
             float screenHeight = metrics.heightPixels;
 
+            if (currentDay == 1) {
+                partGrip.setVisibility(View.VISIBLE);
+                partBarrel.setVisibility(View.VISIBLE);
+                partHammer.setVisibility(View.VISIBLE);
+                partCylinder.setVisibility(View.VISIBLE);
+
+                part_slide.setVisibility(View.GONE);
+                part_spring.setVisibility(View.GONE);
+                part_barrel2.setVisibility(View.GONE);
+                part_frame.setVisibility(View.GONE);
+                part_mag.setVisibility(View.GONE);
+            }
+
             if (currentDay == 2) {
                 // Revolver parçalarını gizle
                 partGrip.setVisibility(View.GONE);
