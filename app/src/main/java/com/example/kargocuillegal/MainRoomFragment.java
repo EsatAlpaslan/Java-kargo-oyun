@@ -436,7 +436,7 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(barrelCenterX - frameCenterX, barrelCenterY - frameCenterY);
 
-        if (distance < 150) {
+        if (distance < 100) {
             float offsetX = 0.36f * part_frame.getWidth();
             float offsetY = -0.18f * part_frame.getHeight();
 
@@ -471,7 +471,7 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(springCenterX - barrelCenterX, springCenterY - barrelCenterY);
 
-        if (distance < 150) {
+        if (distance < 100) {
             float offsetX = -0.1f * part_spring.getWidth();
             float offsetY = 0.1f * part_spring.getHeight();
 
@@ -560,6 +560,20 @@ public class MainRoomFragment extends Fragment {
 
     private void checkIfCompleted() {
         if (gripLockedToCylinder && barrelLockedToCylinder && hammerLockedToCylinder && !isCompleted) {
+            completionText.setVisibility(View.VISIBLE);
+            nextDayButton.setVisibility(View.VISIBLE);
+            dayTimerText.setVisibility(View.GONE); // Sayaç gizlensin
+
+            if (countDownTimer != null) {
+                countDownTimer.cancel();
+            }
+
+            isCompleted = true;
+        }
+    }
+
+    private void checkIffCompleted() {
+        if (slideLocked  && barrel2Locked && springLocked && magLocked && !isCompleted) {
             completionText.setVisibility(View.VISIBLE);
             nextDayButton.setVisibility(View.VISIBLE);
             dayTimerText.setVisibility(View.GONE); // Sayaç gizlensin

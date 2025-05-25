@@ -68,18 +68,20 @@
         android:translationY="20dp" />
 
     <ImageView
-        android:id="@+id/partSlide"
-        android:layout_width="132dp"
-        android:layout_height="76dp"
+        android:id="@+id/partMag"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
         android:adjustViewBounds="true"
         android:clipChildren="true"
         android:clipToPadding="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/part_slide"
-        android:translationX="5dp"
-        android:translationY="150dp"
+        android:src="@drawable/part_mag"
+        android:translationX="500dp"
+        android:translationY="250dp"
         android:visibility="gone"
         />
+
+
 
     <ImageView
         android:id="@+id/partSpring"
@@ -124,18 +126,20 @@
         />
 
     <ImageView
-        android:id="@+id/partMag"
-        android:layout_width="125dp"
-        android:layout_height="60dp"
+        android:id="@+id/partSlide"
+        android:layout_width="132dp"
+        android:layout_height="76dp"
         android:adjustViewBounds="true"
         android:clipChildren="true"
         android:clipToPadding="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/part_mag"
-        android:translationX="500dp"
-        android:translationY="250dp"
+        android:src="@drawable/part_slide"
+        android:translationX="5dp"
+        android:translationY="150dp"
         android:visibility="gone"
         />
+
+
 
     <TextView
         android:id="@+id/completionText"
