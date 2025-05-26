@@ -142,7 +142,6 @@ public class MainRoomFragment extends Fragment {
                 part_frame.setVisibility(View.GONE);
                 part_mag.setVisibility(View.GONE);
 
-                // Deagle parçaları gizli olsun
                 partDeagleFrame.setVisibility(View.GONE);
                 partDeagleSlide.setVisibility(View.GONE);
                 partDeagleBarrel.setVisibility(View.GONE);
@@ -171,18 +170,19 @@ public class MainRoomFragment extends Fragment {
                 partDeagleSpring.setVisibility(View.VISIBLE);
                 partDeagleMag.setVisibility(View.VISIBLE);
 
-                // Hepsini rastgele masaya dağıt
-                randomize(part_slide, screenWidth, screenHeight);
-                randomize(part_spring, screenWidth, screenHeight);
-                randomize(part_barrel2, screenWidth, screenHeight);
-                randomize(part_frame, screenWidth, screenHeight);
-                randomize(part_mag, screenWidth, screenHeight);
+                // 📌 GLOCK konumları
+                part_slide.setX(0.10f * screenWidth); part_slide.setY(0.08f * screenHeight);
+                part_spring.setX(0.30f * screenWidth); part_spring.setY(0.08f * screenHeight);
+                part_barrel2.setX(0.50f * screenWidth); part_barrel2.setY(0.08f * screenHeight);
+                part_frame.setX(0.10f * screenWidth); part_frame.setY(0.25f * screenHeight);
+                part_mag.setX(0.30f * screenWidth); part_mag.setY(0.25f * screenHeight);
 
-                randomize(partDeagleFrame, screenWidth, screenHeight);
-                randomize(partDeagleSlide, screenWidth, screenHeight);
-                randomize(partDeagleBarrel, screenWidth, screenHeight);
-                randomize(partDeagleSpring, screenWidth, screenHeight);
-                randomize(partDeagleMag, screenWidth, screenHeight);
+                // 📌 DEAGLE konumları
+                partDeagleSlide.setX(0.60f * screenWidth); partDeagleSlide.setY(0.08f * screenHeight);
+                partDeagleBarrel.setX(0.75f * screenWidth); partDeagleBarrel.setY(0.08f * screenHeight);
+                partDeagleSpring.setX(0.75f * screenWidth); partDeagleSpring.setY(0.18f * screenHeight);
+                partDeagleFrame.setX(0.60f * screenWidth); partDeagleFrame.setY(0.25f * screenHeight);
+                partDeagleMag.setX(0.75f * screenWidth); partDeagleMag.setY(0.28f * screenHeight);
 
                 // Sürüklenebilir yap
                 makeDraggable(part_slide);
@@ -197,7 +197,7 @@ public class MainRoomFragment extends Fragment {
                 makeDraggable(partDeagleSpring);
                 makeDraggable(partDeagleMag);
 
-                // Üstte görünmesini istediğin parçalar
+                // Üstte görünmesi gereken parçalar
                 part_frame.bringToFront();
                 part_slide.bringToFront();
                 partDeagleFrame.bringToFront();
@@ -224,7 +224,7 @@ public class MainRoomFragment extends Fragment {
                 partHammer.setX(0.70f * screenWidth); partHammer.setY(0.08f * screenHeight);
             }
 
-            // Deagle kilit sıfırlama (gerekirse eklersin)
+            // Revolver kilit sıfırlama
             gripLockedToCylinder = false;
             barrelLockedToCylinder = false;
             hammerLockedToCylinder = false;
@@ -234,6 +234,7 @@ public class MainRoomFragment extends Fragment {
 
             Toast.makeText(getContext(), "GÜN " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
         });
+
 
         orderBoardButton = view.findViewById(R.id.orderBoardButton);
 
