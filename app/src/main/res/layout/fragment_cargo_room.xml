@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".CargoRoomFragment">
 
-    <!-- Oda başlığı -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kargo / Dağıtım Odası"
-        android:textSize="24sp"
-        android:layout_gravity="center" />
+    <!-- Arka plan görseli -->
+    <ImageView
+        android:id="@+id/cargoRoomBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/kargo_dagitim" />
 
     <!-- Sağ altta geri dönüş butonu -->
     <Button
