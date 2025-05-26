@@ -171,18 +171,18 @@ public class MainRoomFragment extends Fragment {
                 partDeagleMag.setVisibility(View.VISIBLE);
 
                 // 📌 GLOCK konumları
-                part_slide.setX(0.10f * screenWidth); part_slide.setY(0.08f * screenHeight);
-                part_spring.setX(0.30f * screenWidth); part_spring.setY(0.08f * screenHeight);
-                part_barrel2.setX(0.50f * screenWidth); part_barrel2.setY(0.08f * screenHeight);
-                part_frame.setX(0.10f * screenWidth); part_frame.setY(0.25f * screenHeight);
-                part_mag.setX(0.30f * screenWidth); part_mag.setY(0.25f * screenHeight);
+                part_slide.setX(0.07f * screenWidth); part_slide.setY(0.05f * screenHeight);
+                part_spring.setX(0.38f * screenWidth); part_spring.setY(0.11f * screenHeight);
+                part_barrel2.setX(0.23f * screenWidth); part_barrel2.setY(0.77f * screenHeight);
+                part_frame.setX(0.78f * screenWidth); part_frame.setY(0.67f * screenHeight);
+                part_mag.setX(0.036f * screenWidth); part_mag.setY(0.63f * screenHeight);
 
                 // 📌 DEAGLE konumları
-                partDeagleSlide.setX(0.60f * screenWidth); partDeagleSlide.setY(0.08f * screenHeight);
-                partDeagleBarrel.setX(0.75f * screenWidth); partDeagleBarrel.setY(0.08f * screenHeight);
-                partDeagleSpring.setX(0.75f * screenWidth); partDeagleSpring.setY(0.18f * screenHeight);
-                partDeagleFrame.setX(0.60f * screenWidth); partDeagleFrame.setY(0.25f * screenHeight);
-                partDeagleMag.setX(0.75f * screenWidth); partDeagleMag.setY(0.28f * screenHeight);
+                partDeagleSlide.setX(0.5f * screenWidth); partDeagleSlide.setY(0.76f * screenHeight);
+                partDeagleBarrel.setX(0.7f * screenWidth); partDeagleBarrel.setY(0.08f * screenHeight);
+                partDeagleSpring.setX(0.9f * screenWidth); partDeagleSpring.setY(0.18f * screenHeight);
+                partDeagleFrame.setX(0.05f * screenWidth); partDeagleFrame.setY(0.3f * screenHeight);
+                partDeagleMag.setX(0.88f * screenWidth); partDeagleMag.setY(0.36f * screenHeight);
 
                 // Sürüklenebilir yap
                 makeDraggable(part_slide);
