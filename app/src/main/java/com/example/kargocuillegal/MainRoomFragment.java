@@ -53,6 +53,19 @@ public class MainRoomFragment extends Fragment {
 
     private boolean frameLocked = false;
 
+    private boolean deagleSlideLocked = false;
+    private float deagleSlideOffsetX = 0, deagleSlideOffsetY = 0;
+
+    private boolean deagleBarrelLocked = false;
+    private float deagleBarrelOffsetX = 0, deagleBarrelOffsetY = 0;
+
+    private boolean deagleSpringLocked = false;
+    private float deagleSpringOffsetX = 0, deagleSpringOffsetY = 0;
+
+    private boolean deagleMagLocked = false;
+    private float deagleMagOffsetX = 0, deagleMagOffsetY = 0;
+
+
 
 
     private int currentDay = 1; // Başlangıçta Gün 1
