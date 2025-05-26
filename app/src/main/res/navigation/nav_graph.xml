@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/introFragment">
+
+    <!-- Intro Fragment -->
     <fragment
         android:id="@+id/introFragment"
         android:name="com.example.kargocuillegal.IntroFragment"
         android:label="fragment_intro"
-        tools:layout="@layout/fragment_intro" >
+        tools:layout="@layout/fragment_intro">
         <action
             android:id="@+id/action_introFragment_to_roomSelectionFragment"
             app:destination="@id/roomSelectionFragment"
@@ -16,14 +18,15 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
-
     </fragment>
 
+    <!-- Room Selection Fragment -->
     <fragment
         android:id="@+id/roomSelectionFragment"
         android:name="com.example.kargocuillegal.RoomSelectionFragment"
         android:label="fragment_room_selection"
-        tools:layout="@layout/fragment_room_selection" >
+        tools:layout="@layout/fragment_room_selection">
+
         <action
             android:id="@+id/action_roomSelectionFragment_to_mainRoomFragment"
             app:destination="@id/mainRoomFragment"
@@ -32,12 +35,42 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
+        <action
+            android:id="@+id/action_roomSelectionFragment_to_customerServiceFragment"
+            app:destination="@id/customerServiceFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_roomSelectionFragment_to_cargoRoomFragment"
+            app:destination="@id/cargoRoomFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
+    <!-- Main Room Fragment -->
     <fragment
         android:id="@+id/mainRoomFragment"
         android:name="com.example.kargocuillegal.MainRoomFragment"
         android:label="fragment_main_room"
         tools:layout="@layout/fragment_main_room" />
 
+    <!-- Müşteri Hizmetleri Fragment -->
+    <fragment
+        android:id="@+id/customerServiceFragment"
+        android:name="com.example.kargocuillegal.CustomerServiceFragment"
+        android:label="fragment_customer_service"
+        tools:layout="@layout/fragment_customer_service" />
+
+    <!-- Kargo/Dağıtım Fragment -->
+    <fragment
+        android:id="@+id/cargoRoomFragment"
+        android:name="com.example.kargocuillegal.CargoRoomFragment"
+        android:label="fragment_cargo_room"
+        tools:layout="@layout/fragment_cargo_room" />
 
 </navigation>
