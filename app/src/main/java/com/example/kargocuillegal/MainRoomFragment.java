@@ -171,18 +171,19 @@ public class MainRoomFragment extends Fragment {
                 partDeagleSpring.setVisibility(View.VISIBLE);
                 partDeagleMag.setVisibility(View.VISIBLE);
 
-                // Hepsini rastgele masaya dağıt
-                randomize(part_slide, screenWidth, screenHeight);
-                randomize(part_spring, screenWidth, screenHeight);
-                randomize(part_barrel2, screenWidth, screenHeight);
-                randomize(part_frame, screenWidth, screenHeight);
-                randomize(part_mag, screenWidth, screenHeight);
+                // 📌 GLOCK konumları
+                part_slide.setX(0.08f * screenWidth); part_slide.setY(0.05f * screenHeight);
+                part_spring.setX(0.35f * screenWidth); part_spring.setY(0.83f * screenHeight);
+                part_barrel2.setX(0.90f * screenWidth); part_barrel2.setY(0.6f * screenHeight);
+                part_frame.setX(0.85f * screenWidth); part_frame.setY(0.28f * screenHeight);
+                part_mag.setX(0.03f * screenWidth); part_mag.setY(0.60f * screenHeight);
 
-                randomize(partDeagleFrame, screenWidth, screenHeight);
-                randomize(partDeagleSlide, screenWidth, screenHeight);
-                randomize(partDeagleBarrel, screenWidth, screenHeight);
-                randomize(partDeagleSpring, screenWidth, screenHeight);
-                randomize(partDeagleMag, screenWidth, screenHeight);
+                // 📌 DEAGLE konumları
+                partDeagleSlide.setX(0.65f * screenWidth); partDeagleSlide.setY(0.05f * screenHeight);
+                partDeagleBarrel.setX(0.37f * screenWidth); partDeagleBarrel.setY(0.08f * screenHeight);
+                partDeagleSpring.setX(0.88f * screenWidth); partDeagleSpring.setY(0.18f * screenHeight);
+                partDeagleFrame.setX(0.04f * screenWidth); partDeagleFrame.setY(0.3f * screenHeight);
+                partDeagleMag.setX(0.75f * screenWidth); partDeagleMag.setY(0.75f * screenHeight);
 
                 // Sürüklenebilir yap
                 makeDraggable(part_slide);
@@ -197,7 +198,7 @@ public class MainRoomFragment extends Fragment {
                 makeDraggable(partDeagleSpring);
                 makeDraggable(partDeagleMag);
 
-                // Üstte görünmesini istediğin parçalar
+                // Üstte görünmesi gereken parçalar
                 part_frame.bringToFront();
                 part_slide.bringToFront();
                 partDeagleFrame.bringToFront();
@@ -224,7 +225,7 @@ public class MainRoomFragment extends Fragment {
                 partHammer.setX(0.70f * screenWidth); partHammer.setY(0.08f * screenHeight);
             }
 
-            // Deagle kilit sıfırlama (gerekirse eklersin)
+            // Revolver kilit sıfırlama
             gripLockedToCylinder = false;
             barrelLockedToCylinder = false;
             hammerLockedToCylinder = false;
@@ -482,7 +483,7 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(slideCenterX - frameCenterX, slideCenterY - frameCenterY);
 
-        if (distance < 150) {
+        if (distance < 80) {
             float offsetX = 0.05f * part_frame.getWidth();
             float offsetY = -0.43f * part_slide.getHeight();
 
@@ -592,7 +593,7 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(magCenterX - frameCenterX, magCenterY - frameCenterY);
 
-        if (distance < 100) {
+        if (distance < 30) {
             float offsetX = -0.227f * part_mag.getWidth();
             float offsetY = 0.18f * part_mag.getHeight();
 
