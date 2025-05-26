@@ -140,40 +140,45 @@
         />
     <ImageView
         android:id="@+id/partDeagleFrame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="135dp"
+        android:layout_height="76dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/deagle_frame"
         android:visibility="gone"
         />
 
     <ImageView
         android:id="@+id/partDeagleSlide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="132dp"
+        android:layout_height="76dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/deagle_slide"
         android:visibility="gone"
         />
 
     <ImageView
         android:id="@+id/partDeagleBarrel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="42dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/deagle_barrel"
         android:visibility="gone"
         />
 
     <ImageView
         android:id="@+id/partDeagleSpring"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/deagle_spring"
         android:visibility="gone"
         />
 
     <ImageView
         android:id="@+id/partDeagleMag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/deagle_mag"
         android:visibility="gone"
         />
