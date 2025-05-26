@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -63,6 +64,8 @@ public class MainRoomFragment extends Fragment {
     private ImageButton orderBoardButton;
     private TextView orderText;
     private ImageView exampleGunImage;
+    private ImageView partDeagleFrame, partDeagleSlide, partDeagleBarrel, partDeagleSpring, partDeagleMag;
+
 
 
 
@@ -91,6 +94,13 @@ public class MainRoomFragment extends Fragment {
         part_barrel2 = view.findViewById(R.id.partBarrel2);
         part_frame = view.findViewById(R.id.partFrame);
         part_mag = view.findViewById(R.id.partMag);
+
+        partDeagleFrame = view.findViewById(R.id.partDeagleFrame);
+        partDeagleSlide = view.findViewById(R.id.partDeagleSlide);
+        partDeagleBarrel = view.findViewById(R.id.partDeagleBarrel);
+        partDeagleSpring = view.findViewById(R.id.partDeagleSpring);
+        partDeagleMag = view.findViewById(R.id.partDeagleMag);
+
 
 
         // Sürüklenebilir yap
@@ -131,6 +141,13 @@ public class MainRoomFragment extends Fragment {
                 part_barrel2.setVisibility(View.GONE);
                 part_frame.setVisibility(View.GONE);
                 part_mag.setVisibility(View.GONE);
+
+                // Deagle parçaları gizli olsun
+                partDeagleFrame.setVisibility(View.GONE);
+                partDeagleSlide.setVisibility(View.GONE);
+                partDeagleBarrel.setVisibility(View.GONE);
+                partDeagleSpring.setVisibility(View.GONE);
+                partDeagleMag.setVisibility(View.GONE);
             }
 
             if (currentDay == 2) {
@@ -147,20 +164,44 @@ public class MainRoomFragment extends Fragment {
                 part_frame.setVisibility(View.VISIBLE);
                 part_mag.setVisibility(View.VISIBLE);
 
-                // Glock parçalarını sürüklenebilir yap
+                // Deagle parçalarını göster
+                partDeagleFrame.setVisibility(View.VISIBLE);
+                partDeagleSlide.setVisibility(View.VISIBLE);
+                partDeagleBarrel.setVisibility(View.VISIBLE);
+                partDeagleSpring.setVisibility(View.VISIBLE);
+                partDeagleMag.setVisibility(View.VISIBLE);
+
+                // Hepsini rastgele masaya dağıt
+                randomize(part_slide, screenWidth, screenHeight);
+                randomize(part_spring, screenWidth, screenHeight);
+                randomize(part_barrel2, screenWidth, screenHeight);
+                randomize(part_frame, screenWidth, screenHeight);
+                randomize(part_mag, screenWidth, screenHeight);
+
+                randomize(partDeagleFrame, screenWidth, screenHeight);
+                randomize(partDeagleSlide, screenWidth, screenHeight);
+                randomize(partDeagleBarrel, screenWidth, screenHeight);
+                randomize(partDeagleSpring, screenWidth, screenHeight);
+                randomize(partDeagleMag, screenWidth, screenHeight);
+
+                // Sürüklenebilir yap
                 makeDraggable(part_slide);
                 makeDraggable(part_spring);
                 makeDraggable(part_barrel2);
                 makeDraggable(part_frame);
                 makeDraggable(part_mag);
 
-                // Glock parçalarını konumlandır
-                part_slide.setX(0.10f * screenWidth); part_slide.setY(0.08f * screenHeight);
-                part_spring.setX(0.30f * screenWidth); part_spring.setY(0.08f * screenHeight);
-                part_barrel2.setX(0.50f * screenWidth); part_barrel2.setY(0.08f * screenHeight);
-                part_frame.setX(0.10f * screenWidth); part_frame.setY(0.25f * screenHeight);
-                part_mag.setX(0.30f * screenWidth); part_mag.setY(0.25f * screenHeight);
+                makeDraggable(partDeagleFrame);
+                makeDraggable(partDeagleSlide);
+                makeDraggable(partDeagleBarrel);
+                makeDraggable(partDeagleSpring);
+                makeDraggable(partDeagleMag);
 
+                // Üstte görünmesini istediğin parçalar
+                part_frame.bringToFront();
+                part_slide.bringToFront();
+                partDeagleFrame.bringToFront();
+                partDeagleSlide.bringToFront();
             } else {
                 // Gün 1 veya diğer günler için revolver parçalarını göster
                 partGrip.setVisibility(View.VISIBLE);
@@ -183,15 +224,17 @@ public class MainRoomFragment extends Fragment {
                 partHammer.setX(0.70f * screenWidth); partHammer.setY(0.08f * screenHeight);
             }
 
+            // Deagle kilit sıfırlama (gerekirse eklersin)
             gripLockedToCylinder = false;
             barrelLockedToCylinder = false;
             hammerLockedToCylinder = false;
 
             TextView dayText = requireView().findViewById(R.id.dayText);
-            dayText.setText("G\u00dcN " + currentDay);
+            dayText.setText("GÜN " + currentDay);
 
-            Toast.makeText(getContext(), "G\u00dcN " + currentDay + " ba\u015flad\u0131!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "GÜN " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
         });
+
 
         dayTimerText = view.findViewById(R.id.dayTimerText);
         startCountdown(15);
@@ -654,4 +697,15 @@ public class MainRoomFragment extends Fragment {
 
         countDownTimer.start();
     }
+    private void randomize(View view, float screenWidth, float screenHeight) {
+        Random random = new Random();
+
+        float randomX = 0.1f * screenWidth + random.nextFloat() * 0.8f * screenWidth;
+        float randomY = 0.1f * screenHeight + random.nextFloat() * 0.8f * screenHeight;
+
+        view.setX(randomX);
+        view.setY(randomY);
+    }
+
+
 }
