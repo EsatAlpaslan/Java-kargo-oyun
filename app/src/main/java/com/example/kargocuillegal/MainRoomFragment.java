@@ -116,9 +116,6 @@ public class MainRoomFragment extends Fragment {
         partDeagleSpring = view.findViewById(R.id.partDeagleSpring);
         partDeagleMag = view.findViewById(R.id.partDeagleMag);
 
-
-
-        // Sürüklenebilir yap
         makeDraggable(partGrip);
         makeDraggable(partBarrel);
         makeDraggable(partCylinder);
@@ -126,19 +123,44 @@ public class MainRoomFragment extends Fragment {
 
         completionText = view.findViewById(R.id.completionText);
         nextDayButton = view.findViewById(R.id.nextDayButton);
+        orderBoardButton = view.findViewById(R.id.orderBoardButton);
+        exampleGunImage = view.findViewById(R.id.exampleGunImage);
+        dayTimerText = view.findViewById(R.id.dayTimerText);
+        dayText = view.findViewById(R.id.dayText);
 
-        // yeni gün için
-        TextView completionText = view.findViewById(R.id.completionText);
-        Button nextDayButton = view.findViewById(R.id.nextDayButton);// daha önce tanımlandıysa
+        // Sayaç başlat (güne göre süre belirle)
+        if (currentDay == 1) {
+            startCountdown(15);
+        } else if (currentDay == 2) {
+            startCountdown(21);
+        } else if (currentDay == 3) {
+            startCountdown(30);
+        }
+
+        // Sarı buton sadece gün 3'te görünür
+        orderBoardButton.setVisibility(currentDay == 3 ? View.VISIBLE : View.GONE);
+
+        orderBoardButton.setOnClickListener(v -> {
+            if (exampleGunImage.getVisibility() == View.VISIBLE) {
+                exampleGunImage.setVisibility(View.GONE);
+            } else {
+                exampleGunImage.setVisibility(View.VISIBLE);
+            }
+        });
 
         nextDayButton.setOnClickListener(v -> {
             currentDay++;
-
             nextDayButton.setVisibility(View.GONE);
             completionText.setVisibility(View.GONE);
             isCompleted = false;
 
-            startCountdown(15);
+            if (currentDay == 1) {
+                startCountdown(15);
+            } else if (currentDay == 2) {
+                startCountdown(21);
+            } else if (currentDay == 3) {
+                startCountdown(30);
+            }
 
             DisplayMetrics metrics = new DisplayMetrics();
             requireActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -162,44 +184,38 @@ public class MainRoomFragment extends Fragment {
                 partDeagleBarrel.setVisibility(View.GONE);
                 partDeagleSpring.setVisibility(View.GONE);
                 partDeagleMag.setVisibility(View.GONE);
-            }
-
-            if (currentDay == 2) {
-                // Revolver parçalarını gizle
+            } else if (currentDay == 2) {
                 partGrip.setVisibility(View.GONE);
                 partBarrel.setVisibility(View.GONE);
                 partHammer.setVisibility(View.GONE);
                 partCylinder.setVisibility(View.GONE);
 
-                // Glock parçalarını göster
                 part_slide.setVisibility(View.VISIBLE);
                 part_spring.setVisibility(View.VISIBLE);
                 part_barrel2.setVisibility(View.VISIBLE);
                 part_frame.setVisibility(View.VISIBLE);
                 part_mag.setVisibility(View.VISIBLE);
 
-                // Deagle parçalarını göster
                 partDeagleFrame.setVisibility(View.VISIBLE);
                 partDeagleSlide.setVisibility(View.VISIBLE);
                 partDeagleBarrel.setVisibility(View.VISIBLE);
                 partDeagleSpring.setVisibility(View.VISIBLE);
                 partDeagleMag.setVisibility(View.VISIBLE);
 
-                // 📌 GLOCK konumları
+                // GLOCK parçalarını konumlandır
                 part_slide.setX(0.07f * screenWidth); part_slide.setY(0.05f * screenHeight);
                 part_spring.setX(0.38f * screenWidth); part_spring.setY(0.11f * screenHeight);
                 part_barrel2.setX(0.23f * screenWidth); part_barrel2.setY(0.77f * screenHeight);
                 part_frame.setX(0.78f * screenWidth); part_frame.setY(0.67f * screenHeight);
                 part_mag.setX(0.036f * screenWidth); part_mag.setY(0.63f * screenHeight);
 
-                // 📌 DEAGLE konumları
+                // DEAGLE parçalarını konumlandır
                 partDeagleSlide.setX(0.5f * screenWidth); partDeagleSlide.setY(0.76f * screenHeight);
                 partDeagleBarrel.setX(0.7f * screenWidth); partDeagleBarrel.setY(0.08f * screenHeight);
                 partDeagleSpring.setX(0.9f * screenWidth); partDeagleSpring.setY(0.18f * screenHeight);
                 partDeagleFrame.setX(0.05f * screenWidth); partDeagleFrame.setY(0.3f * screenHeight);
                 partDeagleMag.setX(0.88f * screenWidth); partDeagleMag.setY(0.36f * screenHeight);
 
-                // Sürüklenebilir yap
                 makeDraggable(part_slide);
                 makeDraggable(part_spring);
                 makeDraggable(part_barrel2);
@@ -212,13 +228,11 @@ public class MainRoomFragment extends Fragment {
                 makeDraggable(partDeagleSpring);
                 makeDraggable(partDeagleMag);
 
-                // Üstte görünmesi gereken parçalar
                 part_frame.bringToFront();
                 part_slide.bringToFront();
                 partDeagleFrame.bringToFront();
                 partDeagleSlide.bringToFront();
             } else {
-                // Gün 1 veya diğer günler için revolver parçalarını göster
                 partGrip.setVisibility(View.VISIBLE);
                 partGrip.setEnabled(true);
                 partBarrel.setVisibility(View.VISIBLE);
@@ -239,46 +253,15 @@ public class MainRoomFragment extends Fragment {
                 partHammer.setX(0.70f * screenWidth); partHammer.setY(0.08f * screenHeight);
             }
 
-            // Revolver kilit sıfırlama
             gripLockedToCylinder = false;
             barrelLockedToCylinder = false;
             hammerLockedToCylinder = false;
 
-            TextView dayText = requireView().findViewById(R.id.dayText);
             dayText.setText("GÜN " + currentDay);
-
             Toast.makeText(getContext(), "GÜN " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
         });
-
-
-        orderBoardButton = view.findViewById(R.id.orderBoardButton);
-
-        if (currentDay == 3) {
-            orderBoardButton.setVisibility(View.VISIBLE);
-        } else {
-            orderBoardButton.setVisibility(View.GONE);
-        }
-
-
-
-        dayTimerText = view.findViewById(R.id.dayTimerText);
-        startCountdown(15);
-        dayText = view.findViewById(R.id.dayText);
-
-
-        orderBoardButton = view.findViewById(R.id.orderBoardButton);
-        exampleGunImage = view.findViewById(R.id.exampleGunImage);
-
-        orderBoardButton.setOnClickListener(v -> {
-            // Eğer görünürse gizle, gizliyse göster
-            if (exampleGunImage.getVisibility() == View.VISIBLE) {
-                exampleGunImage.setVisibility(View.GONE);
-            } else {
-                exampleGunImage.setVisibility(View.VISIBLE);
-            }
-        });
-
     }
+
 
     // Sürükle-bırak fonksiyonu + birleşme kontrolü
     private void makeDraggable(ImageView imageView) {
@@ -857,10 +840,15 @@ public class MainRoomFragment extends Fragment {
 
     private void startCountdown(int seconds) {
         if (countDownTimer != null) {
-            countDownTimer.cancel(); // eski sayaç varsa iptal et
+            countDownTimer.cancel(); // Eski sayaç varsa iptal et
         }
 
-        countDownTimer = new CountDownTimer(seconds * 1000, 1000) {
+        // Sayaç görünür ve üstte olsun
+        dayTimerText.setVisibility(View.VISIBLE);
+        dayTimerText.bringToFront();
+        dayTimerText.setText("Kalan: " + seconds + " sn");
+
+        countDownTimer = new CountDownTimer(seconds * 1000L, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 int secondsLeft = (int) (millisUntilFinished / 1000);
@@ -873,20 +861,41 @@ public class MainRoomFragment extends Fragment {
                     dayTimerText.setText("Süreniz bitti!");
                     isTimeOver = true;
 
-                    // Parçaları devre dışı bırak
-                    partGrip.setEnabled(false);
-                    partBarrel.setEnabled(false);
-                    partCylinder.setEnabled(false);
-                    partHammer.setEnabled(false);
+                    if (currentDay == 1) {
+                        partGrip.setEnabled(false);
+                        partBarrel.setEnabled(false);
+                        partCylinder.setEnabled(false);
+                        partHammer.setEnabled(false);
+                    }
+
+                    if (currentDay == 2) {
+                        part_slide.setEnabled(false);
+                        part_spring.setEnabled(false);
+                        part_barrel2.setEnabled(false);
+                        part_frame.setEnabled(false);
+                        part_mag.setEnabled(false);
+
+                        partDeagleFrame.setEnabled(false);
+                        partDeagleSlide.setEnabled(false);
+                        partDeagleBarrel.setEnabled(false);
+                        partDeagleSpring.setEnabled(false);
+                        partDeagleMag.setEnabled(false);
+                    }
+
+                    if (currentDay == 3) {
+                        // Gün 3’te süre dolunca yapılacak işlem
+                        // Örn: yeni parçaları gizle, ekranı dondur, skoru göster vs.
+                    }
                 } else {
-                    dayTimerText.setText(""); // Silah tamamlandıysa sayaç boş kalsın
+                    // Silah tamamlandıysa sayaç temizlenir
+                    dayTimerText.setText("");
                 }
             }
-
         };
 
         countDownTimer.start();
     }
+
     private void randomize(View view, float screenWidth, float screenHeight) {
         Random random = new Random();
 
