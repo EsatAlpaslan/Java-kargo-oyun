@@ -750,6 +750,7 @@ public class MainRoomFragment extends Fragment {
             deagleSpringOffsetX = targetX - partDeagleBarrel.getX();
             deagleSpringOffsetY = targetY - partDeagleBarrel.getY();
 
+
             partDeagleSpring.setEnabled(false);
             deagleSpringLocked = true;
 
@@ -784,6 +785,7 @@ public class MainRoomFragment extends Fragment {
 
             deagleMagOffsetX = targetX - partDeagleFrame.getX();
             deagleMagOffsetY = targetY - partDeagleFrame.getY();
+
 
             partDeagleMag.setEnabled(false);
             deagleMagLocked = true;
