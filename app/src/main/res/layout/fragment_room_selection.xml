@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".RoomSelectionFragment">
 
-    <!-- uc Kapı görseli -->
+    <!-- Arka plan kapı görseli -->
     <ImageView
         android:id="@+id/imgDoors"
         android:layout_width="match_parent"
@@ -15,22 +15,7 @@
         android:scaleType="fitXY"
         android:contentDescription="Kapılar" />
 
-    <!-- Görselin sol kapısıyla örtüşen tıklanabilir alan -->
-    <View
-        android:id="@+id/leftDoorArea"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="100dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:selectableItemBackground"
-        tools:ignore="MissingConstraints" />
-
-    <!-- gecis ekranı icin gorunmez buton -->
+    <!-- SOL kapı (Temizlik) -->
     <Button
         android:id="@+id/btnLeftDoor"
         android:layout_width="135dp"
@@ -41,5 +26,27 @@
         android:background="@android:color/transparent"
         android:contentDescription="Sol Kapı" />
 
+    <!-- ORTA kapı (Müşteri Hizmetleri) -->
+    <Button
+        android:id="@+id/btnMiddleDoor"
+        android:layout_width="170dp"
+        android:layout_height="235dp"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="130dp"
+        android:layout_marginStart="-30dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Orta Kapı" />
+
+
+    <!-- SAĞ kapı (Kargo/Dağıtım) -->
+    <Button
+        android:id="@+id/btnRightDoor"
+        android:layout_width="150dp"
+        android:layout_height="230dp"
+        android:layout_gravity="end|top"
+        android:layout_marginEnd="62dp"
+        android:layout_marginTop="140dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Sağ Kapı" />
 
 </FrameLayout>

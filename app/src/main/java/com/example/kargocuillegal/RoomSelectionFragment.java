@@ -49,9 +49,25 @@ public class RoomSelectionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_room_selection, container, false);
 
         Button btnLeftDoor = view.findViewById(R.id.btnLeftDoor);
+        Button btnMiddleDoor = view.findViewById(R.id.btnMiddleDoor);
+        Button btnRightDoor = view.findViewById(R.id.btnRightDoor);
+
+        // Sol kapı (Temizlik ve Depo)
         btnLeftDoor.setOnClickListener(v -> {
-            playDoorSound(); // 🔊 Ses çalsın
-            Navigation.findNavController(v).navigate(R.id.action_roomSelectionFragment_to_mainRoomFragment); // 🚪 Geçiş anında
+            playDoorSound();
+            Navigation.findNavController(v).navigate(R.id.action_roomSelectionFragment_to_mainRoomFragment);
+        });
+
+        // Orta kapı (Müşteri Hizmetleri)
+        btnMiddleDoor.setOnClickListener(v -> {
+            playDoorSound();
+            Navigation.findNavController(v).navigate(R.id.action_roomSelectionFragment_to_customerServiceFragment);
+        });
+
+        // Sağ kapı (Kargo/Dağıtım)
+        btnRightDoor.setOnClickListener(v -> {
+            playDoorSound();
+            Navigation.findNavController(v).navigate(R.id.action_roomSelectionFragment_to_cargoRoomFragment);
         });
 
         return view;
@@ -90,3 +106,4 @@ public class RoomSelectionFragment extends Fragment {
         }
     }
 }
+
