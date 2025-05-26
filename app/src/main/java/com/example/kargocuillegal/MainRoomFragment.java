@@ -809,11 +809,8 @@ public class MainRoomFragment extends Fragment {
         }
 
         if (currentDay == 2 &&
-                slideLocked &&
-                barrel2Locked &&
-                springLocked &&
-                magLocked &&
-                frameLocked) {
+                slideLocked && barrel2Locked && springLocked && magLocked &&
+                deagleSlideLocked && deagleBarrelLocked && deagleSpringLocked && deagleMagLocked) {
 
             completionText.setVisibility(View.VISIBLE);
             nextDayButton.setVisibility(View.VISIBLE);
@@ -822,6 +819,7 @@ public class MainRoomFragment extends Fragment {
             if (countDownTimer != null) countDownTimer.cancel();
             isCompleted = true;
         }
+
     }
 
 
