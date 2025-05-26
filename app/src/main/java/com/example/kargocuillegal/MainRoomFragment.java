@@ -669,9 +669,9 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(slideCenterX - frameCenterX, slideCenterY - frameCenterY);
 
-        if (distance < 150) {
-            float offsetX = 0.05f * partDeagleFrame.getWidth();
-            float offsetY = -0.43f * partDeagleSlide.getHeight();
+        if (distance < 100) {
+            float offsetX = -0.13f * partDeagleFrame.getWidth();
+            float offsetY = -0.31f * partDeagleSlide.getHeight();
 
             float targetX = partDeagleFrame.getX() + offsetX;
             float targetY = partDeagleFrame.getY() + offsetY;
@@ -703,9 +703,9 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(barrelCenterX - frameCenterX, barrelCenterY - frameCenterY);
 
-        if (distance < 150) {
-            float offsetX = 0.36f * partDeagleFrame.getWidth();
-            float offsetY = -0.18f * partDeagleFrame.getHeight();
+        if (distance < 100) {
+            float offsetX = -0.017f * partDeagleFrame.getWidth();
+            float offsetY = -0.12f * partDeagleFrame.getHeight();
 
             float targetX = partDeagleFrame.getX() + offsetX;
             float targetY = partDeagleFrame.getY() + offsetY;
@@ -773,8 +773,8 @@ public class MainRoomFragment extends Fragment {
         double distance = Math.hypot(magCenterX - frameCenterX, magCenterY - frameCenterY);
 
         if (distance < 100) {
-            float offsetX = -0.227f * partDeagleMag.getWidth();
-            float offsetY = 0.18f * partDeagleMag.getHeight();
+            float offsetX = 0.2f * partDeagleMag.getWidth();
+            float offsetY = 0.25f * partDeagleMag.getHeight();
 
             float targetX = partDeagleFrame.getX() + offsetX;
             float targetY = partDeagleFrame.getY() + offsetY;

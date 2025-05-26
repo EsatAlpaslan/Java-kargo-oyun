@@ -157,6 +157,15 @@
         />
 
     <ImageView
+        android:id="@+id/partDeagleSpring"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/deagle_spring"
+        android:visibility="gone"
+        />
+
+    <ImageView
         android:id="@+id/partDeagleBarrel"
         android:layout_width="100dp"
         android:layout_height="42dp"
@@ -165,14 +174,7 @@
         android:visibility="gone"
         />
 
-    <ImageView
-        android:id="@+id/partDeagleSpring"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/deagle_spring"
-        android:visibility="gone"
-        />
+
 
     <ImageView
         android:id="@+id/partDeagleMag"
