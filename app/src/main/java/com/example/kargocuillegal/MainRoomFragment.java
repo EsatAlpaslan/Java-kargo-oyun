@@ -68,6 +68,8 @@ public class MainRoomFragment extends Fragment {
 
 
 
+
+
     private int currentDay = 1; // Başlangıçta Gün 1
     private boolean isCompleted = false;
     private TextView dayTimerText;
@@ -308,7 +310,7 @@ public class MainRoomFragment extends Fragment {
                         v.setX(newX);
                         v.setY(newY);
 
-                        // 🔧 Revolver parçaları birbirine bağlıysa birlikte hareket etsin
+                        // 🔧 Revolver parçaları birlikte hareket
                         if (v.getId() == R.id.partCylinder && barrelLockedToCylinder) {
                             partBarrel.setX(newX + barrelOffsetX);
                             partBarrel.setY(newY + barrelOffsetY);
@@ -322,14 +324,14 @@ public class MainRoomFragment extends Fragment {
                             partHammer.setY(newY + hammerOffsetY);
                         }
 
-                        // 🔧 Glock birleşme kontrolleri ve kilitli parçaların birlikte hareketi
+                        // 🔧 Glock birleşme kontrolleri ve bağlı taşıma
                         if (currentDay == 2) {
                             checkSlideFrameMerge();
                             checkBarrel2ToFrame();
                             checkSpringToBarrel2();
                             checkMagToFrame();
 
-                            // Frame sürükleniyorsa bağlı parçaları da taşı
+                            // Frame hareket ederse bağlı glock parçaları da sürüklensin
                             if (v.getId() == R.id.partFrame) {
                                 if (slideLocked) {
                                     part_slide.setX(newX + slideOffsetX);
@@ -345,14 +347,41 @@ public class MainRoomFragment extends Fragment {
                                 }
                             }
 
-                            // Barrel2 sürükleniyorsa spring de onunla birlikte sürüklensin
                             if (v.getId() == R.id.partBarrel2 && springLocked) {
                                 part_spring.setX(newX + springOffsetX);
                                 part_spring.setY(newY + springOffsetY);
                             }
+
+                            // 🔧 Deagle birleşme kontrolleri
+                            checkDeagleSlideFrameMerge();
+                            checkDeagleBarrelToFrame();
+                            checkDeagleSpringToBarrel();
+                            checkDeagleMagToFrame();
+
+                            // Frame hareket ederse bağlı deagle parçaları da sürüklensin
+                            if (v.getId() == R.id.partDeagleFrame) {
+                                if (deagleSlideLocked) {
+                                    partDeagleSlide.setX(newX + deagleSlideOffsetX);
+                                    partDeagleSlide.setY(newY + deagleSlideOffsetY);
+                                }
+                                if (deagleBarrelLocked) {
+                                    partDeagleBarrel.setX(newX + deagleBarrelOffsetX);
+                                    partDeagleBarrel.setY(newY + deagleBarrelOffsetY);
+                                }
+                                if (deagleMagLocked) {
+                                    partDeagleMag.setX(newX + deagleMagOffsetX);
+                                    partDeagleMag.setY(newY + deagleMagOffsetY);
+                                }
+                            }
+
+                            if (v.getId() == R.id.partDeagleBarrel && deagleSpringLocked) {
+                                partDeagleSpring.setX(newX + deagleSpringOffsetX);
+                                partDeagleSpring.setY(newY + deagleSpringOffsetY);
+                            }
                         }
 
                         return true;
+
 
                     case MotionEvent.ACTION_UP:
                         checkGripCylinderMerge();
@@ -625,6 +654,144 @@ public class MainRoomFragment extends Fragment {
             checkIfAssemblyCompleted();
         }
     }
+    private void checkDeagleSlideFrameMerge() {
+        int[] slideLoc = new int[2];
+        int[] frameLoc = new int[2];
+
+        partDeagleSlide.getLocationOnScreen(slideLoc);
+        partDeagleFrame.getLocationOnScreen(frameLoc);
+
+        float slideCenterX = slideLoc[0] + partDeagleSlide.getWidth() / 2f;
+        float slideCenterY = slideLoc[1] + partDeagleSlide.getHeight() / 2f;
+
+        float frameCenterX = frameLoc[0] + partDeagleFrame.getWidth() / 2f;
+        float frameCenterY = frameLoc[1] + partDeagleFrame.getHeight() / 2f;
+
+        double distance = Math.hypot(slideCenterX - frameCenterX, slideCenterY - frameCenterY);
+
+        if (distance < 150) {
+            float offsetX = 0.05f * partDeagleFrame.getWidth();
+            float offsetY = -0.43f * partDeagleSlide.getHeight();
+
+            float targetX = partDeagleFrame.getX() + offsetX;
+            float targetY = partDeagleFrame.getY() + offsetY;
+
+            partDeagleSlide.setX(targetX);
+            partDeagleSlide.setY(targetY);
+
+            deagleSlideOffsetX = targetX - partDeagleFrame.getX();
+            deagleSlideOffsetY = targetY - partDeagleFrame.getY();
+
+            partDeagleSlide.setEnabled(false);
+            deagleSlideLocked = true;
+
+            checkIfAssemblyCompleted();
+        }
+    }
+    private void checkDeagleBarrelToFrame() {
+        int[] barrelLoc = new int[2];
+        int[] frameLoc = new int[2];
+
+        partDeagleBarrel.getLocationOnScreen(barrelLoc);
+        partDeagleFrame.getLocationOnScreen(frameLoc);
+
+        float barrelCenterX = barrelLoc[0] + partDeagleBarrel.getWidth() / 2f;
+        float barrelCenterY = barrelLoc[1] + partDeagleBarrel.getHeight() / 2f;
+
+        float frameCenterX = frameLoc[0] + partDeagleFrame.getWidth() / 2f;
+        float frameCenterY = frameLoc[1] + partDeagleFrame.getHeight() / 2f;
+
+        double distance = Math.hypot(barrelCenterX - frameCenterX, barrelCenterY - frameCenterY);
+
+        if (distance < 150) {
+            float offsetX = 0.36f * partDeagleFrame.getWidth();
+            float offsetY = -0.18f * partDeagleFrame.getHeight();
+
+            float targetX = partDeagleFrame.getX() + offsetX;
+            float targetY = partDeagleFrame.getY() + offsetY;
+
+            partDeagleBarrel.setX(targetX);
+            partDeagleBarrel.setY(targetY);
+
+            deagleBarrelOffsetX = targetX - partDeagleFrame.getX();
+            deagleBarrelOffsetY = targetY - partDeagleFrame.getY();
+
+            partDeagleBarrel.setEnabled(false);
+            deagleBarrelLocked = true;
+
+            checkIfAssemblyCompleted(); // Tüm parçalar tamamlandıysa kontrol et
+        }
+    }
+    private void checkDeagleSpringToBarrel() {
+        int[] springLoc = new int[2];
+        int[] barrelLoc = new int[2];
+
+        partDeagleSpring.getLocationOnScreen(springLoc);
+        partDeagleBarrel.getLocationOnScreen(barrelLoc);
+
+        float springCenterX = springLoc[0] + partDeagleSpring.getWidth() / 2f;
+        float springCenterY = springLoc[1] + partDeagleSpring.getHeight() / 2f;
+
+        float barrelCenterX = barrelLoc[0] + partDeagleBarrel.getWidth() / 2f;
+        float barrelCenterY = barrelLoc[1] + partDeagleBarrel.getHeight() / 2f;
+
+        double distance = Math.hypot(springCenterX - barrelCenterX, springCenterY - barrelCenterY);
+
+        if (distance < 150) {
+            float offsetX = -0.1f * partDeagleSpring.getWidth();
+            float offsetY = 0.1f * partDeagleSpring.getHeight();
+
+            float targetX = partDeagleBarrel.getX() + offsetX;
+            float targetY = partDeagleBarrel.getY() + offsetY;
+
+            partDeagleSpring.setX(targetX);
+            partDeagleSpring.setY(targetY);
+
+            deagleSpringOffsetX = targetX - partDeagleBarrel.getX();
+            deagleSpringOffsetY = targetY - partDeagleBarrel.getY();
+
+            partDeagleSpring.setEnabled(false);
+            deagleSpringLocked = true;
+
+            checkIfAssemblyCompleted(); // Parçalar tamamsa tetikler
+        }
+    }
+
+    private void checkDeagleMagToFrame() {
+        int[] magLoc = new int[2];
+        int[] frameLoc = new int[2];
+
+        partDeagleMag.getLocationOnScreen(magLoc);
+        partDeagleFrame.getLocationOnScreen(frameLoc);
+
+        float magCenterX = magLoc[0] + partDeagleMag.getWidth() / 2f;
+        float magCenterY = magLoc[1] + partDeagleMag.getHeight() / 2f;
+
+        float frameCenterX = frameLoc[0] + partDeagleFrame.getWidth() / 2f;
+        float frameCenterY = frameLoc[1] + partDeagleFrame.getHeight() / 2f;
+
+        double distance = Math.hypot(magCenterX - frameCenterX, magCenterY - frameCenterY);
+
+        if (distance < 100) {
+            float offsetX = -0.227f * partDeagleMag.getWidth();
+            float offsetY = 0.18f * partDeagleMag.getHeight();
+
+            float targetX = partDeagleFrame.getX() + offsetX;
+            float targetY = partDeagleFrame.getY() + offsetY;
+
+            partDeagleMag.setX(targetX);
+            partDeagleMag.setY(targetY);
+
+            deagleMagOffsetX = targetX - partDeagleFrame.getX();
+            deagleMagOffsetY = targetY - partDeagleFrame.getY();
+
+            partDeagleMag.setEnabled(false);
+            deagleMagLocked = true;
+
+            checkIfAssemblyCompleted(); // Genel tamamlama kontrolü
+        }
+    }
+
 
 
     private void checkIfAssemblyCompleted() {
