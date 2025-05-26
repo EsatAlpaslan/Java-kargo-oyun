@@ -235,6 +235,15 @@ public class MainRoomFragment extends Fragment {
             Toast.makeText(getContext(), "GÜN " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
         });
 
+        orderBoardButton = view.findViewById(R.id.orderBoardButton);
+
+        if (currentDay == 3) {
+            orderBoardButton.setVisibility(View.VISIBLE);
+        } else {
+            orderBoardButton.setVisibility(View.GONE);
+        }
+
+
 
         dayTimerText = view.findViewById(R.id.dayTimerText);
         startCountdown(15);
