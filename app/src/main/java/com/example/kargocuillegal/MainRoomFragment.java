@@ -261,23 +261,38 @@ public class MainRoomFragment extends Fragment {
                 partDeagleBarrel.setVisibility(View.GONE);
                 partDeagleSpring.setVisibility(View.GONE);
                 partDeagleMag.setVisibility(View.GONE);
+                // Her parçaya özel boyut
+                ViewGroup.LayoutParams paramsUst = partUDPust.getLayoutParams();
+                paramsUst.width = (int)(0.25f * screenWidth);
+                paramsUst.height = (int)(0.10f * screenWidth);
+                partUDPust.setLayoutParams(paramsUst);
 
-                // Oranlı boyutlandırma
-                int partSize = (int)(0.12f * screenWidth);
+                ViewGroup.LayoutParams paramsGovde = partUDPgovde.getLayoutParams();
+                paramsGovde.width = (int)(0.15f * screenWidth);
+                paramsGovde.height = (int)(0.08f * screenWidth);
+                partUDPgovde.setLayoutParams(paramsGovde);
 
+                ViewGroup.LayoutParams paramsSarjor = partUDPsarjor.getLayoutParams();
+                paramsSarjor.width = (int)(0.09f * screenWidth);
+                paramsSarjor.height = (int)(0.12f * screenWidth);
+                partUDPsarjor.setLayoutParams(paramsSarjor);
+
+                ViewGroup.LayoutParams paramsUc = partUDPuc.getLayoutParams();
+                paramsUc.width = (int)(0.12f * screenWidth);
+                paramsUc.height = (int)(0.11f * screenWidth);
+                partUDPuc.setLayoutParams(paramsUc);
+
+                ViewGroup.LayoutParams paramsYay = partUDPyay.getLayoutParams();
+                paramsYay.width = (int)(0.08f * screenWidth);
+                paramsYay.height = (int)(0.08f * screenWidth);
+                partUDPyay.setLayoutParams(paramsYay);
+
+
+                // Görünür yap
                 ImageView[] udpParts = new ImageView[]{
                         partUDPust, partUDPgovde, partUDPsarjor,
                         partUDPuc, partUDPyay
                 };
-
-                for (ImageView part : udpParts) {
-                    ViewGroup.LayoutParams params = part.getLayoutParams();
-                    params.width = partSize;
-                    params.height = partSize;
-                    part.setLayoutParams(params);
-                }
-
-                // Görünür yap
                 for (ImageView part : udpParts) {
                     part.setVisibility(View.VISIBLE);
                     makeDraggable(part);
