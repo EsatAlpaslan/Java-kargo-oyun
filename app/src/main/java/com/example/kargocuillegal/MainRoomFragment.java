@@ -28,7 +28,6 @@ public class MainRoomFragment extends Fragment {
     private float barrelOffsetX = 0;  // Barrel'ın cylinder'a göre X farkı
     private float barrelOffsetY = 0;  // Barrel'ın cylinder'a göre Y farkı
 
-    //yeni eklendi
     private boolean gripLockedToCylinder = false;
     private float gripOffsetX = 0;
     private float gripOffsetY = 0;
@@ -36,6 +35,7 @@ public class MainRoomFragment extends Fragment {
     private boolean hammerLockedToCylinder = false;
     private float hammerOffsetX = 0;
     private float hammerOffsetY = 0;
+
     private TextView completionText;
     private Button nextDayButton;
 
@@ -47,6 +47,11 @@ public class MainRoomFragment extends Fragment {
 
     private boolean springLocked = false;
     private float springOffsetX = 0, springOffsetY = 0;
+
+    // ✅ Glock yayının namluya bağlı şekilde hareketi için
+    private boolean springLockedToBarrel2 = false;
+    private float springToBarrel2OffsetX = 0;
+    private float springToBarrel2OffsetY = 0;
 
     private boolean magLocked = false;
     private float magOffsetX = 0, magOffsetY = 0;
@@ -62,13 +67,13 @@ public class MainRoomFragment extends Fragment {
     private boolean deagleSpringLocked = false;
     private float deagleSpringOffsetX = 0, deagleSpringOffsetY = 0;
 
+    // ✅ Deagle yayının namluya bağlı şekilde hareketi için
+    private boolean deagleSpringLockedToBarrel = false;
+    private float deagleSpringToBarrelOffsetX = 0;
+    private float deagleSpringToBarrelOffsetY = 0;
+
     private boolean deagleMagLocked = false;
     private float deagleMagOffsetX = 0, deagleMagOffsetY = 0;
-
-
-
-
-
 
     private int currentDay = 1; // Başlangıçta Gün 1
     private boolean isCompleted = false;
@@ -76,10 +81,14 @@ public class MainRoomFragment extends Fragment {
     private CountDownTimer countDownTimer;
     private TextView dayText;
     private boolean isTimeOver = false;
+
     private ImageButton orderBoardButton;
     private TextView orderText;
     private ImageView exampleGunImage;
+
     private ImageView partDeagleFrame, partDeagleSlide, partDeagleBarrel, partDeagleSpring, partDeagleMag;
+
+    // Gün 3: USP parçaları
     private ImageView partUDPust, partUDPgovde, partUDPsarjor, partUDPuc, partUDPyay;
     private boolean isUstLockedToGovde = false;
     private boolean isUcLockedToUst = false;
@@ -91,9 +100,6 @@ public class MainRoomFragment extends Fragment {
         float dy = Math.abs(part1.getY() - part2.getY());
         return dx < thresholdPx && dy < thresholdPx;
     }
-
-
-
 
 
 
@@ -272,48 +278,33 @@ public class MainRoomFragment extends Fragment {
                 partDeagleBarrel.setVisibility(View.GONE);
                 partDeagleSpring.setVisibility(View.GONE);
                 partDeagleMag.setVisibility(View.GONE);
-                // Her parçaya özel boyut
-                ViewGroup.LayoutParams paramsUst = partUDPust.getLayoutParams();
-                paramsUst.width = (int)(0.15f * screenWidth);
-                paramsUst.height = (int)(0.10f * screenWidth);
-                partUDPust.setLayoutParams(paramsUst);
 
-                ViewGroup.LayoutParams paramsGovde = partUDPgovde.getLayoutParams();
-                paramsGovde.width = (int)(0.15f * screenWidth);
-                paramsGovde.height = (int)(0.08f * screenWidth);
-                partUDPgovde.setLayoutParams(paramsGovde);
+                // Oranlı boyutlandırma
+                int partSize = (int)(0.12f * screenWidth);
 
-                ViewGroup.LayoutParams paramsSarjor = partUDPsarjor.getLayoutParams();
-                paramsSarjor.width = (int)(0.09f * screenWidth);
-                paramsSarjor.height = (int)(0.12f * screenWidth);
-                partUDPsarjor.setLayoutParams(paramsSarjor);
-
-                ViewGroup.LayoutParams paramsUc = partUDPuc.getLayoutParams();
-                paramsUc.width = (int)(0.12f * screenWidth);
-                paramsUc.height = (int)(0.11f * screenWidth);
-                partUDPuc.setLayoutParams(paramsUc);
-
-                ViewGroup.LayoutParams paramsYay = partUDPyay.getLayoutParams();
-                paramsYay.width = (int)(0.10f * screenWidth);
-                paramsYay.height = (int)(0.10f * screenWidth);
-                partUDPyay.setLayoutParams(paramsYay);
-
-
-                // Görünür yap
                 ImageView[] udpParts = new ImageView[]{
                         partUDPust, partUDPgovde, partUDPsarjor,
                         partUDPuc, partUDPyay
                 };
+
+                for (ImageView part : udpParts) {
+                    ViewGroup.LayoutParams params = part.getLayoutParams();
+                    params.width = partSize;
+                    params.height = partSize;
+                    part.setLayoutParams(params);
+                }
+
+                // Görünür yap
                 for (ImageView part : udpParts) {
                     part.setVisibility(View.VISIBLE);
                     makeDraggable(part);
                 }
                 // Konumlandır
                 partUDPust.setX(0.05f * screenWidth);      partUDPust.setY(0.10f * screenHeight);
-                partUDPgovde.setX(0.80f * screenWidth);    partUDPgovde.setY(0.55f * screenHeight);
-                partUDPsarjor.setX(0.45f * screenWidth);   partUDPsarjor.setY(0.65f * screenHeight);
-                partUDPuc.setX(0.65f * screenWidth);       partUDPuc.setY(0.08f * screenHeight);
-                partUDPyay.setX(0.05f * screenWidth);      partUDPyay.setY(0.65f * screenHeight);
+                partUDPgovde.setX(0.25f * screenWidth);    partUDPgovde.setY(0.20f * screenHeight);
+                partUDPsarjor.setX(0.45f * screenWidth);   partUDPsarjor.setY(0.30f * screenHeight);
+                partUDPuc.setX(0.65f * screenWidth);       partUDPuc.setY(0.40f * screenHeight);
+                partUDPyay.setX(0.15f * screenWidth);      partUDPyay.setY(0.55f * screenHeight);
 
                 // Öne al
                 partUDPgovde.bringToFront();
@@ -401,14 +392,8 @@ public class MainRoomFragment extends Fragment {
                             partHammer.setY(newY + hammerOffsetY);
                         }
 
-                        // 🔧 Glock birleşme kontrolleri ve bağlı taşıma
+                        // 🔄 Glock bağlı taşıma
                         if (currentDay == 2) {
-                            checkSlideFrameMerge();
-                            checkBarrel2ToFrame();
-                            checkSpringToBarrel2();
-                            checkMagToFrame();
-
-                            // Frame hareket ederse bağlı glock parçaları da sürüklensin
                             if (v.getId() == R.id.partFrame) {
                                 if (slideLocked) {
                                     part_slide.setX(newX + slideOffsetX);
@@ -428,11 +413,15 @@ public class MainRoomFragment extends Fragment {
                                 }
                             }
 
-                            // 🔧 Deagle birleşme kontrolleri ve bağlı taşıma
-                            checkDeagleSlideFrameMerge();
-                            checkDeagleBarrelToFrame();
-                            checkDeagleSpringToBarrel();
-                            checkDeagleMagToFrame();
+                            if (v.getId() == R.id.partBarrel2 && springLockedToBarrel2) {
+                                part_spring.setX(newX + springToBarrel2OffsetX);
+                                part_spring.setY(newY + springToBarrel2OffsetY);
+                            }
+
+                            if (v.getId() == R.id.partDeagleBarrel && deagleSpringLockedToBarrel) {
+                                partDeagleSpring.setX(newX + deagleSpringToBarrelOffsetX);
+                                partDeagleSpring.setY(newY + deagleSpringToBarrelOffsetY);
+                            }
 
                             if (v.getId() == R.id.partDeagleFrame) {
                                 if (deagleSlideLocked) {
@@ -460,6 +449,18 @@ public class MainRoomFragment extends Fragment {
                         checkGripCylinderMerge();
                         checkCylinderBarrelMerge();
                         checkCylinderHammerMerge();
+
+                        if (currentDay == 2) {
+                            checkSlideFrameMerge();
+                            checkBarrel2ToFrame();
+                            checkSpringToBarrel2();
+                            checkMagToFrame();
+                            checkDeagleSlideFrameMerge();
+                            checkDeagleBarrelToFrame();
+                            checkDeagleSpringToBarrel();
+                            checkDeagleMagToFrame();
+                        }
+
                         checkIfAssemblyCompleted();
                         return true;
 
@@ -469,6 +470,8 @@ public class MainRoomFragment extends Fragment {
             }
         });
     }
+
+
 
     private void checkGripCylinderMerge() {
         int[] gripLoc = new int[2];
@@ -686,6 +689,9 @@ public class MainRoomFragment extends Fragment {
 
             // 🔕 Artık sürüklenemesin
             part_spring.setEnabled(false);
+            springToBarrel2OffsetX = targetX - part_barrel2.getX();
+            springToBarrel2OffsetY = targetY - part_barrel2.getY();
+            springLockedToBarrel2 = true;
 
             checkIfAssemblyCompleted();
         }
@@ -819,16 +825,18 @@ public class MainRoomFragment extends Fragment {
             partDeagleSpring.setX(targetX);
             partDeagleSpring.setY(targetY);
 
-            deagleSpringOffsetX = targetX - partDeagleBarrel.getX();
-            deagleSpringOffsetY = targetY - partDeagleBarrel.getY();
-
+            // 🔒 Kilitleme ve bağlı taşıma için offset'leri kaydet
+            deagleSpringToBarrelOffsetX = offsetX;
+            deagleSpringToBarrelOffsetY = offsetY;
+            deagleSpringLockedToBarrel = true;
 
             partDeagleSpring.setEnabled(false);
             deagleSpringLocked = true;
 
-            checkIfAssemblyCompleted(); // Parçalar tamamsa tetikler
+            checkIfAssemblyCompleted();
         }
     }
+
 
     private void checkDeagleMagToFrame() {
         int[] magLoc = new int[2];
