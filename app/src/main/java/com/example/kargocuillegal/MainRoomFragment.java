@@ -80,6 +80,8 @@ public class MainRoomFragment extends Fragment {
     private TextView orderText;
     private ImageView exampleGunImage;
     private ImageView partDeagleFrame, partDeagleSlide, partDeagleBarrel, partDeagleSpring, partDeagleMag;
+    private ImageView partUSPust, partUSPgovde, partUSPsarjor, partUSPuc, partUSPyay, partUSPyaygovde;
+
 
 
 
@@ -232,7 +234,55 @@ public class MainRoomFragment extends Fragment {
                 part_slide.bringToFront();
                 partDeagleFrame.bringToFront();
                 partDeagleSlide.bringToFront();
-            } else {
+            } else if (currentDay == 3) {
+                // Eski parçaları gizle
+                partGrip.setVisibility(View.GONE);
+                partBarrel.setVisibility(View.GONE);
+                partHammer.setVisibility(View.GONE);
+                partCylinder.setVisibility(View.GONE);
+
+                part_slide.setVisibility(View.GONE);
+                part_spring.setVisibility(View.GONE);
+                part_barrel2.setVisibility(View.GONE);
+                part_frame.setVisibility(View.GONE);
+                part_mag.setVisibility(View.GONE);
+
+                partDeagleFrame.setVisibility(View.GONE);
+                partDeagleSlide.setVisibility(View.GONE);
+                partDeagleBarrel.setVisibility(View.GONE);
+                partDeagleSpring.setVisibility(View.GONE);
+                partDeagleMag.setVisibility(View.GONE);
+
+                // USP parçalarını görünür yap
+                partUSPust.setVisibility(View.VISIBLE);
+                partUSPgovde.setVisibility(View.VISIBLE);
+                partUSPsarjor.setVisibility(View.VISIBLE);
+                partUSPuc.setVisibility(View.VISIBLE);
+                partUSPyay.setVisibility(View.VISIBLE);
+                partUSPyaygovde.setVisibility(View.VISIBLE);
+
+                // USP parçalarını sürüklenebilir yap
+                makeDraggable(partUSPust);
+                makeDraggable(partUSPgovde);
+                makeDraggable(partUSPsarjor);
+                makeDraggable(partUSPuc);
+                makeDraggable(partUSPyay);
+                makeDraggable(partUSPyaygovde);
+
+                // Ekrana konumlandır
+                partUSPust.setX(0.05f * screenWidth); partUSPust.setY(0.10f * screenHeight);
+                partUSPgovde.setX(0.25f * screenWidth); partUSPgovde.setY(0.20f * screenHeight);
+                partUSPsarjor.setX(0.45f * screenWidth); partUSPsarjor.setY(0.30f * screenHeight);
+                partUSPuc.setX(0.65f * screenWidth); partUSPuc.setY(0.40f * screenHeight);
+                partUSPyay.setX(0.15f * screenWidth); partUSPyay.setY(0.55f * screenHeight);
+                partUSPyaygovde.setX(0.55f * screenWidth); partUSPyaygovde.setY(0.60f * screenHeight);
+
+                // Gerekirse öne al
+                partUSPgovde.bringToFront();
+                partUSPust.bringToFront();
+            }
+
+            else {
                 partGrip.setVisibility(View.VISIBLE);
                 partGrip.setEnabled(true);
                 partBarrel.setVisibility(View.VISIBLE);
@@ -260,6 +310,14 @@ public class MainRoomFragment extends Fragment {
             dayText.setText("GÜN " + currentDay);
             Toast.makeText(getContext(), "GÜN " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
         });
+
+        partUSPust = view.findViewById(R.id.partUSPust);
+        partUSPgovde = view.findViewById(R.id.partUSPgovde);
+        partUSPsarjor = view.findViewById(R.id.partUSPsarjor);
+        partUSPuc = view.findViewById(R.id.partUSPuc);
+        partUSPyay = view.findViewById(R.id.partUSPyay);
+        partUSPyaygovde = view.findViewById(R.id.partUSPyaygovde);
+
     }
 
 

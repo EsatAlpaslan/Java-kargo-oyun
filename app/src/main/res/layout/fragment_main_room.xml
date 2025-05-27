@@ -277,6 +277,49 @@
         android:visibility="gone"
         android:contentDescription="Silah Görseli" />
 
+    <ImageView
+        android:id="@+id/partUSPust"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/uspparca_ust"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/partUSPgovde"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/uspparca_govde"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/partUSPsarjor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/uspparca_sarjor"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/partUSPuc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/uspparca_uc"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/partUSPyay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/uspparca_yay"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/partUSPyaygovde"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/uspparca_yaygovdesi"
+        android:visibility="gone" />
+
+
 
 
 
