@@ -337,12 +337,15 @@ public class MainRoomFragment extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
                 if (isTimeOver) return false;
 
-                // 🔐 Glock parçaları kilitlendiyse tekrar oynatılamasın
                 if (currentDay == 2) {
                     if (v == part_slide && slideLocked) return false;
                     if (v == part_barrel2 && barrel2Locked) return false;
                     if (v == part_spring && springLocked) return false;
                     if (v == part_mag && magLocked) return false;
+                    if (v == partDeagleSlide && deagleSlideLocked) return false;
+                    if (v == partDeagleBarrel && deagleBarrelLocked) return false;
+                    if (v == partDeagleSpring && deagleSpringLocked) return false;
+                    if (v == partDeagleMag && deagleMagLocked) return false;
                 }
 
                 switch (event.getAction()) {
@@ -389,24 +392,22 @@ public class MainRoomFragment extends Fragment {
                                     part_barrel2.setX(newX + barrel2OffsetX);
                                     part_barrel2.setY(newY + barrel2OffsetY);
                                 }
+                                if (springLocked) {
+                                    part_spring.setX(newX + springOffsetX);
+                                    part_spring.setY(newY + springOffsetY);
+                                }
                                 if (magLocked) {
                                     part_mag.setX(newX + magOffsetX);
                                     part_mag.setY(newY + magOffsetY);
                                 }
                             }
 
-                            if (v.getId() == R.id.partBarrel2 && springLocked) {
-                                part_spring.setX(newX + springOffsetX);
-                                part_spring.setY(newY + springOffsetY);
-                            }
-
-                            // 🔧 Deagle birleşme kontrolleri
+                            // 🔧 Deagle birleşme kontrolleri ve bağlı taşıma
                             checkDeagleSlideFrameMerge();
                             checkDeagleBarrelToFrame();
                             checkDeagleSpringToBarrel();
                             checkDeagleMagToFrame();
 
-                            // Frame hareket ederse bağlı deagle parçaları da sürüklensin
                             if (v.getId() == R.id.partDeagleFrame) {
                                 if (deagleSlideLocked) {
                                     partDeagleSlide.setX(newX + deagleSlideOffsetX);
@@ -416,20 +417,18 @@ public class MainRoomFragment extends Fragment {
                                     partDeagleBarrel.setX(newX + deagleBarrelOffsetX);
                                     partDeagleBarrel.setY(newY + deagleBarrelOffsetY);
                                 }
+                                if (deagleSpringLocked) {
+                                    partDeagleSpring.setX(newX + deagleSpringOffsetX);
+                                    partDeagleSpring.setY(newY + deagleSpringOffsetY);
+                                }
                                 if (deagleMagLocked) {
                                     partDeagleMag.setX(newX + deagleMagOffsetX);
                                     partDeagleMag.setY(newY + deagleMagOffsetY);
                                 }
                             }
-
-                            if (v.getId() == R.id.partDeagleBarrel && deagleSpringLocked) {
-                                partDeagleSpring.setX(newX + deagleSpringOffsetX);
-                                partDeagleSpring.setY(newY + deagleSpringOffsetY);
-                            }
                         }
 
                         return true;
-
 
                     case MotionEvent.ACTION_UP:
                         checkGripCylinderMerge();
@@ -444,7 +443,6 @@ public class MainRoomFragment extends Fragment {
             }
         });
     }
-
 
     private void checkGripCylinderMerge() {
         int[] gripLoc = new int[2];
