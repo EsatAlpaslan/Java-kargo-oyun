@@ -47,17 +47,10 @@ public class MainRoomFragment extends Fragment {
 
     private boolean springLocked = false;
     private float springOffsetX = 0, springOffsetY = 0;
-    private boolean springLockedToBarrel2 = false;
-
 
     private boolean magLocked = false;
     private float magOffsetX = 0, magOffsetY = 0;
-    private float springToBarrel2OffsetX = 0;
-    private float springToBarrel2OffsetY = 0;
 
-    private boolean deagleSpringLockedToBarrel = false;
-    private float deagleSpringToBarrelOffsetX = 0;
-    private float deagleSpringToBarrelOffsetY = 0;
     private boolean frameLocked = false;
 
     private boolean deagleSlideLocked = false;
@@ -87,7 +80,9 @@ public class MainRoomFragment extends Fragment {
     private TextView orderText;
     private ImageView exampleGunImage;
     private ImageView partDeagleFrame, partDeagleSlide, partDeagleBarrel, partDeagleSpring, partDeagleMag;
-    private ImageView partUSPust, partUSPgovde, partUSPsarjor, partUSPuc, partUSPyay, partUSPyaygovde;
+    private ImageView partUDPust, partUDPgovde, partUDPsarjor, partUDPuc, partUDPyay;
+
+
 
 
 
@@ -136,6 +131,13 @@ public class MainRoomFragment extends Fragment {
         exampleGunImage = view.findViewById(R.id.exampleGunImage);
         dayTimerText = view.findViewById(R.id.dayTimerText);
         dayText = view.findViewById(R.id.dayText);
+
+        partUDPust = view.findViewById(R.id.partUDPust);
+        partUDPgovde = view.findViewById(R.id.partUDPgovde);
+        partUDPsarjor = view.findViewById(R.id.partUDPsarjor);
+        partUDPuc = view.findViewById(R.id.partUDPuc);
+        partUDPyay = view.findViewById(R.id.partUDPyay);
+
 
         // Sayaç başlat (güne göre süre belirle)
         if (currentDay == 1) {
@@ -260,50 +262,37 @@ public class MainRoomFragment extends Fragment {
                 partDeagleSpring.setVisibility(View.GONE);
                 partDeagleMag.setVisibility(View.GONE);
 
-                // 📏 Ekran oranına göre USP parçalarını boyutlandır
-                int partSize = (int)(0.12f * screenWidth); // Genişliğin %12'si kadar
+                // Oranlı boyutlandırma
+                int partSize = (int)(0.12f * screenWidth);
 
-                ImageView[] uspParts = new ImageView[]{
-                        partUSPust, partUSPgovde, partUSPsarjor,
-                        partUSPuc, partUSPyay, partUSPyaygovde
+                ImageView[] udpParts = new ImageView[]{
+                        partUDPust, partUDPgovde, partUDPsarjor,
+                        partUDPuc, partUDPyay
                 };
 
-                for (ImageView part : uspParts) {
+                for (ImageView part : udpParts) {
                     ViewGroup.LayoutParams params = part.getLayoutParams();
                     params.width = partSize;
                     params.height = partSize;
                     part.setLayoutParams(params);
                 }
 
+                // Görünür yap
+                for (ImageView part : udpParts) {
+                    part.setVisibility(View.VISIBLE);
+                    makeDraggable(part);
+                }
+                // Konumlandır
+                partUDPust.setX(0.05f * screenWidth);      partUDPust.setY(0.10f * screenHeight);
+                partUDPgovde.setX(0.25f * screenWidth);    partUDPgovde.setY(0.20f * screenHeight);
+                partUDPsarjor.setX(0.45f * screenWidth);   partUDPsarjor.setY(0.30f * screenHeight);
+                partUDPuc.setX(0.65f * screenWidth);       partUDPuc.setY(0.40f * screenHeight);
+                partUDPyay.setX(0.15f * screenWidth);      partUDPyay.setY(0.55f * screenHeight);
 
-                // USP parçalarını görünür yap
-                partUSPust.setVisibility(View.VISIBLE);
-                partUSPgovde.setVisibility(View.VISIBLE);
-                partUSPsarjor.setVisibility(View.VISIBLE);
-                partUSPuc.setVisibility(View.VISIBLE);
-                partUSPyaygovde.setVisibility(View.VISIBLE);
-                partUSPyay.setVisibility(View.VISIBLE);
+                // Öne al
+                partUDPgovde.bringToFront();
+                partUDPust.bringToFront();
 
-                // 🎯 Konumlandır
-                partUSPust.setX(0.05f * screenWidth);        partUSPust.setY(0.10f * screenHeight);
-                partUSPgovde.setX(0.25f * screenWidth);      partUSPgovde.setY(0.20f * screenHeight);
-                partUSPsarjor.setX(0.45f * screenWidth);     partUSPsarjor.setY(0.30f * screenHeight);
-                partUSPuc.setX(0.65f * screenWidth);         partUSPuc.setY(0.40f * screenHeight);
-                partUSPyay.setX(0.15f * screenWidth);        partUSPyay.setY(0.55f * screenHeight);
-                partUSPyaygovde.setX(0.55f * screenWidth);   partUSPyaygovde.setY(0.60f * screenHeight);
-
-                // USP parçalarını sürüklenebilir yap
-                makeDraggable(partUSPust);
-                makeDraggable(partUSPgovde);
-                makeDraggable(partUSPsarjor);
-                makeDraggable(partUSPuc);
-                makeDraggable(partUSPyay);
-                makeDraggable(partUSPyaygovde);
-
-
-                // Gerekirse öne al
-                partUSPgovde.bringToFront();
-                partUSPust.bringToFront();
             }
 
             else {
@@ -335,12 +324,6 @@ public class MainRoomFragment extends Fragment {
             Toast.makeText(getContext(), "GÜN " + currentDay + " başladı!", Toast.LENGTH_SHORT).show();
         });
 
-        partUSPust = view.findViewById(R.id.partUSPust);
-        partUSPgovde = view.findViewById(R.id.partUSPgovde);
-        partUSPsarjor = view.findViewById(R.id.partUSPsarjor);
-        partUSPuc = view.findViewById(R.id.partUSPuc);
-        partUSPyay = view.findViewById(R.id.partUSPyay);
-        partUSPyaygovde = view.findViewById(R.id.partUSPyaygovde);
 
     }
 
