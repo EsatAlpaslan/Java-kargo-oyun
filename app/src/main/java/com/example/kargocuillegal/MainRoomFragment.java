@@ -185,7 +185,7 @@ public class MainRoomFragment extends Fragment {
             if (currentDay == 1) {
                 startCountdown(15);
             } else if (currentDay == 2) {
-                startCountdown(21);
+                startCountdown(30);
             } else if (currentDay == 3) {
                 startCountdown(30);
             }
