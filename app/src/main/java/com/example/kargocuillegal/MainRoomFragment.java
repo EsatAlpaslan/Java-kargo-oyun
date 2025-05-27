@@ -381,14 +381,8 @@ public class MainRoomFragment extends Fragment {
                             partHammer.setY(newY + hammerOffsetY);
                         }
 
-                        // 🔧 Glock birleşme kontrolleri ve bağlı taşıma
+                        // 🔄 Glock bağlı taşıma
                         if (currentDay == 2) {
-                            checkSlideFrameMerge();
-                            checkBarrel2ToFrame();
-                            checkSpringToBarrel2();
-                            checkMagToFrame();
-
-                            // Frame hareket ederse bağlı glock parçaları da sürüklensin
                             if (v.getId() == R.id.partFrame) {
                                 if (slideLocked) {
                                     part_slide.setX(newX + slideOffsetX);
@@ -406,22 +400,17 @@ public class MainRoomFragment extends Fragment {
                                     part_mag.setX(newX + magOffsetX);
                                     part_mag.setY(newY + magOffsetY);
                                 }
-                                if (v.getId() == R.id.partBarrel2 && springLockedToBarrel2) {
-                                    part_spring.setX(newX + springToBarrel2OffsetX);
-                                    part_spring.setY(newY + springToBarrel2OffsetY);
-                                }
-
-                                if (v.getId() == R.id.partDeagleBarrel && deagleSpringLockedToBarrel) {
-                                    partDeagleSpring.setX(newX + deagleSpringToBarrelOffsetX);
-                                    partDeagleSpring.setY(newY + deagleSpringToBarrelOffsetY);
-                                }
                             }
 
-                            // 🔧 Deagle birleşme kontrolleri ve bağlı taşıma
-                            checkDeagleSlideFrameMerge();
-                            checkDeagleBarrelToFrame();
-                            checkDeagleSpringToBarrel();
-                            checkDeagleMagToFrame();
+                            if (v.getId() == R.id.partBarrel2 && springLockedToBarrel2) {
+                                part_spring.setX(newX + springToBarrel2OffsetX);
+                                part_spring.setY(newY + springToBarrel2OffsetY);
+                            }
+
+                            if (v.getId() == R.id.partDeagleBarrel && deagleSpringLockedToBarrel) {
+                                partDeagleSpring.setX(newX + deagleSpringToBarrelOffsetX);
+                                partDeagleSpring.setY(newY + deagleSpringToBarrelOffsetY);
+                            }
 
                             if (v.getId() == R.id.partDeagleFrame) {
                                 if (deagleSlideLocked) {
@@ -449,6 +438,18 @@ public class MainRoomFragment extends Fragment {
                         checkGripCylinderMerge();
                         checkCylinderBarrelMerge();
                         checkCylinderHammerMerge();
+
+                        if (currentDay == 2) {
+                            checkSlideFrameMerge();
+                            checkBarrel2ToFrame();
+                            checkSpringToBarrel2();
+                            checkMagToFrame();
+                            checkDeagleSlideFrameMerge();
+                            checkDeagleBarrelToFrame();
+                            checkDeagleSpringToBarrel();
+                            checkDeagleMagToFrame();
+                        }
+
                         checkIfAssemblyCompleted();
                         return true;
 
@@ -458,6 +459,8 @@ public class MainRoomFragment extends Fragment {
             }
         });
     }
+
+
 
     private void checkGripCylinderMerge() {
         int[] gripLoc = new int[2];
