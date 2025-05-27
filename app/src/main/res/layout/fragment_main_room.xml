@@ -278,51 +278,39 @@
         android:contentDescription="Silah Görseli" />
 
     <ImageView
-        android:id="@+id/partUSPust"
+        android:id="@+id/partUDPust"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/uspparca_ust"
+        android:src="@drawable/udp_ust"
         android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/partUSPgovde"
+        android:id="@+id/partUDPgovde"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/uspparca_govde"
+        android:src="@drawable/udp_govde"
         android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/partUSPsarjor"
+        android:id="@+id/partUDPsarjor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/uspparca_sarjor"
+        android:src="@drawable/udp_sarjor"
         android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/partUSPuc"
+        android:id="@+id/partUDPuc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/uspparca_uc"
+        android:src="@drawable/udp_uc"
         android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/partUSPyay"
+        android:id="@+id/partUDPyay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/uspparca_yay"
+        android:src="@drawable/udp_yay"
         android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/partUSPyaygovde"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/uspparca_yaygovdesi"
-        android:visibility="gone" />
-
-
-
-
-
 
 
 
