@@ -81,6 +81,17 @@ public class MainRoomFragment extends Fragment {
     private ImageView exampleGunImage;
     private ImageView partDeagleFrame, partDeagleSlide, partDeagleBarrel, partDeagleSpring, partDeagleMag;
     private ImageView partUDPust, partUDPgovde, partUDPsarjor, partUDPuc, partUDPyay;
+    private boolean isUstLockedToGovde = false;
+    private boolean isUcLockedToUst = false;
+    private boolean isSarjorLocked = false;
+    private boolean isYayLockedToUst = false;
+    private boolean isYayInsideUc = false;
+    private boolean isNear(View part1, View part2, float thresholdPx) {
+        float dx = Math.abs(part1.getX() - part2.getX());
+        float dy = Math.abs(part1.getY() - part2.getY());
+        return dx < thresholdPx && dy < thresholdPx;
+    }
+
 
 
 
