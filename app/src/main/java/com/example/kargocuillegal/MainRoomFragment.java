@@ -28,7 +28,6 @@ public class MainRoomFragment extends Fragment {
     private float barrelOffsetX = 0;  // Barrel'ın cylinder'a göre X farkı
     private float barrelOffsetY = 0;  // Barrel'ın cylinder'a göre Y farkı
 
-    //yeni eklendi
     private boolean gripLockedToCylinder = false;
     private float gripOffsetX = 0;
     private float gripOffsetY = 0;
@@ -36,6 +35,7 @@ public class MainRoomFragment extends Fragment {
     private boolean hammerLockedToCylinder = false;
     private float hammerOffsetX = 0;
     private float hammerOffsetY = 0;
+
     private TextView completionText;
     private Button nextDayButton;
 
@@ -47,6 +47,11 @@ public class MainRoomFragment extends Fragment {
 
     private boolean springLocked = false;
     private float springOffsetX = 0, springOffsetY = 0;
+
+    // ✅ Glock yayının namluya bağlı şekilde hareketi için
+    private boolean springLockedToBarrel2 = false;
+    private float springToBarrel2OffsetX = 0;
+    private float springToBarrel2OffsetY = 0;
 
     private boolean magLocked = false;
     private float magOffsetX = 0, magOffsetY = 0;
@@ -62,13 +67,13 @@ public class MainRoomFragment extends Fragment {
     private boolean deagleSpringLocked = false;
     private float deagleSpringOffsetX = 0, deagleSpringOffsetY = 0;
 
+    // ✅ Deagle yayının namluya bağlı şekilde hareketi için
+    private boolean deagleSpringLockedToBarrel = false;
+    private float deagleSpringToBarrelOffsetX = 0;
+    private float deagleSpringToBarrelOffsetY = 0;
+
     private boolean deagleMagLocked = false;
     private float deagleMagOffsetX = 0, deagleMagOffsetY = 0;
-
-
-
-
-
 
     private int currentDay = 1; // Başlangıçta Gün 1
     private boolean isCompleted = false;
@@ -76,14 +81,15 @@ public class MainRoomFragment extends Fragment {
     private CountDownTimer countDownTimer;
     private TextView dayText;
     private boolean isTimeOver = false;
+
     private ImageButton orderBoardButton;
     private TextView orderText;
     private ImageView exampleGunImage;
+
     private ImageView partDeagleFrame, partDeagleSlide, partDeagleBarrel, partDeagleSpring, partDeagleMag;
+
+    // Gün 3: USP parçaları
     private ImageView partUDPust, partUDPgovde, partUDPsarjor, partUDPuc, partUDPyay;
-
-
-
 
 
 
@@ -400,6 +406,15 @@ public class MainRoomFragment extends Fragment {
                                     part_mag.setX(newX + magOffsetX);
                                     part_mag.setY(newY + magOffsetY);
                                 }
+                                if (v.getId() == R.id.partBarrel2 && springLockedToBarrel2) {
+                                    part_spring.setX(newX + springToBarrel2OffsetX);
+                                    part_spring.setY(newY + springToBarrel2OffsetY);
+                                }
+
+                                if (v.getId() == R.id.partDeagleBarrel && deagleSpringLockedToBarrel) {
+                                    partDeagleSpring.setX(newX + deagleSpringToBarrelOffsetX);
+                                    partDeagleSpring.setY(newY + deagleSpringToBarrelOffsetY);
+                                }
                             }
 
                             // 🔧 Deagle birleşme kontrolleri ve bağlı taşıma
@@ -660,6 +675,9 @@ public class MainRoomFragment extends Fragment {
 
             // 🔕 Artık sürüklenemesin
             part_spring.setEnabled(false);
+            springToBarrel2OffsetX = targetX - part_barrel2.getX();
+            springToBarrel2OffsetY = targetY - part_barrel2.getY();
+            springLockedToBarrel2 = true;
 
             checkIfAssemblyCompleted();
         }
@@ -793,16 +811,18 @@ public class MainRoomFragment extends Fragment {
             partDeagleSpring.setX(targetX);
             partDeagleSpring.setY(targetY);
 
-            deagleSpringOffsetX = targetX - partDeagleBarrel.getX();
-            deagleSpringOffsetY = targetY - partDeagleBarrel.getY();
-
+            // 🔒 Kilitleme ve bağlı taşıma için offset'leri kaydet
+            deagleSpringToBarrelOffsetX = offsetX;
+            deagleSpringToBarrelOffsetY = offsetY;
+            deagleSpringLockedToBarrel = true;
 
             partDeagleSpring.setEnabled(false);
             deagleSpringLocked = true;
 
-            checkIfAssemblyCompleted(); // Parçalar tamamsa tetikler
+            checkIfAssemblyCompleted();
         }
     }
+
 
     private void checkDeagleMagToFrame() {
         int[] magLoc = new int[2];
