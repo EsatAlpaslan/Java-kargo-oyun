@@ -297,7 +297,12 @@
         android:layout_height="wrap_content"
         android:src="@drawable/udp_sarjor"
         android:visibility="gone" />
-
+    <ImageView
+        android:id="@+id/partUDPyay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/udp_yay"
+        android:visibility="gone" />
     <ImageView
         android:id="@+id/partUDPuc"
         android:layout_width="wrap_content"
@@ -305,12 +310,6 @@
         android:src="@drawable/udp_uc"
         android:visibility="gone" />
 
-    <ImageView
-        android:id="@+id/partUDPyay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/udp_yay"
-        android:visibility="gone" />
 
 
 
