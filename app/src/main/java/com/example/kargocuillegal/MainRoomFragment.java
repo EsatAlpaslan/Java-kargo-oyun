@@ -253,37 +253,13 @@ public class MainRoomFragment extends Fragment {
                 partDeagleSpring.setVisibility(View.GONE);
                 partDeagleMag.setVisibility(View.GONE);
 
-                // 📏 Ekran oranına göre USP parçalarını boyutlandır
-                int partSize = (int)(0.12f * screenWidth); // Genişliğin %12'si kadar
-
-                ImageView[] uspParts = new ImageView[]{
-                        partUSPust, partUSPgovde, partUSPsarjor,
-                        partUSPuc, partUSPyay, partUSPyaygovde
-                };
-
-                for (ImageView part : uspParts) {
-                    ViewGroup.LayoutParams params = part.getLayoutParams();
-                    params.width = partSize;
-                    params.height = partSize;
-                    part.setLayoutParams(params);
-                }
-
-
                 // USP parçalarını görünür yap
                 partUSPust.setVisibility(View.VISIBLE);
                 partUSPgovde.setVisibility(View.VISIBLE);
                 partUSPsarjor.setVisibility(View.VISIBLE);
                 partUSPuc.setVisibility(View.VISIBLE);
-                partUSPyaygovde.setVisibility(View.VISIBLE);
                 partUSPyay.setVisibility(View.VISIBLE);
-
-                // 🎯 Konumlandır
-                partUSPust.setX(0.05f * screenWidth);        partUSPust.setY(0.10f * screenHeight);
-                partUSPgovde.setX(0.25f * screenWidth);      partUSPgovde.setY(0.20f * screenHeight);
-                partUSPsarjor.setX(0.45f * screenWidth);     partUSPsarjor.setY(0.30f * screenHeight);
-                partUSPuc.setX(0.65f * screenWidth);         partUSPuc.setY(0.40f * screenHeight);
-                partUSPyay.setX(0.15f * screenWidth);        partUSPyay.setY(0.55f * screenHeight);
-                partUSPyaygovde.setX(0.55f * screenWidth);   partUSPyaygovde.setY(0.60f * screenHeight);
+                partUSPyaygovde.setVisibility(View.VISIBLE);
 
                 // USP parçalarını sürüklenebilir yap
                 makeDraggable(partUSPust);
@@ -293,6 +269,13 @@ public class MainRoomFragment extends Fragment {
                 makeDraggable(partUSPyay);
                 makeDraggable(partUSPyaygovde);
 
+                // Ekrana konumlandır
+                partUSPust.setX(0.05f * screenWidth); partUSPust.setY(0.10f * screenHeight);
+                partUSPgovde.setX(0.25f * screenWidth); partUSPgovde.setY(0.20f * screenHeight);
+                partUSPsarjor.setX(0.45f * screenWidth); partUSPsarjor.setY(0.30f * screenHeight);
+                partUSPuc.setX(0.65f * screenWidth); partUSPuc.setY(0.40f * screenHeight);
+                partUSPyay.setX(0.15f * screenWidth); partUSPyay.setY(0.55f * screenHeight);
+                partUSPyaygovde.setX(0.55f * screenWidth); partUSPyaygovde.setY(0.60f * screenHeight);
 
                 // Gerekirse öne al
                 partUSPgovde.bringToFront();
