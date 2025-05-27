@@ -102,6 +102,8 @@ public class MainRoomFragment extends Fragment {
     private boolean isYayLockedToGovde = false;
     private float yayOffsetX = 0, yayOffsetY = 0;
     private boolean isYayLockedToUst = false;
+    private boolean isYayInsideUc = false;
+
 
 
 
@@ -459,6 +461,58 @@ public class MainRoomFragment extends Fragment {
                                 partUDPyay.setX(newX + yayOffsetX);
                                 partUDPyay.setY(newY + yayOffsetY);
                             }
+                                // uc hareket ederse yay da onunla gider
+                                if (v.getId() == R.id.partUDPuc && isYayInsideUc) {
+                                    partUDPyay.setX(newX + yayOffsetX);
+                                    partUDPyay.setY(newY + yayOffsetY);
+                                }
+
+                            if (isUstLockedToGovde) {
+                                partUDPust.setX(newX + ustOffsetX);
+                                partUDPust.setY(newY + ustOffsetY);
+                            }
+
+                            if (isUcLockedToGovde) {
+                                partUDPuc.setX(newX + ucOffsetX);
+                                partUDPuc.setY(newY + ucOffsetY);
+
+                                if (isYayInsideUc) {
+                                    partUDPyay.setX(partUDPuc.getX() + yayOffsetX);
+                                    partUDPyay.setY(partUDPuc.getY() + yayOffsetY);
+                                }
+                            }
+
+                            if (isSarjorLockedToGovde) {
+                                partUDPsarjor.setX(newX + sarjorOffsetX);
+                                partUDPsarjor.setY(newY + sarjorOffsetY);
+                            }
+                            if (v.getId() == R.id.partUDPgovde) {
+                                if (isUstLockedToGovde) {
+                                    partUDPust.setX(newX + ustOffsetX);
+                                    partUDPust.setY(newY + ustOffsetY);
+
+                                    // ✅ Eğer yay da "üst"e bağlıysa onunla birlikte hareket etsin
+                                    if (isYayLockedToUst) {
+                                        partUDPyay.setX(partUDPust.getX() + yayOffsetX);
+                                        partUDPyay.setY(partUDPust.getY() + yayOffsetY);
+                                    }
+                                }
+                                if (isUcLockedToGovde) {
+                                    partUDPuc.setX(newX + ucOffsetX);
+                                    partUDPuc.setY(newY + ucOffsetY);
+
+                                    // ✅ Eğer yay "uc" ile bağlıysa onunla birlikte hareket etsin
+                                    if (isYayInsideUc) {
+                                        partUDPyay.setX(partUDPuc.getX() + yayOffsetX);
+                                        partUDPyay.setY(partUDPuc.getY() + yayOffsetY);
+                                    }
+                                }
+                                if (isSarjorLockedToGovde) {
+                                    partUDPsarjor.setX(newX + sarjorOffsetX);
+                                    partUDPsarjor.setY(newY + sarjorOffsetY);
+                                }
+                            }
+
                         }
 
                         return true;
@@ -483,8 +537,10 @@ public class MainRoomFragment extends Fragment {
                             checkUDPustToGovde();
                             checkUDPucToGovde();
                             checkUDPsarjorToGovde();
-                            checkUDPyayToUst(); // ✅ Yay kontrolü eklendi
+                            checkUDPyayToUst();
                         }
+
+
 
                         checkIfAssemblyCompleted();
                         return true;
@@ -919,8 +975,8 @@ public class MainRoomFragment extends Fragment {
         double distance = Math.hypot(ustCenterX - govdeCenterX, ustCenterY - govdeCenterY);
 
         if (distance < 130) {
-            float offsetX = -0.1f * partUDPgovde.getWidth();
-            float offsetY = -0.5f * partUDPust.getHeight();
+            float offsetX = 0f * partUDPgovde.getWidth();
+            float offsetY = -0.26f * partUDPust.getHeight();
 
             float targetX = partUDPgovde.getX() + offsetX;
             float targetY = partUDPgovde.getY() + offsetY;
@@ -950,9 +1006,9 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(ucCenterX - govdeCenterX, ucCenterY - govdeCenterY);
 
-        if (distance < 130) {
-            float offsetX = 0.3f * partUDPgovde.getWidth();
-            float offsetY = 0.1f * partUDPgovde.getHeight();
+        if (distance < 100) {
+            float offsetX = -0.965f * partUDPgovde.getWidth();
+            float offsetY = -0.29f * partUDPgovde.getHeight();
 
             float targetX = partUDPgovde.getX() + offsetX;
             float targetY = partUDPgovde.getY() + offsetY;
@@ -984,8 +1040,8 @@ public class MainRoomFragment extends Fragment {
         double distance = Math.hypot(sarjorCenterX - govdeCenterX, sarjorCenterY - govdeCenterY);
 
         if (distance < 130) {
-            float offsetX = 0.05f * partUDPsarjor.getWidth();
-            float offsetY = 0.5f * partUDPsarjor.getHeight();
+            float offsetX = 0.29f * partUDPsarjor.getWidth();
+            float offsetY = 0f * partUDPsarjor.getHeight();
 
             float targetX = partUDPgovde.getX() + offsetX;
             float targetY = partUDPgovde.getY() + offsetY;
@@ -1016,8 +1072,8 @@ public class MainRoomFragment extends Fragment {
         double distance = Math.hypot(yayCenterX - ustCenterX, yayCenterY - ustCenterY);
 
         if (distance < 130) {
-            float offsetX = 0.4f * partUDPust.getWidth();
-            float offsetY = 0.3f * partUDPust.getHeight();
+            float offsetX = 0.0f * partUDPust.getWidth();
+            float offsetY = 0.03f * partUDPust.getHeight();
 
             float targetX = partUDPust.getX() + offsetX;
             float targetY = partUDPust.getY() + offsetY;
@@ -1032,6 +1088,7 @@ public class MainRoomFragment extends Fragment {
             partUDPyay.setEnabled(false);
         }
     }
+
 
 
 
