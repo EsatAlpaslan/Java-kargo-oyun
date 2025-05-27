@@ -186,6 +186,42 @@
         />
 
 
+    <!-- Usp-S parçaları -->
+    <ImageView
+        android:id="@+id/partUDPust"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/udp_ust"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/partUDPgovde"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/udp_govde"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/partUDPsarjor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/udp_sarjor"
+        android:visibility="gone" />
+    <ImageView
+        android:id="@+id/partUDPyay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/udp_yay"
+        android:visibility="gone" />
+    <ImageView
+        android:id="@+id/partUDPuc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/udp_uc"
+        android:visibility="gone" />
+
+
+
 
 
     <TextView
@@ -276,39 +312,6 @@
         android:src="@drawable/revolver"
         android:visibility="gone"
         android:contentDescription="Silah Görseli" />
-
-    <ImageView
-        android:id="@+id/partUDPust"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/udp_ust"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/partUDPgovde"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/udp_govde"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/partUDPsarjor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/udp_sarjor"
-        android:visibility="gone" />
-    <ImageView
-        android:id="@+id/partUDPyay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/udp_yay"
-        android:visibility="gone" />
-    <ImageView
-        android:id="@+id/partUDPuc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/udp_uc"
-        android:visibility="gone" />
 
 
 

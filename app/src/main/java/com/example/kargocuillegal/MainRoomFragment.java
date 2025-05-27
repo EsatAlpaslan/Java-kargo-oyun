@@ -25,8 +25,8 @@ public class MainRoomFragment extends Fragment {
     private ImageView part_slide, part_spring, part_barrel2, part_frame, part_mag;
 
     private boolean barrelLockedToCylinder = false;
-    private float barrelOffsetX = 0;  // Barrel'ın cylinder'a göre X farkı
-    private float barrelOffsetY = 0;  // Barrel'ın cylinder'a göre Y farkı
+    private float barrelOffsetX = 0;
+    private float barrelOffsetY = 0;
 
     private boolean gripLockedToCylinder = false;
     private float gripOffsetX = 0;
@@ -48,7 +48,6 @@ public class MainRoomFragment extends Fragment {
     private boolean springLocked = false;
     private float springOffsetX = 0, springOffsetY = 0;
 
-    // ✅ Glock yayının namluya bağlı şekilde hareketi için
     private boolean springLockedToBarrel2 = false;
     private float springToBarrel2OffsetX = 0;
     private float springToBarrel2OffsetY = 0;
@@ -67,7 +66,6 @@ public class MainRoomFragment extends Fragment {
     private boolean deagleSpringLocked = false;
     private float deagleSpringOffsetX = 0, deagleSpringOffsetY = 0;
 
-    // ✅ Deagle yayının namluya bağlı şekilde hareketi için
     private boolean deagleSpringLockedToBarrel = false;
     private float deagleSpringToBarrelOffsetX = 0;
     private float deagleSpringToBarrelOffsetY = 0;
@@ -75,7 +73,7 @@ public class MainRoomFragment extends Fragment {
     private boolean deagleMagLocked = false;
     private float deagleMagOffsetX = 0, deagleMagOffsetY = 0;
 
-    private int currentDay = 1; // Başlangıçta Gün 1
+    private int currentDay = 1;
     private boolean isCompleted = false;
     private TextView dayTimerText;
     private CountDownTimer countDownTimer;
@@ -90,11 +88,23 @@ public class MainRoomFragment extends Fragment {
 
     // Gün 3: USP parçaları
     private ImageView partUDPust, partUDPgovde, partUDPsarjor, partUDPuc, partUDPyay;
+
+    // ✅ USP parçaları kilitlenme durumları
     private boolean isUstLockedToGovde = false;
-    private boolean isUcLockedToUst = false;
-    private boolean isSarjorLocked = false;
+    private float ustOffsetX = 0, ustOffsetY = 0;
+
+    private boolean isUcLockedToGovde = false;
+    private float ucOffsetX = 0, ucOffsetY = 0;
+
+    private boolean isSarjorLockedToGovde = false;
+    private float sarjorOffsetX = 0, sarjorOffsetY = 0;
+
+    private boolean isYayLockedToGovde = false;
+    private float yayOffsetX = 0, yayOffsetY = 0;
     private boolean isYayLockedToUst = false;
-    private boolean isYayInsideUc = false;
+
+
+
     private boolean isNear(View part1, View part2, float thresholdPx) {
         float dx = Math.abs(part1.getX() - part2.getX());
         float dy = Math.abs(part1.getY() - part2.getY());
@@ -280,7 +290,7 @@ public class MainRoomFragment extends Fragment {
                 partDeagleMag.setVisibility(View.GONE);
 
                 // Oranlı boyutlandırma
-                int partSize = (int)(0.12f * screenWidth);
+                int partSize = (int)(0.16f * screenWidth);
 
                 ImageView[] udpParts = new ImageView[]{
                         partUDPust, partUDPgovde, partUDPsarjor,
@@ -443,6 +453,14 @@ public class MainRoomFragment extends Fragment {
                             }
                         }
 
+                        // 🔄 USP yay üstüne bağlıysa birlikte hareket etsin
+                        if (currentDay == 3) {
+                            if (v.getId() == R.id.partUDPust && isYayLockedToUst) {
+                                partUDPyay.setX(newX + yayOffsetX);
+                                partUDPyay.setY(newY + yayOffsetY);
+                            }
+                        }
+
                         return true;
 
                     case MotionEvent.ACTION_UP:
@@ -461,6 +479,13 @@ public class MainRoomFragment extends Fragment {
                             checkDeagleMagToFrame();
                         }
 
+                        if (currentDay == 3) {
+                            checkUDPustToGovde();
+                            checkUDPucToGovde();
+                            checkUDPsarjorToGovde();
+                            checkUDPyayToUst(); // ✅ Yay kontrolü eklendi
+                        }
+
                         checkIfAssemblyCompleted();
                         return true;
 
@@ -470,6 +495,8 @@ public class MainRoomFragment extends Fragment {
             }
         });
     }
+
+
 
 
 
@@ -876,6 +903,140 @@ public class MainRoomFragment extends Fragment {
 
 
 
+    private void checkUDPustToGovde() {
+        int[] ustLoc = new int[2];
+        int[] govdeLoc = new int[2];
+
+        partUDPust.getLocationOnScreen(ustLoc);
+        partUDPgovde.getLocationOnScreen(govdeLoc);
+
+        float ustCenterX = ustLoc[0] + partUDPust.getWidth() / 2f;
+        float ustCenterY = ustLoc[1] + partUDPust.getHeight() / 2f;
+
+        float govdeCenterX = govdeLoc[0] + partUDPgovde.getWidth() / 2f;
+        float govdeCenterY = govdeLoc[1] + partUDPgovde.getHeight() / 2f;
+
+        double distance = Math.hypot(ustCenterX - govdeCenterX, ustCenterY - govdeCenterY);
+
+        if (distance < 130) {
+            float offsetX = -0.1f * partUDPgovde.getWidth();
+            float offsetY = -0.5f * partUDPust.getHeight();
+
+            float targetX = partUDPgovde.getX() + offsetX;
+            float targetY = partUDPgovde.getY() + offsetY;
+
+            partUDPust.setX(targetX);
+            partUDPust.setY(targetY);
+
+            ustOffsetX = offsetX;
+            ustOffsetY = offsetY;
+            isUstLockedToGovde = true;
+
+            partUDPust.setEnabled(false);
+        }
+    }
+    private void checkUDPucToGovde() {
+        int[] ucLoc = new int[2];
+        int[] govdeLoc = new int[2];
+
+        partUDPuc.getLocationOnScreen(ucLoc);
+        partUDPgovde.getLocationOnScreen(govdeLoc);
+
+        float ucCenterX = ucLoc[0] + partUDPuc.getWidth() / 2f;
+        float ucCenterY = ucLoc[1] + partUDPuc.getHeight() / 2f;
+
+        float govdeCenterX = govdeLoc[0] + partUDPgovde.getWidth() / 2f;
+        float govdeCenterY = govdeLoc[1] + partUDPgovde.getHeight() / 2f;
+
+        double distance = Math.hypot(ucCenterX - govdeCenterX, ucCenterY - govdeCenterY);
+
+        if (distance < 130) {
+            float offsetX = 0.3f * partUDPgovde.getWidth();
+            float offsetY = 0.1f * partUDPgovde.getHeight();
+
+            float targetX = partUDPgovde.getX() + offsetX;
+            float targetY = partUDPgovde.getY() + offsetY;
+
+            partUDPuc.setX(targetX);
+            partUDPuc.setY(targetY);
+
+            ucOffsetX = offsetX;
+            ucOffsetY = offsetY;
+            isUcLockedToGovde = true;
+
+            partUDPuc.setEnabled(false);
+        }
+    }
+
+    private void checkUDPsarjorToGovde() {
+        int[] sarjorLoc = new int[2];
+        int[] govdeLoc = new int[2];
+
+        partUDPsarjor.getLocationOnScreen(sarjorLoc);
+        partUDPgovde.getLocationOnScreen(govdeLoc);
+
+        float sarjorCenterX = sarjorLoc[0] + partUDPsarjor.getWidth() / 2f;
+        float sarjorCenterY = sarjorLoc[1] + partUDPsarjor.getHeight() / 2f;
+
+        float govdeCenterX = govdeLoc[0] + partUDPgovde.getWidth() / 2f;
+        float govdeCenterY = govdeLoc[1] + partUDPgovde.getHeight() / 2f;
+
+        double distance = Math.hypot(sarjorCenterX - govdeCenterX, sarjorCenterY - govdeCenterY);
+
+        if (distance < 130) {
+            float offsetX = 0.05f * partUDPsarjor.getWidth();
+            float offsetY = 0.5f * partUDPsarjor.getHeight();
+
+            float targetX = partUDPgovde.getX() + offsetX;
+            float targetY = partUDPgovde.getY() + offsetY;
+
+            partUDPsarjor.setX(targetX);
+            partUDPsarjor.setY(targetY);
+
+            sarjorOffsetX = offsetX;
+            sarjorOffsetY = offsetY;
+            isSarjorLockedToGovde = true;
+
+            partUDPsarjor.setEnabled(false);
+        }
+    }
+    private void checkUDPyayToUst() {
+        int[] yayLoc = new int[2];
+        int[] ustLoc = new int[2];
+
+        partUDPyay.getLocationOnScreen(yayLoc);
+        partUDPust.getLocationOnScreen(ustLoc);
+
+        float yayCenterX = yayLoc[0] + partUDPyay.getWidth() / 2f;
+        float yayCenterY = yayLoc[1] + partUDPyay.getHeight() / 2f;
+
+        float ustCenterX = ustLoc[0] + partUDPust.getWidth() / 2f;
+        float ustCenterY = ustLoc[1] + partUDPust.getHeight() / 2f;
+
+        double distance = Math.hypot(yayCenterX - ustCenterX, yayCenterY - ustCenterY);
+
+        if (distance < 130) {
+            float offsetX = 0.4f * partUDPust.getWidth();
+            float offsetY = 0.3f * partUDPust.getHeight();
+
+            float targetX = partUDPust.getX() + offsetX;
+            float targetY = partUDPust.getY() + offsetY;
+
+            partUDPyay.setX(targetX);
+            partUDPyay.setY(targetY);
+
+            yayOffsetX = offsetX;
+            yayOffsetY = offsetY;
+            isYayLockedToUst = true;
+
+            partUDPyay.setEnabled(false);
+        }
+    }
+
+
+
+
+
     private void checkIfAssemblyCompleted() {
         if (currentDay == 1 &&
                 barrelLockedToCylinder &&
@@ -901,39 +1062,22 @@ public class MainRoomFragment extends Fragment {
             if (countDownTimer != null) countDownTimer.cancel();
             isCompleted = true;
         }
+        if (currentDay == 3 &&
+                isUstLockedToGovde &&
+                isUcLockedToGovde &&
+                isSarjorLockedToGovde &&
+                isYayLockedToUst) {
 
-    }
-
-
-    private void checkIfCompleted() {
-        if (gripLockedToCylinder && barrelLockedToCylinder && hammerLockedToCylinder && !isCompleted) {
             completionText.setVisibility(View.VISIBLE);
             nextDayButton.setVisibility(View.VISIBLE);
-            dayTimerText.setVisibility(View.GONE); // Sayaç gizlensin
+            dayTimerText.setVisibility(View.GONE);
 
-            if (countDownTimer != null) {
-                countDownTimer.cancel();
-            }
-
+            if (countDownTimer != null) countDownTimer.cancel();
             isCompleted = true;
         }
+
+
     }
-
-    private void checkIffCompleted() {
-        if (slideLocked  && barrel2Locked && springLocked && magLocked && !isCompleted) {
-            completionText.setVisibility(View.VISIBLE);
-            nextDayButton.setVisibility(View.VISIBLE);
-            dayTimerText.setVisibility(View.GONE); // Sayaç gizlensin
-
-            if (countDownTimer != null) {
-                countDownTimer.cancel();
-            }
-
-            isCompleted = true;
-        }
-    }
-
-
 
     private void startCountdown(int seconds) {
         if (countDownTimer != null) {
