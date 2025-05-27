@@ -92,8 +92,6 @@ public class MainRoomFragment extends Fragment {
     private ImageView partUDPust, partUDPgovde, partUDPsarjor, partUDPuc, partUDPyay;
 
 
-
-
     public MainRoomFragment() {
         // Boş constructor
     }
@@ -220,18 +218,28 @@ public class MainRoomFragment extends Fragment {
                 partDeagleMag.setVisibility(View.VISIBLE);
 
                 // GLOCK parçalarını konumlandır
-                part_slide.setX(0.07f * screenWidth); part_slide.setY(0.05f * screenHeight);
-                part_spring.setX(0.38f * screenWidth); part_spring.setY(0.11f * screenHeight);
-                part_barrel2.setX(0.23f * screenWidth); part_barrel2.setY(0.77f * screenHeight);
-                part_frame.setX(0.78f * screenWidth); part_frame.setY(0.67f * screenHeight);
-                part_mag.setX(0.036f * screenWidth); part_mag.setY(0.63f * screenHeight);
+                part_slide.setX(0.07f * screenWidth);
+                part_slide.setY(0.05f * screenHeight);
+                part_spring.setX(0.38f * screenWidth);
+                part_spring.setY(0.11f * screenHeight);
+                part_barrel2.setX(0.23f * screenWidth);
+                part_barrel2.setY(0.77f * screenHeight);
+                part_frame.setX(0.78f * screenWidth);
+                part_frame.setY(0.67f * screenHeight);
+                part_mag.setX(0.036f * screenWidth);
+                part_mag.setY(0.63f * screenHeight);
 
                 // DEAGLE parçalarını konumlandır
-                partDeagleSlide.setX(0.5f * screenWidth); partDeagleSlide.setY(0.76f * screenHeight);
-                partDeagleBarrel.setX(0.7f * screenWidth); partDeagleBarrel.setY(0.08f * screenHeight);
-                partDeagleSpring.setX(0.9f * screenWidth); partDeagleSpring.setY(0.18f * screenHeight);
-                partDeagleFrame.setX(0.05f * screenWidth); partDeagleFrame.setY(0.3f * screenHeight);
-                partDeagleMag.setX(0.88f * screenWidth); partDeagleMag.setY(0.36f * screenHeight);
+                partDeagleSlide.setX(0.5f * screenWidth);
+                partDeagleSlide.setY(0.76f * screenHeight);
+                partDeagleBarrel.setX(0.7f * screenWidth);
+                partDeagleBarrel.setY(0.08f * screenHeight);
+                partDeagleSpring.setX(0.9f * screenWidth);
+                partDeagleSpring.setY(0.18f * screenHeight);
+                partDeagleFrame.setX(0.05f * screenWidth);
+                partDeagleFrame.setY(0.3f * screenHeight);
+                partDeagleMag.setX(0.88f * screenWidth);
+                partDeagleMag.setY(0.36f * screenHeight);
 
                 makeDraggable(part_slide);
                 makeDraggable(part_spring);
@@ -269,7 +277,7 @@ public class MainRoomFragment extends Fragment {
                 partDeagleMag.setVisibility(View.GONE);
 
                 // Oranlı boyutlandırma
-                int partSize = (int)(0.12f * screenWidth);
+                int partSize = (int) (0.12f * screenWidth);
 
                 ImageView[] udpParts = new ImageView[]{
                         partUDPust, partUDPgovde, partUDPsarjor,
@@ -289,19 +297,22 @@ public class MainRoomFragment extends Fragment {
                     makeDraggable(part);
                 }
                 // Konumlandır
-                partUDPust.setX(0.05f * screenWidth);      partUDPust.setY(0.10f * screenHeight);
-                partUDPgovde.setX(0.25f * screenWidth);    partUDPgovde.setY(0.20f * screenHeight);
-                partUDPsarjor.setX(0.45f * screenWidth);   partUDPsarjor.setY(0.30f * screenHeight);
-                partUDPuc.setX(0.65f * screenWidth);       partUDPuc.setY(0.40f * screenHeight);
-                partUDPyay.setX(0.15f * screenWidth);      partUDPyay.setY(0.55f * screenHeight);
+                partUDPust.setX(0.05f * screenWidth);
+                partUDPust.setY(0.10f * screenHeight);
+                partUDPgovde.setX(0.25f * screenWidth);
+                partUDPgovde.setY(0.20f * screenHeight);
+                partUDPsarjor.setX(0.45f * screenWidth);
+                partUDPsarjor.setY(0.30f * screenHeight);
+                partUDPuc.setX(0.65f * screenWidth);
+                partUDPuc.setY(0.40f * screenHeight);
+                partUDPyay.setX(0.15f * screenWidth);
+                partUDPyay.setY(0.55f * screenHeight);
 
                 // Öne al
                 partUDPgovde.bringToFront();
                 partUDPust.bringToFront();
 
-            }
-
-            else {
+            } else {
                 partGrip.setVisibility(View.VISIBLE);
                 partGrip.setEnabled(true);
                 partBarrel.setVisibility(View.VISIBLE);
@@ -316,10 +327,14 @@ public class MainRoomFragment extends Fragment {
                 makeDraggable(partHammer);
                 makeDraggable(partCylinder);
 
-                partGrip.setX(0.10f * screenWidth); partGrip.setY(0.08f * screenHeight);
-                partCylinder.setX(0.30f * screenWidth); partCylinder.setY(0.08f * screenHeight);
-                partBarrel.setX(0.50f * screenWidth); partBarrel.setY(0.08f * screenHeight);
-                partHammer.setX(0.70f * screenWidth); partHammer.setY(0.08f * screenHeight);
+                partGrip.setX(0.10f * screenWidth);
+                partGrip.setY(0.08f * screenHeight);
+                partCylinder.setX(0.30f * screenWidth);
+                partCylinder.setY(0.08f * screenHeight);
+                partBarrel.setX(0.50f * screenWidth);
+                partBarrel.setY(0.08f * screenHeight);
+                partHammer.setX(0.70f * screenWidth);
+                partHammer.setY(0.08f * screenHeight);
             }
 
             gripLockedToCylinder = false;
@@ -367,7 +382,6 @@ public class MainRoomFragment extends Fragment {
                         v.setX(newX);
                         v.setY(newY);
 
-                        // 🔧 Revolver parçaları birlikte hareket
                         if (v.getId() == R.id.partCylinder && barrelLockedToCylinder) {
                             partBarrel.setX(newX + barrelOffsetX);
                             partBarrel.setY(newY + barrelOffsetY);
@@ -381,14 +395,12 @@ public class MainRoomFragment extends Fragment {
                             partHammer.setY(newY + hammerOffsetY);
                         }
 
-                        // 🔧 Glock birleşme kontrolleri ve bağlı taşıma
                         if (currentDay == 2) {
                             checkSlideFrameMerge();
                             checkBarrel2ToFrame();
                             checkSpringToBarrel2();
                             checkMagToFrame();
 
-                            // Frame hareket ederse bağlı glock parçaları da sürüklensin
                             if (v.getId() == R.id.partFrame) {
                                 if (slideLocked) {
                                     part_slide.setX(newX + slideOffsetX);
@@ -406,18 +418,18 @@ public class MainRoomFragment extends Fragment {
                                     part_mag.setX(newX + magOffsetX);
                                     part_mag.setY(newY + magOffsetY);
                                 }
-                                if (v.getId() == R.id.partBarrel2 && springLockedToBarrel2) {
-                                    part_spring.setX(newX + springToBarrel2OffsetX);
-                                    part_spring.setY(newY + springToBarrel2OffsetY);
-                                }
-
-                                if (v.getId() == R.id.partDeagleBarrel && deagleSpringLockedToBarrel) {
-                                    partDeagleSpring.setX(newX + deagleSpringToBarrelOffsetX);
-                                    partDeagleSpring.setY(newY + deagleSpringToBarrelOffsetY);
-                                }
                             }
 
-                            // 🔧 Deagle birleşme kontrolleri ve bağlı taşıma
+                            if (v.getId() == R.id.partBarrel2 && springLockedToBarrel2) {
+                                part_spring.setX(newX + springToBarrel2OffsetX);
+                                part_spring.setY(newY + springToBarrel2OffsetY);
+                            }
+
+                            if (v.getId() == R.id.partDeagleBarrel && deagleSpringLockedToBarrel) {
+                                partDeagleSpring.setX(newX + deagleSpringToBarrelOffsetX);
+                                partDeagleSpring.setY(newY + deagleSpringToBarrelOffsetY);
+                            }
+
                             checkDeagleSlideFrameMerge();
                             checkDeagleBarrelToFrame();
                             checkDeagleSpringToBarrel();
@@ -458,6 +470,9 @@ public class MainRoomFragment extends Fragment {
             }
         });
     }
+
+
+
 
     private void checkGripCylinderMerge() {
         int[] gripLoc = new int[2];
