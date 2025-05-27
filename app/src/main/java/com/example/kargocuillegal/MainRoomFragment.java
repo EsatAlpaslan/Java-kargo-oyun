@@ -263,7 +263,7 @@ public class MainRoomFragment extends Fragment {
                 partDeagleMag.setVisibility(View.GONE);
                 // Her parçaya özel boyut
                 ViewGroup.LayoutParams paramsUst = partUDPust.getLayoutParams();
-                paramsUst.width = (int)(0.25f * screenWidth);
+                paramsUst.width = (int)(0.15f * screenWidth);
                 paramsUst.height = (int)(0.10f * screenWidth);
                 partUDPust.setLayoutParams(paramsUst);
 
@@ -277,15 +277,16 @@ public class MainRoomFragment extends Fragment {
                 paramsSarjor.height = (int)(0.12f * screenWidth);
                 partUDPsarjor.setLayoutParams(paramsSarjor);
 
+                ViewGroup.LayoutParams paramsYay = partUDPyay.getLayoutParams();
+                paramsYay.width = (int)(0.10f * screenWidth);
+                paramsYay.height = (int)(0.10f * screenWidth);
+                partUDPyay.setLayoutParams(paramsYay);
+
+
                 ViewGroup.LayoutParams paramsUc = partUDPuc.getLayoutParams();
                 paramsUc.width = (int)(0.12f * screenWidth);
                 paramsUc.height = (int)(0.11f * screenWidth);
                 partUDPuc.setLayoutParams(paramsUc);
-
-                ViewGroup.LayoutParams paramsYay = partUDPyay.getLayoutParams();
-                paramsYay.width = (int)(0.08f * screenWidth);
-                paramsYay.height = (int)(0.08f * screenWidth);
-                partUDPyay.setLayoutParams(paramsYay);
 
 
                 // Görünür yap
