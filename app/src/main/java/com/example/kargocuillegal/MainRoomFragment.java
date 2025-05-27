@@ -47,10 +47,17 @@ public class MainRoomFragment extends Fragment {
 
     private boolean springLocked = false;
     private float springOffsetX = 0, springOffsetY = 0;
+    private boolean springLockedToBarrel2 = false;
+
 
     private boolean magLocked = false;
     private float magOffsetX = 0, magOffsetY = 0;
+    private float springToBarrel2OffsetX = 0;
+    private float springToBarrel2OffsetY = 0;
 
+    private boolean deagleSpringLockedToBarrel = false;
+    private float deagleSpringToBarrelOffsetX = 0;
+    private float deagleSpringToBarrelOffsetY = 0;
     private boolean frameLocked = false;
 
     private boolean deagleSlideLocked = false;
