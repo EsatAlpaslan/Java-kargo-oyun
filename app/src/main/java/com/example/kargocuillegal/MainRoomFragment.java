@@ -263,7 +263,7 @@ public class MainRoomFragment extends Fragment {
                 partDeagleMag.setVisibility(View.GONE);
                 // Her parçaya özel boyut
                 ViewGroup.LayoutParams paramsUst = partUDPust.getLayoutParams();
-                paramsUst.width = (int)(0.25f * screenWidth);
+                paramsUst.width = (int)(0.15f * screenWidth);
                 paramsUst.height = (int)(0.10f * screenWidth);
                 partUDPust.setLayoutParams(paramsUst);
 
@@ -283,8 +283,8 @@ public class MainRoomFragment extends Fragment {
                 partUDPuc.setLayoutParams(paramsUc);
 
                 ViewGroup.LayoutParams paramsYay = partUDPyay.getLayoutParams();
-                paramsYay.width = (int)(0.08f * screenWidth);
-                paramsYay.height = (int)(0.08f * screenWidth);
+                paramsYay.width = (int)(0.10f * screenWidth);
+                paramsYay.height = (int)(0.10f * screenWidth);
                 partUDPyay.setLayoutParams(paramsYay);
 
 
@@ -299,10 +299,10 @@ public class MainRoomFragment extends Fragment {
                 }
                 // Konumlandır
                 partUDPust.setX(0.05f * screenWidth);      partUDPust.setY(0.10f * screenHeight);
-                partUDPgovde.setX(0.25f * screenWidth);    partUDPgovde.setY(0.20f * screenHeight);
-                partUDPsarjor.setX(0.45f * screenWidth);   partUDPsarjor.setY(0.30f * screenHeight);
-                partUDPuc.setX(0.65f * screenWidth);       partUDPuc.setY(0.40f * screenHeight);
-                partUDPyay.setX(0.15f * screenWidth);      partUDPyay.setY(0.55f * screenHeight);
+                partUDPgovde.setX(0.80f * screenWidth);    partUDPgovde.setY(0.55f * screenHeight);
+                partUDPsarjor.setX(0.45f * screenWidth);   partUDPsarjor.setY(0.65f * screenHeight);
+                partUDPuc.setX(0.65f * screenWidth);       partUDPuc.setY(0.08f * screenHeight);
+                partUDPyay.setX(0.05f * screenWidth);      partUDPyay.setY(0.65f * screenHeight);
 
                 // Öne al
                 partUDPgovde.bringToFront();
