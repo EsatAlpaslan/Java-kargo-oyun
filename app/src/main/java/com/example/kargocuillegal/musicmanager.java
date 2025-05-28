@@ -44,4 +44,11 @@ public class musicmanager {
     public static boolean isMusicPlaying() {
         return isPlaying;
     }
+
+    // 🔊 Ses seviyesini ayarlamak için yeni metod
+    public static void setVolume(float volume) {
+        if (mediaPlayer != null) {
+            mediaPlayer.setVolume(volume, volume); // Sol ve sağ kanal eşit
+        }
+    }
 }

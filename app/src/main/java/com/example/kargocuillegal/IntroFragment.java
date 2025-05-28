@@ -24,8 +24,15 @@ public class IntroFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_intro, container, false);
+        View view = inflater.inflate(R.layout.fragment_intro, container, false);
+
+        // 🎵 Müzik başlat ve sesi tam aç
+        musicmanager.startMusic(requireContext());
+        musicmanager.setVolume(0.3f);  // Ses tamamen açık
+
+        return view;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

@@ -130,8 +130,12 @@ public class MainRoomFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Müzik sesini kıs
+        musicmanager.setVolume(0.1f);  // veya 0.2f gibi
+
         return inflater.inflate(R.layout.fragment_main_room, container, false);
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

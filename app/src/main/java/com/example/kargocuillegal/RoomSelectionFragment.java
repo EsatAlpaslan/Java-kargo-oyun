@@ -46,6 +46,9 @@ public class RoomSelectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // 🎵 Müzik sesini kıs (efektler duyulsun)
+        musicmanager.setVolume(0.05f);
+
         View view = inflater.inflate(R.layout.fragment_room_selection, container, false);
 
         Button btnLeftDoor = view.findViewById(R.id.btnLeftDoor);
@@ -72,6 +75,7 @@ public class RoomSelectionFragment extends Fragment {
 
         return view;
     }
+
 
     private void playDoorSound() {
         if (mediaPlayer != null) {
