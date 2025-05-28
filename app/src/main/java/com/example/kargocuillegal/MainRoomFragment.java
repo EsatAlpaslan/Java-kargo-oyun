@@ -400,7 +400,6 @@ public class MainRoomFragment extends Fragment {
                             checkUDPyayToUst();
                         }
 
-                        // 🔧 Revolver parçaları birlikte hareket
                         if (v.getId() == R.id.partCylinder && barrelLockedToCylinder) {
                             partBarrel.setX(newX + barrelOffsetX);
                             partBarrel.setY(newY + barrelOffsetY);
@@ -414,7 +413,6 @@ public class MainRoomFragment extends Fragment {
                             partHammer.setY(newY + hammerOffsetY);
                         }
 
-                        // 🔄 Glock bağlı taşıma
                         if (currentDay == 2) {
                             if (v.getId() == R.id.partFrame) {
                                 if (slideLocked) {
@@ -463,25 +461,9 @@ public class MainRoomFragment extends Fragment {
                                     partDeagleMag.setY(newY + deagleMagOffsetY);
                                 }
                             }
-                            if (currentDay == 2) {
-                                // 🔁 Gün 2: GLOCK birleşmeleri
-                                checkSlideFrameMerge();
-                                checkBarrel2ToFrame();
-                                checkSpringToBarrel2();
-                                checkMagToFrame();
-
-                                // 🔁 Gün 2: DEAGLE birleşmeleri
-                                checkDeagleSlideFrameMerge();
-                                checkDeagleBarrelToFrame();
-                                checkDeagleSpringToBarrel();
-                                checkDeagleMagToFrame();
-                            }
-
                         }
 
-                        // 🔄 USP yay üstüne bağlıysa birlikte hareket etsin
                         if (currentDay == 3) {
-                            // GOVDE sürüklenirse
                             if (v.getId() == R.id.partUDPgovde) {
                                 if (isUstLockedToGovde) {
                                     partUDPust.setX(newX + ustOffsetX);
@@ -509,7 +491,6 @@ public class MainRoomFragment extends Fragment {
                                 }
                             }
 
-                            // UST sürüklenirse
                             if (v.getId() == R.id.partUDPust) {
                                 if (isUcLockedToUst) {
                                     partUDPuc.setX(newX + ucOffsetX);
@@ -527,7 +508,6 @@ public class MainRoomFragment extends Fragment {
                                 }
                             }
 
-                            // UC sürüklenirse
                             if (v.getId() == R.id.partUDPuc && isYayInsideUc) {
                                 partUDPyay.setX(newX + yayUcOffsetX);
                                 partUDPyay.setY(newY + yayUcOffsetY);
@@ -537,10 +517,21 @@ public class MainRoomFragment extends Fragment {
                         return true;
 
                     case MotionEvent.ACTION_UP:
-                        // Gerekli birleşme kontrolleri burada yapılır
                         checkGripCylinderMerge();
                         checkCylinderBarrelMerge();
                         checkCylinderHammerMerge();
+
+                        if (currentDay == 2) {
+                            checkSlideFrameMerge();
+                            checkBarrel2ToFrame();
+                            checkSpringToBarrel2();
+                            checkMagToFrame();
+                            checkDeagleSlideFrameMerge();
+                            checkDeagleBarrelToFrame();
+                            checkDeagleSpringToBarrel();
+                            checkDeagleMagToFrame();
+                        }
+
                         checkIfAssemblyCompleted();
                         return true;
 
@@ -550,6 +541,8 @@ public class MainRoomFragment extends Fragment {
             }
         });
     }
+
+
 
 
 
