@@ -3,7 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/introFragment">
+    app:startDestination="@id/introSplashFragment">
+
+    <!-- Intro Splash Fragment -->
+    <fragment
+        android:id="@+id/introSplashFragment"
+        android:name="com.example.kargocuillegal.IntroSplashFragment"
+        android:label="fragment_intro_splash"
+        tools:layout="@layout/fragment_intro_splash">
+        <action
+            android:id="@+id/action_introSplashFragment_to_introFragment"
+            app:destination="@id/introFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
 
     <!-- Intro Fragment -->
     <fragment
