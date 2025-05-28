@@ -107,6 +107,9 @@ public class MainRoomFragment extends Fragment {
     private boolean isYayInsideUc = false;
     private float yayUcOffsetX = 0, yayUcOffsetY = 0;
 
+    private boolean isUcLockedToGovde = false;
+    private float ucGovdeOffsetX = 0, ucGovdeOffsetY = 0;
+
 
 
 
@@ -200,9 +203,9 @@ public class MainRoomFragment extends Fragment {
             if (currentDay == 1) {
                 startCountdown(15);
             } else if (currentDay == 2) {
-                startCountdown(30);
+                startCountdown(25);
             } else if (currentDay == 3) {
-                startCountdown(30);
+                startCountdown(12);
             }
 
             DisplayMetrics metrics = new DisplayMetrics();
@@ -393,13 +396,7 @@ public class MainRoomFragment extends Fragment {
                         v.setX(newX);
                         v.setY(newY);
 
-                        if (currentDay == 3) {
-                            checkUDPustToGovde();
-                            checkUDPucToGovde();
-                            checkUDPsarjorToGovde();
-                            checkUDPyayToUst();
-                        }
-
+                        // Revolver bağlı hareket
                         if (v.getId() == R.id.partCylinder && barrelLockedToCylinder) {
                             partBarrel.setX(newX + barrelOffsetX);
                             partBarrel.setY(newY + barrelOffsetY);
@@ -413,6 +410,7 @@ public class MainRoomFragment extends Fragment {
                             partHammer.setY(newY + hammerOffsetY);
                         }
 
+                        // Gün 2 - Glock & Deagle bağlı hareket
                         if (currentDay == 2) {
                             if (v.getId() == R.id.partFrame) {
                                 if (slideLocked) {
@@ -463,25 +461,26 @@ public class MainRoomFragment extends Fragment {
                             }
                         }
 
+                        // Gün 3 - USP parçaları bağlı hareket
                         if (currentDay == 3) {
                             if (v.getId() == R.id.partUDPgovde) {
                                 if (isUstLockedToGovde) {
                                     partUDPust.setX(newX + ustOffsetX);
                                     partUDPust.setY(newY + ustOffsetY);
 
-                                    if (isUcLockedToUst) {
-                                        partUDPuc.setX(partUDPust.getX() + ucOffsetX);
-                                        partUDPuc.setY(partUDPust.getY() + ucOffsetY);
-
-                                        if (isYayInsideUc) {
-                                            partUDPyay.setX(partUDPuc.getX() + yayUcOffsetX);
-                                            partUDPyay.setY(partUDPuc.getY() + yayUcOffsetY);
-                                        }
-                                    }
-
                                     if (isYayLockedToUst) {
                                         partUDPyay.setX(partUDPust.getX() + yayUstOffsetX);
                                         partUDPyay.setY(partUDPust.getY() + yayUstOffsetY);
+                                    }
+                                }
+
+                                if (isUcLockedToGovde) {
+                                    partUDPuc.setX(newX + ucGovdeOffsetX);
+                                    partUDPuc.setY(newY + ucGovdeOffsetY);
+
+                                    if (isYayInsideUc) {
+                                        partUDPyay.setX(partUDPuc.getX() + yayUcOffsetX);
+                                        partUDPyay.setY(partUDPuc.getY() + yayUcOffsetY);
                                     }
                                 }
 
@@ -492,16 +491,6 @@ public class MainRoomFragment extends Fragment {
                             }
 
                             if (v.getId() == R.id.partUDPust) {
-                                if (isUcLockedToUst) {
-                                    partUDPuc.setX(newX + ucOffsetX);
-                                    partUDPuc.setY(newY + ucOffsetY);
-
-                                    if (isYayInsideUc) {
-                                        partUDPyay.setX(partUDPuc.getX() + yayUcOffsetX);
-                                        partUDPyay.setY(partUDPuc.getY() + yayUcOffsetY);
-                                    }
-                                }
-
                                 if (isYayLockedToUst) {
                                     partUDPyay.setX(newX + yayUstOffsetX);
                                     partUDPyay.setY(newY + yayUstOffsetY);
@@ -532,6 +521,13 @@ public class MainRoomFragment extends Fragment {
                             checkDeagleMagToFrame();
                         }
 
+                        if (currentDay == 3) {
+                            checkUDPustToGovde();
+                            checkUDPucToGovde();
+                            checkUDPsarjorToGovde();
+                            checkUDPyayToUst();
+                        }
+
                         checkIfAssemblyCompleted();
                         return true;
 
@@ -541,6 +537,8 @@ public class MainRoomFragment extends Fragment {
             }
         });
     }
+
+
 
 
 
@@ -788,7 +786,7 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(magCenterX - frameCenterX, magCenterY - frameCenterY);
 
-        if (distance < 100) {
+        if (distance < 115){
             float offsetX = -0.227f * part_mag.getWidth();
             float offsetY = 0.18f * part_mag.getHeight();
 
@@ -983,7 +981,7 @@ public class MainRoomFragment extends Fragment {
             partUDPust.setEnabled(false);
         }
     }
-    private void checkUDPucToGovde() {
+     private void checkUDPucToGovde() {
         int[] ucLoc = new int[2];
         int[] govdeLoc = new int[2];
 
@@ -993,14 +991,15 @@ public class MainRoomFragment extends Fragment {
         float ucCenterX = ucLoc[0] + partUDPuc.getWidth() / 2f;
         float ucCenterY = ucLoc[1] + partUDPuc.getHeight() / 2f;
 
-        float govdeCenterX = govdeLoc[0] + partUDPgovde.getWidth() / 2f;
-        float govdeCenterY = govdeLoc[1] + partUDPgovde.getHeight() / 2f;
+         float govdeCenterX = govdeLoc[0] + partUDPgovde.getWidth() * -0.2f; // daha sola
+         float govdeCenterY = govdeLoc[1] + partUDPgovde.getHeight() * 0.20f; // daha yukarı
 
-        double distance = Math.hypot(ucCenterX - govdeCenterX, ucCenterY - govdeCenterY);
+
+         double distance = Math.hypot(ucCenterX - govdeCenterX, ucCenterY - govdeCenterY);
 
         if (distance < 100) {
-            float offsetX = -0.95f * partUDPuc.getWidth(); // yay'ın sağ kenarı ust'un soluna denk gelsin
-            float offsetY = -0.04f * partUDPgovde.getHeight();
+            float offsetX = -0.94f * partUDPgovde.getWidth();   // sağa kilitle
+            float offsetY = -0.29f * partUDPgovde.getHeight();  // yukarı kilitle
 
             float targetX = partUDPgovde.getX() + offsetX;
             float targetY = partUDPgovde.getY() + offsetY;
@@ -1008,13 +1007,15 @@ public class MainRoomFragment extends Fragment {
             partUDPuc.setX(targetX);
             partUDPuc.setY(targetY);
 
-            ucOffsetX = offsetX;
-            ucOffsetY = offsetY;
-            isUcLockedToUst = true;
+            ucGovdeOffsetX = offsetX;
+            ucGovdeOffsetY = offsetY;
+            isUcLockedToGovde = true;
 
             partUDPuc.setEnabled(false);
         }
     }
+
+
 
     private void checkUDPsarjorToGovde() {
         int[] sarjorLoc = new int[2];
@@ -1114,7 +1115,7 @@ public class MainRoomFragment extends Fragment {
         }
         if (currentDay == 3 &&
                 isUstLockedToGovde &&
-                isUcLockedToUst &&
+                isUcLockedToGovde &&
                 isSarjorLockedToGovde &&
                 isYayLockedToUst) {
 
