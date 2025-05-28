@@ -1126,12 +1126,19 @@ public class MainRoomFragment extends Fragment {
                 isYayLockedToUst) {
 
             completionText.setVisibility(View.VISIBLE);
+            completionText.setText("Silah başarıyla tamamlandı!");
+
             nextDayButton.setVisibility(View.VISIBLE);
+            nextDayButton.setText("Devamı yakında...");
+            nextDayButton.setEnabled(false);          // ❌ Tıklanamaz
+            nextDayButton.setAlpha(0.7f);             // (isteğe bağlı) soluk göster
+
             dayTimerText.setVisibility(View.GONE);
 
             if (countDownTimer != null) countDownTimer.cancel();
             isCompleted = true;
         }
+
 
 
     }
