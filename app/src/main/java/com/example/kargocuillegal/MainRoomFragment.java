@@ -89,20 +89,23 @@ public class MainRoomFragment extends Fragment {
     // Gün 3: USP parçaları
     private ImageView partUDPust, partUDPgovde, partUDPsarjor, partUDPuc, partUDPyay;
 
-    // ✅ USP parçaları kilitlenme durumları
+    // GOVDE'ye bağlananlar
     private boolean isUstLockedToGovde = false;
     private float ustOffsetX = 0, ustOffsetY = 0;
-
-    private boolean isUcLockedToGovde = false;
-    private float ucOffsetX = 0, ucOffsetY = 0;
 
     private boolean isSarjorLockedToGovde = false;
     private float sarjorOffsetX = 0, sarjorOffsetY = 0;
 
-    private boolean isYayLockedToGovde = false;
-    private float yayOffsetX = 0, yayOffsetY = 0;
+    // UST'ye bağlananlar
+    private boolean isUcLockedToUst = false;
+    private float ucOffsetX = 0, ucOffsetY = 0;
+
     private boolean isYayLockedToUst = false;
+    private float yayUstOffsetX = 0, yayUstOffsetY = 0;
+
+    // UC'ye bağlananlar
     private boolean isYayInsideUc = false;
+    private float yayUcOffsetX = 0, yayUcOffsetY = 0;
 
 
 
@@ -390,6 +393,13 @@ public class MainRoomFragment extends Fragment {
                         v.setX(newX);
                         v.setY(newY);
 
+                        if (currentDay == 3) {
+                            checkUDPustToGovde();
+                            checkUDPucToGovde();
+                            checkUDPsarjorToGovde();
+                            checkUDPyayToUst();
+                        }
+
                         // 🔧 Revolver parçaları birlikte hareket
                         if (v.getId() == R.id.partCylinder && barrelLockedToCylinder) {
                             partBarrel.setX(newX + barrelOffsetX);
@@ -453,95 +463,84 @@ public class MainRoomFragment extends Fragment {
                                     partDeagleMag.setY(newY + deagleMagOffsetY);
                                 }
                             }
+                            if (currentDay == 2) {
+                                // 🔁 Gün 2: GLOCK birleşmeleri
+                                checkSlideFrameMerge();
+                                checkBarrel2ToFrame();
+                                checkSpringToBarrel2();
+                                checkMagToFrame();
+
+                                // 🔁 Gün 2: DEAGLE birleşmeleri
+                                checkDeagleSlideFrameMerge();
+                                checkDeagleBarrelToFrame();
+                                checkDeagleSpringToBarrel();
+                                checkDeagleMagToFrame();
+                            }
+
                         }
 
                         // 🔄 USP yay üstüne bağlıysa birlikte hareket etsin
                         if (currentDay == 3) {
-                            if (v.getId() == R.id.partUDPust && isYayLockedToUst) {
-                                partUDPyay.setX(newX + yayOffsetX);
-                                partUDPyay.setY(newY + yayOffsetY);
-                            }
-                                // uc hareket ederse yay da onunla gider
-                                if (v.getId() == R.id.partUDPuc && isYayInsideUc) {
-                                    partUDPyay.setX(newX + yayOffsetX);
-                                    partUDPyay.setY(newY + yayOffsetY);
-                                }
-
-                            if (isUstLockedToGovde) {
-                                partUDPust.setX(newX + ustOffsetX);
-                                partUDPust.setY(newY + ustOffsetY);
-                            }
-
-                            if (isUcLockedToGovde) {
-                                partUDPuc.setX(newX + ucOffsetX);
-                                partUDPuc.setY(newY + ucOffsetY);
-
-                                if (isYayInsideUc) {
-                                    partUDPyay.setX(partUDPuc.getX() + yayOffsetX);
-                                    partUDPyay.setY(partUDPuc.getY() + yayOffsetY);
-                                }
-                            }
-
-                            if (isSarjorLockedToGovde) {
-                                partUDPsarjor.setX(newX + sarjorOffsetX);
-                                partUDPsarjor.setY(newY + sarjorOffsetY);
-                            }
+                            // GOVDE sürüklenirse
                             if (v.getId() == R.id.partUDPgovde) {
                                 if (isUstLockedToGovde) {
                                     partUDPust.setX(newX + ustOffsetX);
                                     partUDPust.setY(newY + ustOffsetY);
 
-                                    // ✅ Eğer yay da "üst"e bağlıysa onunla birlikte hareket etsin
-                                    if (isYayLockedToUst) {
-                                        partUDPyay.setX(partUDPust.getX() + yayOffsetX);
-                                        partUDPyay.setY(partUDPust.getY() + yayOffsetY);
-                                    }
-                                }
-                                if (isUcLockedToGovde) {
-                                    partUDPuc.setX(newX + ucOffsetX);
-                                    partUDPuc.setY(newY + ucOffsetY);
+                                    if (isUcLockedToUst) {
+                                        partUDPuc.setX(partUDPust.getX() + ucOffsetX);
+                                        partUDPuc.setY(partUDPust.getY() + ucOffsetY);
 
-                                    // ✅ Eğer yay "uc" ile bağlıysa onunla birlikte hareket etsin
-                                    if (isYayInsideUc) {
-                                        partUDPyay.setX(partUDPuc.getX() + yayOffsetX);
-                                        partUDPyay.setY(partUDPuc.getY() + yayOffsetY);
+                                        if (isYayInsideUc) {
+                                            partUDPyay.setX(partUDPuc.getX() + yayUcOffsetX);
+                                            partUDPyay.setY(partUDPuc.getY() + yayUcOffsetY);
+                                        }
+                                    }
+
+                                    if (isYayLockedToUst) {
+                                        partUDPyay.setX(partUDPust.getX() + yayUstOffsetX);
+                                        partUDPyay.setY(partUDPust.getY() + yayUstOffsetY);
                                     }
                                 }
+
                                 if (isSarjorLockedToGovde) {
                                     partUDPsarjor.setX(newX + sarjorOffsetX);
                                     partUDPsarjor.setY(newY + sarjorOffsetY);
                                 }
                             }
 
+                            // UST sürüklenirse
+                            if (v.getId() == R.id.partUDPust) {
+                                if (isUcLockedToUst) {
+                                    partUDPuc.setX(newX + ucOffsetX);
+                                    partUDPuc.setY(newY + ucOffsetY);
+
+                                    if (isYayInsideUc) {
+                                        partUDPyay.setX(partUDPuc.getX() + yayUcOffsetX);
+                                        partUDPyay.setY(partUDPuc.getY() + yayUcOffsetY);
+                                    }
+                                }
+
+                                if (isYayLockedToUst) {
+                                    partUDPyay.setX(newX + yayUstOffsetX);
+                                    partUDPyay.setY(newY + yayUstOffsetY);
+                                }
+                            }
+
+                            // UC sürüklenirse
+                            if (v.getId() == R.id.partUDPuc && isYayInsideUc) {
+                                partUDPyay.setX(newX + yayUcOffsetX);
+                                partUDPyay.setY(newY + yayUcOffsetY);
+                            }
                         }
 
                         return true;
 
                     case MotionEvent.ACTION_UP:
+                        // Gerekli birleşme kontrolleri burada yapılır
                         checkGripCylinderMerge();
                         checkCylinderBarrelMerge();
                         checkCylinderHammerMerge();
-
-                        if (currentDay == 2) {
-                            checkSlideFrameMerge();
-                            checkBarrel2ToFrame();
-                            checkSpringToBarrel2();
-                            checkMagToFrame();
-                            checkDeagleSlideFrameMerge();
-                            checkDeagleBarrelToFrame();
-                            checkDeagleSpringToBarrel();
-                            checkDeagleMagToFrame();
-                        }
-
-                        if (currentDay == 3) {
-                            checkUDPustToGovde();
-                            checkUDPucToGovde();
-                            checkUDPsarjorToGovde();
-                            checkUDPyayToUst();
-                        }
-
-
-
                         checkIfAssemblyCompleted();
                         return true;
 
@@ -683,7 +682,7 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(slideCenterX - frameCenterX, slideCenterY - frameCenterY);
 
-        if (distance < 150) {
+        if (distance < 100) {
             float offsetX = 0.05f * part_frame.getWidth();
             float offsetY = -0.43f * part_slide.getHeight();
 
@@ -1007,8 +1006,8 @@ public class MainRoomFragment extends Fragment {
         double distance = Math.hypot(ucCenterX - govdeCenterX, ucCenterY - govdeCenterY);
 
         if (distance < 100) {
-            float offsetX = -0.965f * partUDPgovde.getWidth();
-            float offsetY = -0.29f * partUDPgovde.getHeight();
+            float offsetX = -0.95f * partUDPuc.getWidth(); // yay'ın sağ kenarı ust'un soluna denk gelsin
+            float offsetY = -0.04f * partUDPgovde.getHeight();
 
             float targetX = partUDPgovde.getX() + offsetX;
             float targetY = partUDPgovde.getY() + offsetY;
@@ -1018,7 +1017,7 @@ public class MainRoomFragment extends Fragment {
 
             ucOffsetX = offsetX;
             ucOffsetY = offsetY;
-            isUcLockedToGovde = true;
+            isUcLockedToUst = true;
 
             partUDPuc.setEnabled(false);
         }
@@ -1072,8 +1071,9 @@ public class MainRoomFragment extends Fragment {
         double distance = Math.hypot(yayCenterX - ustCenterX, yayCenterY - ustCenterY);
 
         if (distance < 130) {
-            float offsetX = 0.0f * partUDPust.getWidth();
-            float offsetY = 0.03f * partUDPust.getHeight();
+            // 🔧 Yay'ı ust'un soluna hizala
+            float offsetX = 0.01f * partUDPyay.getWidth(); // yay'ın sağ kenarı ust'un soluna denk gelsin
+            float offsetY = 0f * partUDPust.getHeight();
 
             float targetX = partUDPust.getX() + offsetX;
             float targetY = partUDPust.getY() + offsetY;
@@ -1081,8 +1081,8 @@ public class MainRoomFragment extends Fragment {
             partUDPyay.setX(targetX);
             partUDPyay.setY(targetY);
 
-            yayOffsetX = offsetX;
-            yayOffsetY = offsetY;
+            yayUstOffsetX = offsetX;
+            yayUstOffsetY = offsetY;
             isYayLockedToUst = true;
 
             partUDPyay.setEnabled(false);
@@ -1121,7 +1121,7 @@ public class MainRoomFragment extends Fragment {
         }
         if (currentDay == 3 &&
                 isUstLockedToGovde &&
-                isUcLockedToGovde &&
+                isUcLockedToUst &&
                 isSarjorLockedToGovde &&
                 isYayLockedToUst) {
 
@@ -1190,10 +1190,8 @@ public class MainRoomFragment extends Fragment {
                 }
             }
         };
-
         countDownTimer.start();
     }
-
     private void randomize(View view, float screenWidth, float screenHeight) {
         Random random = new Random();
 
@@ -1203,6 +1201,4 @@ public class MainRoomFragment extends Fragment {
         view.setX(randomX);
         view.setY(randomY);
     }
-
-
 }
