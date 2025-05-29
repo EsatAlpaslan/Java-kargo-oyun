@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.widget.ImageButton;
-//import android.media.MediaPlayer;
 
 
 
@@ -179,9 +178,9 @@ public class MainRoomFragment extends Fragment {
         if (currentDay == 1) {
             startCountdown(15);
         } else if (currentDay == 2) {
-            startCountdown(21);
+            startCountdown(25);
         } else if (currentDay == 3) {
-            startCountdown(30);
+            startCountdown(10);
         }
 
         // Sarı buton sadece gün 3'te görünür
@@ -206,7 +205,7 @@ public class MainRoomFragment extends Fragment {
             } else if (currentDay == 2) {
                 startCountdown(25);
             } else if (currentDay == 3) {
-                startCountdown(12);
+                startCountdown(10);
             }
 
             DisplayMetrics metrics = new DisplayMetrics();
@@ -625,7 +624,6 @@ public class MainRoomFragment extends Fragment {
             barrelLockedToCylinder = true;
 
             partBarrel.setEnabled(false);
-           // playMergeSound();
             checkIfAssemblyCompleted();
 
         }
@@ -663,7 +661,6 @@ public class MainRoomFragment extends Fragment {
             hammerLockedToCylinder = true;
 
             partHammer.setEnabled(false);
-           // playMergeSound();
             checkIfAssemblyCompleted();
 
         }
@@ -699,7 +696,7 @@ public class MainRoomFragment extends Fragment {
 
             part_slide.setEnabled(false);
             slideLocked = true;
-           // playMergeSound();
+
             checkIfAssemblyCompleted(); // bunu aşağıda güncelleyeceğiz
         }
     }
@@ -734,7 +731,6 @@ public class MainRoomFragment extends Fragment {
 
             part_barrel2.setEnabled(false);
             barrel2Locked = true;
-          //  playMergeSound();
             checkIfAssemblyCompleted();
         }
     }
@@ -776,7 +772,6 @@ public class MainRoomFragment extends Fragment {
             springToBarrel2OffsetX = targetX - part_barrel2.getX();
             springToBarrel2OffsetY = targetY - part_barrel2.getY();
             springLockedToBarrel2 = true;
-           // playMergeSound();
             checkIfAssemblyCompleted();
         }
     }
@@ -812,7 +807,6 @@ public class MainRoomFragment extends Fragment {
 
             part_mag.setEnabled(false);
             magLocked = true;
-           // playMergeSound();
             checkIfAssemblyCompleted();
         }
     }
@@ -847,7 +841,7 @@ public class MainRoomFragment extends Fragment {
 
             partDeagleSlide.setEnabled(false);
             deagleSlideLocked = true;
-            //playMergeSound();
+
             checkIfAssemblyCompleted();
         }
     }
@@ -882,7 +876,7 @@ public class MainRoomFragment extends Fragment {
 
             partDeagleBarrel.setEnabled(false);
             deagleBarrelLocked = true;
-            //playMergeSound();
+
             checkIfAssemblyCompleted(); // Tüm parçalar tamamlandıysa kontrol et
         }
     }
@@ -919,7 +913,6 @@ public class MainRoomFragment extends Fragment {
 
             partDeagleSpring.setEnabled(false);
             deagleSpringLocked = true;
-           // playMergeSound();
             checkIfAssemblyCompleted();
         }
     }
@@ -956,7 +949,7 @@ public class MainRoomFragment extends Fragment {
 
             partDeagleMag.setEnabled(false);
             deagleMagLocked = true;
-           // playMergeSound();
+
             checkIfAssemblyCompleted(); // Genel tamamlama kontrolü
         }
     }
@@ -992,7 +985,6 @@ public class MainRoomFragment extends Fragment {
             isUstLockedToGovde = true;
 
             partUDPust.setEnabled(false);
-           // playMergeSound();
         }
     }
 
@@ -1027,7 +1019,7 @@ public class MainRoomFragment extends Fragment {
             isUcLockedToGovde = true;
 
             partUDPuc.setEnabled(false);
-            //playMergeSound();
+
         }
     }
 
@@ -1062,7 +1054,6 @@ public class MainRoomFragment extends Fragment {
             isSarjorLockedToGovde = true;
 
             partUDPsarjor.setEnabled(false);
-            //playMergeSound();
         }
     }
 
@@ -1097,7 +1088,6 @@ public class MainRoomFragment extends Fragment {
             isYayLockedToUst = true;
 
             partUDPyay.setEnabled(false);
-           // playMergeSound();
         }
     }
 
@@ -1114,7 +1104,6 @@ public class MainRoomFragment extends Fragment {
 
             if (countDownTimer != null) countDownTimer.cancel();
             isCompleted = true;
-            //playMergeSound();
         }
 
         if (currentDay == 2 &&
@@ -1127,7 +1116,7 @@ public class MainRoomFragment extends Fragment {
 
             if (countDownTimer != null) countDownTimer.cancel();
             isCompleted = true;
-          //  playMergeSound();
+
         }
         if (currentDay == 3 &&
                 isUstLockedToGovde &&
@@ -1147,7 +1136,7 @@ public class MainRoomFragment extends Fragment {
 
             if (countDownTimer != null) countDownTimer.cancel();
             isCompleted = true;
-           // playMergeSound();
+
         }
     }
 
@@ -1217,9 +1206,4 @@ public class MainRoomFragment extends Fragment {
         view.setX(randomX);
         view.setY(randomY);
     }
-    //private void playMergeSound() {
-    // MediaPlayer mergeSound = MediaPlayer.create(getContext(), R.raw.handgun_clip);
-    //mergeSound.setOnCompletionListener(mp -> mp.release());
-    //mergeSound.start();
-//}
 }
