@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.widget.ImageButton;
-import android.media.MediaPlayer;
+//import android.media.MediaPlayer;
 
 
 
@@ -113,16 +113,11 @@ public class MainRoomFragment extends Fragment {
     private float ucGovdeOffsetX = 0, ucGovdeOffsetY = 0;
 
 
-
-
     private boolean isNear(View part1, View part2, float thresholdPx) {
         float dx = Math.abs(part1.getX() - part2.getX());
         float dy = Math.abs(part1.getY() - part2.getY());
         return dx < thresholdPx && dy < thresholdPx;
     }
-
-
-
 
 
     public MainRoomFragment() {
@@ -255,18 +250,28 @@ public class MainRoomFragment extends Fragment {
                 partDeagleMag.setVisibility(View.VISIBLE);
 
                 // GLOCK parçalarını konumlandır
-                part_slide.setX(0.07f * screenWidth); part_slide.setY(0.05f * screenHeight);
-                part_spring.setX(0.38f * screenWidth); part_spring.setY(0.11f * screenHeight);
-                part_barrel2.setX(0.23f * screenWidth); part_barrel2.setY(0.77f * screenHeight);
-                part_frame.setX(0.78f * screenWidth); part_frame.setY(0.67f * screenHeight);
-                part_mag.setX(0.036f * screenWidth); part_mag.setY(0.63f * screenHeight);
+                part_slide.setX(0.07f * screenWidth);
+                part_slide.setY(0.05f * screenHeight);
+                part_spring.setX(0.38f * screenWidth);
+                part_spring.setY(0.11f * screenHeight);
+                part_barrel2.setX(0.23f * screenWidth);
+                part_barrel2.setY(0.77f * screenHeight);
+                part_frame.setX(0.78f * screenWidth);
+                part_frame.setY(0.67f * screenHeight);
+                part_mag.setX(0.036f * screenWidth);
+                part_mag.setY(0.63f * screenHeight);
 
                 // DEAGLE parçalarını konumlandır
-                partDeagleSlide.setX(0.5f * screenWidth); partDeagleSlide.setY(0.76f * screenHeight);
-                partDeagleBarrel.setX(0.7f * screenWidth); partDeagleBarrel.setY(0.08f * screenHeight);
-                partDeagleSpring.setX(0.9f * screenWidth); partDeagleSpring.setY(0.18f * screenHeight);
-                partDeagleFrame.setX(0.05f * screenWidth); partDeagleFrame.setY(0.3f * screenHeight);
-                partDeagleMag.setX(0.88f * screenWidth); partDeagleMag.setY(0.36f * screenHeight);
+                partDeagleSlide.setX(0.5f * screenWidth);
+                partDeagleSlide.setY(0.76f * screenHeight);
+                partDeagleBarrel.setX(0.7f * screenWidth);
+                partDeagleBarrel.setY(0.08f * screenHeight);
+                partDeagleSpring.setX(0.9f * screenWidth);
+                partDeagleSpring.setY(0.18f * screenHeight);
+                partDeagleFrame.setX(0.05f * screenWidth);
+                partDeagleFrame.setY(0.3f * screenHeight);
+                partDeagleMag.setX(0.88f * screenWidth);
+                partDeagleMag.setY(0.36f * screenHeight);
 
                 makeDraggable(part_slide);
                 makeDraggable(part_spring);
@@ -304,7 +309,7 @@ public class MainRoomFragment extends Fragment {
                 partDeagleMag.setVisibility(View.GONE);
 
                 // Oranlı boyutlandırma
-                int partSize = (int)(0.16f * screenWidth);
+                int partSize = (int) (0.16f * screenWidth);
 
                 ImageView[] udpParts = new ImageView[]{
                         partUDPust, partUDPgovde, partUDPsarjor,
@@ -324,19 +329,22 @@ public class MainRoomFragment extends Fragment {
                     makeDraggable(part);
                 }
                 // Konumlandır
-                partUDPust.setX(0.05f * screenWidth);      partUDPust.setY(0.10f * screenHeight);
-                partUDPgovde.setX(0.25f * screenWidth);    partUDPgovde.setY(0.20f * screenHeight);
-                partUDPsarjor.setX(0.45f * screenWidth);   partUDPsarjor.setY(0.30f * screenHeight);
-                partUDPuc.setX(0.65f * screenWidth);       partUDPuc.setY(0.40f * screenHeight);
-                partUDPyay.setX(0.15f * screenWidth);      partUDPyay.setY(0.55f * screenHeight);
+                partUDPust.setX(0.05f * screenWidth);
+                partUDPust.setY(0.10f * screenHeight);
+                partUDPgovde.setX(0.25f * screenWidth);
+                partUDPgovde.setY(0.20f * screenHeight);
+                partUDPsarjor.setX(0.45f * screenWidth);
+                partUDPsarjor.setY(0.30f * screenHeight);
+                partUDPuc.setX(0.65f * screenWidth);
+                partUDPuc.setY(0.40f * screenHeight);
+                partUDPyay.setX(0.15f * screenWidth);
+                partUDPyay.setY(0.55f * screenHeight);
 
                 // Öne al
                 partUDPgovde.bringToFront();
                 partUDPust.bringToFront();
 
-            }
-
-            else {
+            } else {
                 partGrip.setVisibility(View.VISIBLE);
                 partGrip.setEnabled(true);
                 partBarrel.setVisibility(View.VISIBLE);
@@ -351,10 +359,14 @@ public class MainRoomFragment extends Fragment {
                 makeDraggable(partHammer);
                 makeDraggable(partCylinder);
 
-                partGrip.setX(0.10f * screenWidth); partGrip.setY(0.08f * screenHeight);
-                partCylinder.setX(0.30f * screenWidth); partCylinder.setY(0.08f * screenHeight);
-                partBarrel.setX(0.50f * screenWidth); partBarrel.setY(0.08f * screenHeight);
-                partHammer.setX(0.70f * screenWidth); partHammer.setY(0.08f * screenHeight);
+                partGrip.setX(0.10f * screenWidth);
+                partGrip.setY(0.08f * screenHeight);
+                partCylinder.setX(0.30f * screenWidth);
+                partCylinder.setY(0.08f * screenHeight);
+                partBarrel.setX(0.50f * screenWidth);
+                partBarrel.setY(0.08f * screenHeight);
+                partHammer.setX(0.70f * screenWidth);
+                partHammer.setY(0.08f * screenHeight);
             }
 
             gripLockedToCylinder = false;
@@ -545,13 +557,6 @@ public class MainRoomFragment extends Fragment {
     }
 
 
-
-
-
-
-
-
-
     private void checkGripCylinderMerge() {
         int[] gripLoc = new int[2];
         int[] cylLoc = new int[2];
@@ -589,8 +594,6 @@ public class MainRoomFragment extends Fragment {
     }
 
 
-
-
     private void checkCylinderBarrelMerge() {
         int[] barrelLoc = new int[2];
         int[] cylinderLoc = new int[2];
@@ -623,7 +626,7 @@ public class MainRoomFragment extends Fragment {
             barrelLockedToCylinder = true;
 
             partBarrel.setEnabled(false);
-            playMergeSound();
+           // playMergeSound();
             checkIfAssemblyCompleted();
 
         }
@@ -661,11 +664,12 @@ public class MainRoomFragment extends Fragment {
             hammerLockedToCylinder = true;
 
             partHammer.setEnabled(false);
-            playMergeSound();
+           // playMergeSound();
             checkIfAssemblyCompleted();
 
         }
     }
+
     private void checkSlideFrameMerge() {
         int[] slideLoc = new int[2];
         int[] frameLoc = new int[2];
@@ -696,7 +700,7 @@ public class MainRoomFragment extends Fragment {
 
             part_slide.setEnabled(false);
             slideLocked = true;
-            playMergeSound();
+           // playMergeSound();
             checkIfAssemblyCompleted(); // bunu aşağıda güncelleyeceğiz
         }
     }
@@ -731,7 +735,7 @@ public class MainRoomFragment extends Fragment {
 
             part_barrel2.setEnabled(false);
             barrel2Locked = true;
-            playMergeSound();
+          //  playMergeSound();
             checkIfAssemblyCompleted();
         }
     }
@@ -773,7 +777,7 @@ public class MainRoomFragment extends Fragment {
             springToBarrel2OffsetX = targetX - part_barrel2.getX();
             springToBarrel2OffsetY = targetY - part_barrel2.getY();
             springLockedToBarrel2 = true;
-            playMergeSound();
+           // playMergeSound();
             checkIfAssemblyCompleted();
         }
     }
@@ -794,7 +798,7 @@ public class MainRoomFragment extends Fragment {
 
         double distance = Math.hypot(magCenterX - frameCenterX, magCenterY - frameCenterY);
 
-        if (distance < 115){
+        if (distance < 115) {
             float offsetX = -0.227f * part_mag.getWidth();
             float offsetY = 0.18f * part_mag.getHeight();
 
@@ -809,10 +813,11 @@ public class MainRoomFragment extends Fragment {
 
             part_mag.setEnabled(false);
             magLocked = true;
-            playMergeSound();
+           // playMergeSound();
             checkIfAssemblyCompleted();
         }
     }
+
     private void checkDeagleSlideFrameMerge() {
         int[] slideLoc = new int[2];
         int[] frameLoc = new int[2];
@@ -843,10 +848,11 @@ public class MainRoomFragment extends Fragment {
 
             partDeagleSlide.setEnabled(false);
             deagleSlideLocked = true;
-            playMergeSound();
+            //playMergeSound();
             checkIfAssemblyCompleted();
         }
     }
+
     private void checkDeagleBarrelToFrame() {
         int[] barrelLoc = new int[2];
         int[] frameLoc = new int[2];
@@ -877,10 +883,11 @@ public class MainRoomFragment extends Fragment {
 
             partDeagleBarrel.setEnabled(false);
             deagleBarrelLocked = true;
-            playMergeSound();
+            //playMergeSound();
             checkIfAssemblyCompleted(); // Tüm parçalar tamamlandıysa kontrol et
         }
     }
+
     private void checkDeagleSpringToBarrel() {
         int[] springLoc = new int[2];
         int[] barrelLoc = new int[2];
@@ -913,7 +920,7 @@ public class MainRoomFragment extends Fragment {
 
             partDeagleSpring.setEnabled(false);
             deagleSpringLocked = true;
-            playMergeSound();
+           // playMergeSound();
             checkIfAssemblyCompleted();
         }
     }
@@ -950,11 +957,10 @@ public class MainRoomFragment extends Fragment {
 
             partDeagleMag.setEnabled(false);
             deagleMagLocked = true;
-            playMergeSound();
+           // playMergeSound();
             checkIfAssemblyCompleted(); // Genel tamamlama kontrolü
         }
     }
-
 
 
     private void checkUDPustToGovde() {
@@ -987,10 +993,11 @@ public class MainRoomFragment extends Fragment {
             isUstLockedToGovde = true;
 
             partUDPust.setEnabled(false);
-            playMergeSound();
+           // playMergeSound();
         }
     }
-     private void checkUDPucToGovde() {
+
+    private void checkUDPucToGovde() {
         int[] ucLoc = new int[2];
         int[] govdeLoc = new int[2];
 
@@ -1000,11 +1007,11 @@ public class MainRoomFragment extends Fragment {
         float ucCenterX = ucLoc[0] + partUDPuc.getWidth() / 2f;
         float ucCenterY = ucLoc[1] + partUDPuc.getHeight() / 2f;
 
-         float govdeCenterX = govdeLoc[0] + partUDPgovde.getWidth() * -0.2f; // daha sola
-         float govdeCenterY = govdeLoc[1] + partUDPgovde.getHeight() * 0.20f; // daha yukarı
+        float govdeCenterX = govdeLoc[0] + partUDPgovde.getWidth() * -0.2f; // daha sola
+        float govdeCenterY = govdeLoc[1] + partUDPgovde.getHeight() * 0.20f; // daha yukarı
 
 
-         double distance = Math.hypot(ucCenterX - govdeCenterX, ucCenterY - govdeCenterY);
+        double distance = Math.hypot(ucCenterX - govdeCenterX, ucCenterY - govdeCenterY);
 
         if (distance < 100) {
             float offsetX = -0.94f * partUDPgovde.getWidth();   // sağa kilitle
@@ -1021,10 +1028,9 @@ public class MainRoomFragment extends Fragment {
             isUcLockedToGovde = true;
 
             partUDPuc.setEnabled(false);
-            playMergeSound();
+            //playMergeSound();
         }
     }
-
 
 
     private void checkUDPsarjorToGovde() {
@@ -1057,9 +1063,10 @@ public class MainRoomFragment extends Fragment {
             isSarjorLockedToGovde = true;
 
             partUDPsarjor.setEnabled(false);
-            playMergeSound();
+            //playMergeSound();
         }
     }
+
     private void checkUDPyayToUst() {
         int[] yayLoc = new int[2];
         int[] ustLoc = new int[2];
@@ -1091,10 +1098,9 @@ public class MainRoomFragment extends Fragment {
             isYayLockedToUst = true;
 
             partUDPyay.setEnabled(false);
-            playMergeSound();
+           // playMergeSound();
         }
     }
-
 
 
     private void checkIfAssemblyCompleted() {
@@ -1109,7 +1115,7 @@ public class MainRoomFragment extends Fragment {
 
             if (countDownTimer != null) countDownTimer.cancel();
             isCompleted = true;
-            playMergeSound();
+            //playMergeSound();
         }
 
         if (currentDay == 2 &&
@@ -1122,7 +1128,7 @@ public class MainRoomFragment extends Fragment {
 
             if (countDownTimer != null) countDownTimer.cancel();
             isCompleted = true;
-            playMergeSound();
+          //  playMergeSound();
         }
         if (currentDay == 3 &&
                 isUstLockedToGovde &&
@@ -1142,7 +1148,7 @@ public class MainRoomFragment extends Fragment {
 
             if (countDownTimer != null) countDownTimer.cancel();
             isCompleted = true;
-            playMergeSound();
+           // playMergeSound();
         }
     }
 
@@ -1202,6 +1208,7 @@ public class MainRoomFragment extends Fragment {
         };
         countDownTimer.start();
     }
+
     private void randomize(View view, float screenWidth, float screenHeight) {
         Random random = new Random();
 
@@ -1211,9 +1218,9 @@ public class MainRoomFragment extends Fragment {
         view.setX(randomX);
         view.setY(randomY);
     }
-    private void playMergeSound() {
-        MediaPlayer mergeSound = MediaPlayer.create(getContext(), R.raw.handgun_clip);
-        mergeSound.setOnCompletionListener(mp -> mp.release());
-        mergeSound.start();
-    }
+    //private void playMergeSound() {
+    // MediaPlayer mergeSound = MediaPlayer.create(getContext(), R.raw.handgun_clip);
+    //mergeSound.setOnCompletionListener(mp -> mp.release());
+    //mergeSound.start();
+//}
 }
