@@ -556,7 +556,6 @@ public class MainRoomFragment extends Fragment {
         });
     }
 
-
     private void checkGripCylinderMerge() {
         int[] gripLoc = new int[2];
         int[] cylLoc = new int[2];
