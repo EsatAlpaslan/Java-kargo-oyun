@@ -178,9 +178,9 @@ public class MainRoomFragment extends Fragment {
         if (currentDay == 1) {
             startCountdown(15);
         } else if (currentDay == 2) {
-            startCountdown(21);
+            startCountdown(25);
         } else if (currentDay == 3) {
-            startCountdown(30);
+            startCountdown(10);
         }
 
         // Sarı buton sadece gün 3'te görünür
@@ -205,7 +205,7 @@ public class MainRoomFragment extends Fragment {
             } else if (currentDay == 2) {
                 startCountdown(25);
             } else if (currentDay == 3) {
-                startCountdown(12);
+                startCountdown(10);
             }
 
             DisplayMetrics metrics = new DisplayMetrics();

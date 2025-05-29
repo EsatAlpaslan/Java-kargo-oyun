@@ -44,18 +44,6 @@
         android:layout_marginEnd="20dp"
         android:gravity="center_vertical">
 
-        <!-- Ses Butonu -->
-     <!--   <ImageButton
-            android:id="@+id/btnSound"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:src="@android:drawable/ic_lock_silent_mode_off"
-            android:background="@drawable/round_button_background"
-            android:contentDescription="Ses"
-            android:scaleType="centerInside"
-            app:tint="#FFFFFF"
-            android:layout_marginEnd="12dp"/> -->
-
         <!-- Müzik Butonu -->
         <ImageButton
             android:id="@+id/btnMusic"
